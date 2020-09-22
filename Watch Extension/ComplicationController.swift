@@ -34,7 +34,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     
     func getTimelineEndDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
         // Call the handler with the last entry date you can currently provide or nil if you can't support future timelines
-        self.getUntisTimeline { (periods) in
+        self.getUntisTimeline(start: Date()) { (periods) in
             guard let periods = periods else {
                 return handler(nil);
             }
@@ -54,7 +54,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     // MARK: - Timeline Population
     
     func getCurrentTimelineEntry(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimelineEntry?) -> Void) {
-        self.getAllUntisInformation {
+        self.getAllUntisInformation(for: Date()) {
             handler(nil);
         } handler: { (periods, timegrid, subjects) in
             let endEntry = self.getTimelineEndEntry(for: complication, and: Date());
@@ -80,7 +80,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     }
     
     func getTimelineEntries(for complication: CLKComplication, after date: Date, limit: Int, withHandler handler: @escaping ([CLKComplicationTimelineEntry]?) -> Void) {
-        self.getAllUntisInformation {
+        self.getAllUntisInformation(for: date) {
             handler(nil);
         } handler: { (periods, timegrid, subjects) in
             var currentLimitCounter = limit;
@@ -240,17 +240,17 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     
     // MARK: Untis functions
     
-    func getUntisTimeline(handler: @escaping ([Period]?) -> Void) {
+    func getUntisTimeline(start date: Date, handler: @escaping ([Period]?) -> Void) {
         guard let untis = self.bgUtility.getUntisClient() else {
             return handler(nil);
         }
-        untis.getTimetable(cachedHandler: nil) { result in
+        untis.getTimetable(for: date, cachedHandler: nil) { result in
             var periods: [Period] = [];
             guard let currentPeriods = try? result.get() else {
                 return handler(nil);
             }
             periods.append(contentsOf: currentPeriods);
-            untis.getTimetable(for: Calendar.current.date(byAdding: .day, value: 1, to: Date())!, cachedHandler: nil) { tomorrowResult in
+            untis.getTimetable(for: Calendar.current.date(byAdding: .day, value: 1, to: date)!, cachedHandler: nil) { tomorrowResult in
                 guard let tomorrowPeriods = try? tomorrowResult.get() else {
                     return handler(nil);
                 }
@@ -258,7 +258,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                 if periods.count < 1 {
                     return handler(nil);
                 }
-                let sorted = periods.sortedPeriods(useEndtime: true);
+                let sorted = periods.filter({ $0.startTime > date }).filter({ $0.code != .cancelled }).sortedPeriods(useEndtime: true);
                 handler(sorted);
             }
         }
@@ -288,7 +288,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         }
     }
     
-    func getAllUntisInformation(failedHandler: @escaping () -> Void, handler: @escaping ([Period], Timegrid, [Subject]) -> Void) {
+    func getAllUntisInformation(for date: Date, failedHandler: @escaping () -> Void, handler: @escaping ([Period], Timegrid, [Subject]) -> Void) {
         self.getTimegrid { timegrid in
             guard let timegrid = timegrid else {
                 return failedHandler();
@@ -297,7 +297,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                 guard let subjects = subjects else {
                     return failedHandler();
                 }
-                self.getUntisTimeline { (periods) in
+                self.getUntisTimeline(start: date) { (periods) in
                     guard let periods = periods else {
                         return failedHandler();
                     }

@@ -58,6 +58,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
             switch task {
             case let backgroundTask as WKApplicationRefreshBackgroundTask:
                 // Be sure to complete the background task once you’re done.
+                self.scheduleBackgroundRefreshTasks();
                 self.bgUtility = BackgroundUtility();
                 guard let untis = self.bgUtility!.getUntisClient() else {
                     return backgroundTask.setTaskCompletedWithSnapshot(false);
