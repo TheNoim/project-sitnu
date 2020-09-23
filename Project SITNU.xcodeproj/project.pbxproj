@@ -178,6 +178,7 @@
 		FB9EC0F42517C954002D7E16 /* UntisUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UntisUtil.swift; sourceTree = "<group>"; };
 		FB9EC1022517CBB2002D7E16 /* PeriodWithTimegrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodWithTimegrid.swift; sourceTree = "<group>"; };
 		FB9EC1082517D170002D7E16 /* Timetable+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Timetable+Util.swift"; sourceTree = "<group>"; };
+		FBA751B7251BA92500A95571 /* Debug_Macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Debug_Macros.h; sourceTree = "<group>"; };
 		FBA95DA22514F53200494B5C /* Project SITNU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project SITNU.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBA95DA72514F53200494B5C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FBA95DA92514F53400494B5C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -423,6 +424,7 @@
 				FBA95DD02515103D00494B5C /* Extensions */,
 				FBA95DC22514F8FE00494B5C /* Client */,
 				FBA95DBE2514F68900494B5C /* Models */,
+				FBA751B7251BA92500A95571 /* Debug_Macros.h */,
 			);
 			path = WebUntis;
 			sourceTree = "<group>";
@@ -780,7 +782,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"Watch Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				ENABLE_PREVIEWS = YES;
@@ -807,7 +809,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"Watch Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				ENABLE_PREVIEWS = YES;
@@ -836,7 +838,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				IBSC_MODULE = Watch_Extension;
 				INFOPLIST_FILE = Watch/Info.plist;
@@ -857,7 +859,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				IBSC_MODULE = Watch_Extension;
 				INFOPLIST_FILE = Watch/Info.plist;
@@ -994,7 +996,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SITNU/Preview Content\"";
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				ENABLE_PREVIEWS = YES;
@@ -1020,7 +1022,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SITNU/Preview Content\"";
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				ENABLE_PREVIEWS = YES;

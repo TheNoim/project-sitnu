@@ -83,7 +83,6 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         self.getAllUntisInformation(for: date) {
             handler(nil);
         } handler: { (periods, timegrid, subjects) in
-            var currentLimitCounter = limit;
             var entries: [CLKComplicationTimelineEntry] = [];
             var startIndex: Int = 0;
             if let currentPeriodIndex = periods.firstIndex(where: { $0.startTime <= Date() && $0.endTime >= Date() }) {
@@ -91,7 +90,6 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             } else if let nextPeriodIndex = periods.firstIndex(where: { $0.startTime >= Date() }) {
                 startIndex = nextPeriodIndex;
                 if let breakTemplate = self.getBreakComplicationEntry(for: complication, date: Date(), period: periods[nextPeriodIndex], timegrid: timegrid, subjects: subjects) {
-                    currentLimitCounter = currentLimitCounter - 1;
                     entries.append(breakTemplate);
                 }
             } else {
@@ -100,12 +98,11 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                 }
                 return handler([endEntry]);
             }
-            while (startIndex <= (periods.count - 1) && currentLimitCounter > 0) {
+            while (startIndex <= (periods.count - 1) && entries.count < limit) {
                 if let periodEntry = self.getComplicationEntry(for: complication, period: periods[startIndex], timegrid: timegrid, subjects: subjects) {
                     entries.append(periodEntry);
-                    currentLimitCounter = currentLimitCounter - 1;
                 }
-                if currentLimitCounter > 0 {
+                if entries.count < limit {
                     if startIndex + 1 <= (periods.count - 1) {
                         let nextPeriod = periods[startIndex + 1]
                         if let breakTemplate = self.getBreakComplicationEntry(for: complication, date: periods[startIndex].endTime, period: nextPeriod, timegrid: timegrid, subjects: subjects) {
@@ -115,9 +112,11 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                         }
                         
                     }
-                    let endEntry = self.getTimelineEndEntry(for: complication, and: periods[startIndex].endTime)!;
-                    entries.append(endEntry);
-                    startIndex = startIndex + 1;
+                    if entries.count < limit {
+                        let endEntry = self.getTimelineEndEntry(for: complication, and: periods[startIndex].endTime)!;
+                        entries.append(endEntry);
+                        startIndex = startIndex + 1;
+                    }
                 }
             }
             handler(entries);
