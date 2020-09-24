@@ -41,30 +41,21 @@ struct Period: Codable, Identifiable {
     var date: Date {
         let dateString = String(format: "%08d", untisDate);
         let originalDate = dateFormatter.date(from: dateString) ?? Date();
-        #if TIME_OFFSET
-        return Calendar.current.startOfDay(for: Calendar.current.date(byAdding: TIME_UNIT, value: TIME_OFFSET, to: originalDate)!);
-        #endif
-        return originalDate;
+        return getDateWithOffset(for: originalDate, startOfDay: true);
     }
     
     var startTime: Date {
         let dateString = String(format: "%08d", untisDate);
         let startTimeString = String(format: "%04d", self.untisStartTime);
         let originalDate = timeAndDateFormatter.date(from: "\(dateString)\(startTimeString)") ?? Date();
-        #if TIME_OFFSET
-        return Calendar.current.date(byAdding: TIME_UNIT, value: TIME_OFFSET, to: originalDate)!;
-        #endif
-        return originalDate;
+        return getDateWithOffset(for: originalDate);
     }
     
     var endTime: Date {
         let dateString = String(format: "%08d", untisDate);
         let endTimeString = String(format: "%04d", self.untisEndTime);
         let originalDate = timeAndDateFormatter.date(from: "\(dateString)\(endTimeString)") ?? Date();
-        #if TIME_OFFSET
-        return Calendar.current.date(byAdding: TIME_UNIT, value: TIME_OFFSET, to: originalDate)!;
-        #endif
-        return originalDate;
+        return getDateWithOffset(for: originalDate);
     }
     
     var lessonType: LessonType { LessonType.init(rawValue: self.untisLSType ?? "ls") ?? .lesson }

@@ -34,7 +34,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     
     func getTimelineEndDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
         // Call the handler with the last entry date you can currently provide or nil if you can't support future timelines
-        self.getUntisTimeline(start: Date()) { (periods) in
+        self.getUntisTimeline(start: getDateWithOffset(for: Date())) { (periods) in
             guard let periods = periods else {
                 return handler(nil);
             }
@@ -54,25 +54,31 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     // MARK: - Timeline Population
     
     func getCurrentTimelineEntry(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimelineEntry?) -> Void) {
-        self.getAllUntisInformation(for: Date()) {
+        let currentDate = Date();
+        self.getAllUntisInformation(for: currentDate) {
             handler(nil);
         } handler: { (periods, timegrid, subjects) in
-            let endEntry = self.getTimelineEndEntry(for: complication, and: Date());
-            if let currentPeriod = periods.first(where: { $0.startTime <= Date() && $0.endTime >= Date() }) {
-                if let entry = self.getComplicationEntry(for: complication, period: currentPeriod, timegrid: timegrid, subjects: subjects) {
-                    return handler(entry);
-                } else {
-                    return handler(endEntry);
-                }
+            // If there is currently a period
+            if let currentPeriod = periods.first(where: { $0.startTime < currentDate && $0.endTime > currentDate }) {
+                let currentEntry = self.getComplicationEntry(for: complication, period: currentPeriod, timegrid: timegrid, subjects: subjects);
+                handler(currentEntry);
             } else {
-                if let nextPeriod = periods.first(where: { $0.startTime >= Date() }) {
-                    if let entry = self.getBreakComplicationEntry(for: complication, date: Date(), period: nextPeriod, timegrid: timegrid, subjects: subjects) {
-                        return handler(entry);
-                    } else {
-                        return handler(endEntry);
+                // It is currently a break
+                if let nextPeriodIndex = periods.firstIndex(where: { $0.startTime > currentDate }) {
+                    let nextPeriod = periods[nextPeriodIndex];
+                    var breakDate = Calendar.current.startOfDay(for: currentDate); // If it is a new timeline
+                    if nextPeriodIndex >= 1 {
+                        // There is a period before
+                        let lastPeriod = periods[nextPeriodIndex - 1]
+                        // The start date of the break template is the end date of the last period
+                        breakDate = Calendar.current.date(byAdding: .nanosecond, value: 1, to: lastPeriod.endTime)!;
                     }
+                    let breakEntry = self.getBreakComplicationEntry(for: complication, date: breakDate, period: nextPeriod, timegrid: timegrid, subjects: subjects);
+                    handler(breakEntry);
                 } else {
-                    return handler(endEntry);
+                    // End of timeline
+                    let endOfTimelineEntry = self.getTimelineEndEntry(for: complication, and: currentDate);
+                    handler(endOfTimelineEntry);
                 }
             }
         }
@@ -83,43 +89,80 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         self.getAllUntisInformation(for: date) {
             handler(nil);
         } handler: { (periods, timegrid, subjects) in
+            // .filter({ $0.startTime > date || ($0.startTime < date && $0.endTime > date) })
             var entries: [CLKComplicationTimelineEntry] = [];
-            var startIndex: Int = 0;
-            if let currentPeriodIndex = periods.firstIndex(where: { $0.startTime <= Date() && $0.endTime >= Date() }) {
-                startIndex = currentPeriodIndex;
-            } else if let nextPeriodIndex = periods.firstIndex(where: { $0.startTime >= Date() }) {
-                startIndex = nextPeriodIndex;
-                if let breakTemplate = self.getBreakComplicationEntry(for: complication, date: Date(), period: periods[nextPeriodIndex], timegrid: timegrid, subjects: subjects) {
-                    entries.append(breakTemplate);
+            var lastEndTime: Date = date;
+            
+            if let currentPeriod = periods.first(where: { $0.startTime <= date && $0.endTime >= date }) {
+                if let nextPeriod = periods.first(where: { $0.startTime >= date && $0.id != currentPeriod.id }) {
+                    let n = nextPeriod.startTime.timeIntervalSince1970;
+                    let c = currentPeriod.endTime.timeIntervalSince1970;
+                    if abs(n - c) <= 1 {
+                        // The next entry is the next period
+                        let nextEntry = self.getComplicationEntry(for: complication, period: nextPeriod, timegrid: timegrid, subjects: subjects);
+                        entries.appendWithLimitCheck(limit, item: nextEntry!);
+                    } else {
+                        // We need to add a break entry
+                        let nextEntry = self.getBreakComplicationEntry(for: complication, date: currentPeriod.endTime, period: nextPeriod, timegrid: timegrid, subjects: subjects);
+                        entries.appendWithLimitCheck(limit, item: nextEntry!);
+                        let nextPeriodEntry = self.getComplicationEntry(for: complication, period: nextPeriod, timegrid: timegrid, subjects: subjects);
+                        entries.appendWithLimitCheck(limit, item: nextPeriodEntry!);
+                    }
+                    // Every next period needs to be after this time
+                    lastEndTime = nextPeriod.endTime;
+                } else {
+                    // No next Period. The next entry is the end of the timeline
+                    let endEntry = self.getTimelineEndEntry(for: complication, and: date);
+                    entries.appendWithLimitCheck(limit, item: endEntry!);
+                    // We don't need to add anything anymore. We can just return.
+                    return handler(entries);
                 }
             } else {
-                guard let endEntry = self.getTimelineEndEntry(for: complication, and: Date()) else {
-                    return handler(nil);
-                }
-                return handler([endEntry]);
-            }
-            while (startIndex <= (periods.count - 1) && entries.count < limit) {
-                if let periodEntry = self.getComplicationEntry(for: complication, period: periods[startIndex], timegrid: timegrid, subjects: subjects) {
-                    entries.append(periodEntry);
-                }
-                if entries.count < limit {
-                    if startIndex + 1 <= (periods.count - 1) {
-                        let nextPeriod = periods[startIndex + 1]
-                        if let breakTemplate = self.getBreakComplicationEntry(for: complication, date: periods[startIndex].endTime, period: nextPeriod, timegrid: timegrid, subjects: subjects) {
-                            entries.append(breakTemplate);
-                            startIndex = startIndex + 1;
-                            continue;
-                        }
-                        
-                    }
-                    if entries.count < limit {
-                        let endEntry = self.getTimelineEndEntry(for: complication, and: periods[startIndex].endTime)!;
-                        entries.append(endEntry);
-                        startIndex = startIndex + 1;
-                    }
+                if let nextPeriod = periods.first(where: { $0.startTime >= date }) {
+                    // New Timeline
+                    let nextEntry = self.getBreakComplicationEntry(for: complication, date: lastEndTime, period: nextPeriod, timegrid: timegrid, subjects: subjects);
+                    entries.appendWithLimitCheck(limit, item: nextEntry!);
+                    let nextPeriodEntry = self.getComplicationEntry(for: complication, period: nextPeriod, timegrid: timegrid, subjects: subjects);
+                    entries.appendWithLimitCheck(limit, item: nextPeriodEntry!);
+                    lastEndTime = nextPeriod.endTime;
+                } else {
+                    // No next Period. The next entry is the end of the timeline
+                    let endEntry = self.getTimelineEndEntry(for: complication, and: date);
+                    entries.appendWithLimitCheck(limit, item: endEntry!);
+                    // We don't need to add anything anymore. We can just return.
+                    return handler(entries);
                 }
             }
-            handler(entries);
+            
+            while (true) {
+                if let nextPeriod = periods.first(where: { $0.startTime >= lastEndTime }) {
+                    let n = nextPeriod.startTime.timeIntervalSince1970;
+                    let c = lastEndTime.timeIntervalSince1970;
+                    if abs(n - c) <= 1 {
+                        // We don't need a break entry
+                        let nextEntry = self.getComplicationEntry(for: complication, period: nextPeriod, timegrid: timegrid, subjects: subjects);
+                        entries.appendWithLimitCheck(limit, item: nextEntry!);
+                    } else {
+                        // We need to add a break entry, because there is time between last period and next period
+                        let breakEntry = self.getBreakComplicationEntry(for: complication, date: lastEndTime, period: nextPeriod, timegrid: timegrid, subjects: subjects);
+                        entries.appendWithLimitCheck(limit, item: breakEntry!);
+                        let nextPeriodEntry = self.getComplicationEntry(for: complication, period: nextPeriod, timegrid: timegrid, subjects: subjects);
+                        entries.appendWithLimitCheck(limit, item: nextPeriodEntry!);
+                    }
+                    lastEndTime = nextPeriod.endTime;
+                } else {
+                    // There is no next period. This is the end of timeline
+                    let endEntry = self.getTimelineEndEntry(for: complication, and: lastEndTime);
+                    entries.appendWithLimitCheck(limit, item: endEntry!);
+                    break;
+                }
+                
+                if entries.count >= limit {
+                    // We can't add anything anymore
+                    break;
+                }
+            }
+            return handler(entries);
         }
     }
 
@@ -169,7 +212,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         }
         
         if template != nil {
-            return CLKComplicationTimelineEntry(date: date, complicationTemplate: template!)
+            return CLKComplicationTimelineEntry(date: Calendar.current.date(byAdding: .nanosecond, value: 1, to: date)!, complicationTemplate: template!)
         }
         return nil;
     }
@@ -207,7 +250,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             return nil;
         }
         if template != nil {
-            return CLKComplicationTimelineEntry(date: period.startTime, complicationTemplate: template!)
+            return CLKComplicationTimelineEntry(date: Calendar.current.date(byAdding: .nanosecond, value: 1, to: period.startTime)!, complicationTemplate: template!)
         }
         return nil;
     }
@@ -232,7 +275,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         }
         
         if template != nil {
-            return CLKComplicationTimelineEntry(date: date, complicationTemplate: template!)
+            return CLKComplicationTimelineEntry(date: Calendar.current.date(byAdding: .nanosecond, value: 1, to: date)!, complicationTemplate: template!)
         }
         return nil;
     }
@@ -243,13 +286,13 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         guard let untis = self.bgUtility.getUntisClient() else {
             return handler(nil);
         }
-        untis.getTimetable(for: date, cachedHandler: nil) { result in
+        untis.getTimetable(for: getFetchDate(date: date), cachedHandler: nil) { result in
             var periods: [Period] = [];
             guard let currentPeriods = try? result.get() else {
                 return handler(nil);
             }
             periods.append(contentsOf: currentPeriods);
-            untis.getTimetable(for: Calendar.current.date(byAdding: .day, value: 1, to: date)!, cachedHandler: nil) { tomorrowResult in
+            untis.getTimetable(for: Calendar.current.date(byAdding: .day, value: 1, to: getFetchDate(date: date))!, cachedHandler: nil) { tomorrowResult in
                 guard let tomorrowPeriods = try? tomorrowResult.get() else {
                     return handler(nil);
                 }
@@ -257,7 +300,10 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                 if periods.count < 1 {
                     return handler(nil);
                 }
-                let sorted = periods.filter({ $0.startTime > date }).filter({ $0.code != .cancelled }).sortedPeriods(useEndtime: true);
+                let sorted = periods
+                                .sortedPeriods(useEndtime: true)
+                                .filter({ $0.code != .cancelled });
+                
                 handler(sorted);
             }
         }
@@ -305,4 +351,14 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             }
         }
     }
+}
+
+extension Array where Element == CLKComplicationTimelineEntry {
+    
+    mutating func appendWithLimitCheck(_ limit: Int, item: CLKComplicationTimelineEntry) {
+        if self.count < limit {
+            self.append(item);
+        }
+    }
+    
 }
