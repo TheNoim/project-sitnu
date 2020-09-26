@@ -14,6 +14,8 @@ struct ActivityIndicator: View {
     
     var body: some View {
         WebImage(url: Bundle.main.url(forResource: "activity", withExtension: "png"), isAnimating: .constant(active))
+            .antialiased(true)
+            .interpolation(.high)
     }
     
 }

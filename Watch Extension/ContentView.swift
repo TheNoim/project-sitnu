@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SDWebImageSwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var accountStore: AccountStore;
@@ -14,7 +13,7 @@ struct ContentView: View {
     
     var body: some View {
         if !self.accountStore.initialFetch {
-            WebImage(url: Bundle.main.url(forResource: "activity", withExtension: "png"), isAnimating: .constant(true))
+            ActivityIndicator(active: true)
         } else {
             if self.accountStore.selected != nil {
                 let acc = self.accountStore.selected!;

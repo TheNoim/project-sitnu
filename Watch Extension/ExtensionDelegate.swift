@@ -7,13 +7,32 @@
 
 import WatchKit
 import ClockKit
+import SwiftyBeaver
+
+let log = SwiftyBeaver.self
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
     
     var bgUtility: BackgroundUtility?;
+    
+    let fileManager = FileManager.default
 
     func applicationDidFinishLaunching() {
         // Perform any final initialization of your application.
+        
+        let console: ConsoleDestination = ConsoleDestination()
+        
+        var file: FileDestination?;
+        
+        if let url: URL = fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first {
+            file = FileDestination(logFileURL: url.appendingPathComponent("sitnu.log", isDirectory: false));
+        }
+        
+        log.addDestination(console)
+        
+        if file != nil {
+            log.addDestination(file!)
+        }
     }
 
     func applicationDidBecomeActive() {
@@ -30,7 +49,6 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     }
 
     func scheduleBackgroundRefreshTasks() {
-        
         // Get the shared extension object.
         let watchExtension = WKExtension.shared()
         
@@ -38,16 +56,18 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         // updates an hour. So calculate a target date 30 minutes in the future.
         let targetDate = Date().addingTimeInterval(30.0 * 60.0)
         
+        log.info("Schedule background refresh", context: ["targetDate": targetDate]);
+        
         // Schedule the background refresh task.
         watchExtension.scheduleBackgroundRefresh(withPreferredDate: targetDate, userInfo: nil) { (error) in
             
             // Check for errors.
             if let error = error {
-                print("*** An background refresh error occurred: \(error.localizedDescription) ***")
+                log.error("Schedule background refresh error", context: ["error": error])
                 return
             }
             
-            print("*** Background Task Completed Successfully! ***")
+            log.info("Background refresh successfully", context: ["targetDate": targetDate])
         }
     }
     
@@ -57,41 +77,9 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
             // Use a switch statement to check the task type
             switch task {
             case let backgroundTask as WKApplicationRefreshBackgroundTask:
-                // Be sure to complete the background task once you’re done.
-                self.scheduleBackgroundRefreshTasks();
-                self.bgUtility = BackgroundUtility();
-                guard let untis = self.bgUtility!.getUntisClient() else {
-                    return backgroundTask.setTaskCompletedWithSnapshot(false);
-                }
-                guard let complications = CLKComplicationServer.sharedInstance().activeComplications else {
-                    return backgroundTask.setTaskCompletedWithSnapshot(false);
-                }
-                var lastImportTime: Int?;
-                untis.getLatestImportTime(force: true, cachedHandler: { (importTime) in
-                    lastImportTime = importTime;
-                }, completion: { result in
-                    guard let newImportTime = try? result.get() else {
-                        return backgroundTask.setTaskCompletedWithSnapshot(false);
-                    }
-                    var shouldReload: Bool = false;
-                    if lastImportTime == nil {
-                        shouldReload = true;
-                    } else if lastImportTime! != newImportTime {
-                        shouldReload = true;
-                    }
-                    if shouldReload {
-                        untis.getTimetable(and: true, cachedHandler: nil) { _ in
-                            untis.getTimetable(for: Calendar.current.date(byAdding: .day, value: 1, to: Date())!, and: true, cachedHandler: nil) { _ in
-                                for complication in complications {
-                                    CLKComplicationServer.sharedInstance().reloadTimeline(for: complication)
-                                }
-                                backgroundTask.setTaskCompletedWithSnapshot(false);
-                            }
-                        }
-                    } else {
-                        backgroundTask.setTaskCompletedWithSnapshot(false);
-                    }
-                })
+                log.info("Start Background Task");
+                self.runBackgroundTask(backgroundTask: backgroundTask)
+                break;
             case let snapshotTask as WKSnapshotRefreshBackgroundTask:
                 // Snapshot tasks have a unique completion call, make sure to set your expiration date
                 snapshotTask.setTaskCompleted(restoredDefaultState: true, estimatedSnapshotExpiration: Date.distantFuture, userInfo: nil)
@@ -112,6 +100,51 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
                 task.setTaskCompletedWithSnapshot(false)
             }
         }
+    }
+    
+    func runBackgroundTask(backgroundTask: WKApplicationRefreshBackgroundTask) {
+        // Be sure to complete the background task once you’re done.
+        self.scheduleBackgroundRefreshTasks();
+        self.bgUtility = BackgroundUtility();
+        guard let untis = self.bgUtility!.getUntisClient() else {
+            log.warning("End Background Task, because Untis Client is missing")
+            return backgroundTask.setTaskCompletedWithSnapshot(false);
+        }
+        guard let complications = CLKComplicationServer.sharedInstance().activeComplications else {
+            log.warning("End Background Task, because CLKComplicationServer.activeComplications is missing")
+            return backgroundTask.setTaskCompletedWithSnapshot(false);
+        }
+        var lastImportTime: Int?;
+        untis.getLatestImportTime(force: true, cachedHandler: { (importTime) in
+            log.info("Background Task: Cached import time.", context: ["importTime": importTime]);
+            lastImportTime = importTime;
+        }, completion: { result in
+            guard let newImportTime = try? result.get() else {
+                log.warning("End Background Task, because newImportTime is missing")
+                return backgroundTask.setTaskCompletedWithSnapshot(false);
+            }
+            var shouldReload: Bool = false;
+            if lastImportTime == nil {
+                shouldReload = true;
+            } else if lastImportTime! != newImportTime {
+                shouldReload = true;
+            }
+            if shouldReload {
+                untis.getTimetable(and: true, cachedHandler: nil) { _ in
+                    untis.getTimetable(for: Calendar.current.date(byAdding: .day, value: 1, to: Date())!, and: true, cachedHandler: nil) { _ in
+                        for complication in complications {
+                            log.info("Background Task: Reload complication");
+                            CLKComplicationServer.sharedInstance().reloadTimeline(for: complication)
+                        }
+                        log.info("Background Task: End");
+                        backgroundTask.setTaskCompletedWithSnapshot(false);
+                    }
+                }
+            } else {
+                log.warning("End Background Task, because shouldReload is false", context: ["shouldReload": shouldReload, "lastImportTime": lastImportTime as Any, "newImportTime": newImportTime]);
+                backgroundTask.setTaskCompletedWithSnapshot(false);
+            }
+        })
     }
 
 }

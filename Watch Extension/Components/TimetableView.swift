@@ -8,6 +8,14 @@
 import SwiftUI
 import ClockKit
 
+let timetableDayFormatter: RelativeDateTimeFormatter = {
+    let formatter: RelativeDateTimeFormatter = RelativeDateTimeFormatter();
+    formatter.dateTimeStyle = .named;
+    formatter.formattingContext = .dynamic;
+    formatter.unitsStyle = .abbreviated
+    return formatter;
+}();
+
 struct TimetableView: View {
     let account: UntisAccount;
     @State var untis: UntisClient?;
@@ -26,14 +34,6 @@ struct TimetableView: View {
     @State var selectedPeriod: Period?;
     
     @State var forceRefresh: Bool = false;
-    
-    var dayFormatter: RelativeDateTimeFormatter = {
-        let formatter = RelativeDateTimeFormatter();
-        formatter.dateTimeStyle = .named;
-        formatter.formattingContext = .dynamic;
-        formatter.unitsStyle = .abbreviated;
-        return formatter;
-    }();
     
     var body: some View {
         VStack {
@@ -56,21 +56,21 @@ struct TimetableView: View {
                         }
                     })
                 }
+            } else {
+                ActivityIndicator(active: true)
             }
             Button(forceRefresh ? "..." : "Force refresh") {
-                if forceRefresh {
-                    return;
-                }
-                forceRefresh = true;
-                self.getTimetable(finish: {
-                    self.reloadComplications(finish: {
-                        self.forceRefresh = false;
+                if forceRefresh == false {
+                    forceRefresh = true;
+                    self.getTimetable(finish: {
+                        self.reloadComplications(finish: {
+                            self.forceRefresh = false;
+                        }, force: true)
                     }, force: true)
-                }, force: true)
+                }
             }
         }
         .onAppear() {
-            print("onAppear()")
             self.setTitle();
             self.createClient()
             self.getTimegrid();
@@ -92,21 +92,17 @@ struct TimetableView: View {
                 }
                 let xDist: CGFloat = abs(gesture.location.x - self.startPos.x)
                 let yDist: CGFloat = abs(gesture.location.y - self.startPos.y)
-                if self.startPos.y <  gesture.location.y && yDist > xDist {
-                    // DOWN
-                    print("DOWN")
-                }
-                else if self.startPos.y >  gesture.location.y && yDist > xDist {
-                    // UP
-                    print("UP")
-                }
-                else if self.startPos.x > gesture.location.x && yDist < xDist {
+                var nextDate: Date?;
+                if self.startPos.x > gesture.location.x && yDist < xDist {
                     // LEFT
-                    self.setDate(to: Calendar.current.date(byAdding: .day, value: 1, to: self.date)!);
+                    nextDate = Calendar.current.date(byAdding: .day, value: 1, to: self.date);
                 }
                 else if self.startPos.x < gesture.location.x && yDist < xDist {
                     // RIGHT
-                    self.setDate(to: Calendar.current.date(byAdding: .day, value: -1, to: self.date)!)
+                    nextDate = Calendar.current.date(byAdding: .day, value: -1, to: self.date);
+                }
+                if let nextDate = nextDate {
+                    self.setDate(to: nextDate);
                 }
                 self.isSwipping.toggle()
             }
@@ -115,16 +111,18 @@ struct TimetableView: View {
     
     func setDate(to date: Date) {
         self.date = date;
+        self.periods = nil;
         self.setTitle();
         self.getTimetable(finish: nil);
     }
     
     func setTitle() {
-        self.title = self.dayFormatter.localizedString(from: Calendar.current.dateComponents([Calendar.Component.day], from: Calendar.current.startOfDay(for: Date()), to: self.date));
+        let dateComponents: DateComponents = Calendar.current.dateComponents([Calendar.Component.day], from: Calendar.current.startOfDay(for: Date()), to: self.date)
+        self.title = timetableDayFormatter.localizedString(from: dateComponents);
     }
     
     func createClient() {
-        let credentials = BasicUntisCredentials(username: self.account.username, password: self.account.password, server: self.account.server, school: self.account.school);
+        let credentials: BasicUntisCredentials = BasicUntisCredentials(username: self.account.username, password: self.account.password, server: self.account.server, school: self.account.school);
         self.untis = UntisClient(credentials: credentials);
     }
     
@@ -170,42 +168,21 @@ struct TimetableView: View {
     }
     
     func reloadComplications(finish: (() -> Void)?, force: Bool = false) {
+        let finishCall = finish ?? {};
         if !self.account.primary {
-            if finish != nil {
-                finish!();
-            }
-            return;
-        }
-        guard let complications = CLKComplicationServer.sharedInstance().activeComplications else {
-            if finish != nil {
-                finish!();
-            }
-            return;
+            return finishCall();
         }
         var lastImportTime: Int?;
         self.untis?.getLatestImportTime(force: force, cachedHandler: { (importTime) in
             lastImportTime = importTime;
         }, completion: { result in
             guard let newImportTime = try? result.get() else {
-                if finish != nil {
-                    finish!();
-                }
-                return;
+                return finishCall();
             }
-            if lastImportTime == nil {
-                for complication in complications {
-                    CLKComplicationServer.sharedInstance().reloadTimeline(for: complication)
-                }
-            } else {
-                if lastImportTime! != newImportTime {
-                    for complication in complications {
-                        CLKComplicationServer.sharedInstance().reloadTimeline(for: complication)
-                    }
-                }
+            if force || lastImportTime == nil || lastImportTime! != newImportTime {
+                BackgroundUtility.shared.reloadComplications();
             }
-            if finish != nil {
-                finish!();
-            }
+            return finishCall();
         })
     }
 }

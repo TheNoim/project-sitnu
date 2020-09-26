@@ -7,8 +7,11 @@
 
 import Foundation
 import Cache
+import ClockKit
 
 class BackgroundUtility {
+    public static let shared = BackgroundUtility();
+    
     var untisClient: UntisClient?;
     
     public func getContext() -> SharedContext? {
@@ -22,20 +25,29 @@ class BackgroundUtility {
     
     
     public func getUntisClient() -> UntisClient? {
-        if let untisClient = self.untisClient {
+        if let untisClient: UntisClient = self.untisClient {
             return untisClient;
         }
-        guard let sharedContext = self.getContext() else {
+        guard let sharedContext: SharedContext = self.getContext() else {
             return nil;
         }
         if sharedContext.accounts.count < 1 {
             return nil;
         }
-        guard let primaryAccount = sharedContext.accounts.first(where: { $0.primary }) else {
+        guard let primaryAccount: UntisAccount = sharedContext.accounts.first(where: { $0.primary }) else {
             return nil;
         }
         let credentials = BasicUntisCredentials(username: primaryAccount.username, password: primaryAccount.password, server: primaryAccount.server, school: primaryAccount.school);
         self.untisClient = UntisClient(credentials: credentials);
         return self.untisClient;
+    }
+
+    public func reloadComplications() {
+        let server: CLKComplicationServer = CLKComplicationServer.sharedInstance()
+        if server.activeComplications != nil {
+            for complication in server.activeComplications! {
+                server.reloadTimeline(for: complication)
+            }
+        }
     }
 }
