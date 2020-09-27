@@ -13,6 +13,11 @@
 		FB36E8262518EAD40039DFC9 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB36E8252518EAD40039DFC9 /* Storyboard.storyboard */; };
 		FB36E8302518EE870039DFC9 /* TimetableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB36E82F2518EE860039DFC9 /* TimetableRowView.swift */; };
 		FB4CC36425190CC7001E7F69 /* BackgroundUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4CC36325190CC7001E7F69 /* BackgroundUtility.swift */; };
+		FB5A92922520B36F00477E7A /* LogFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5A92912520B36F00477E7A /* LogFiles.swift */; };
+		FB5A92932520B36F00477E7A /* LogFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5A92912520B36F00477E7A /* LogFiles.swift */; };
+		FB5A929D2520D6A000477E7A /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5A929C2520D6A000477E7A /* AccountView.swift */; };
+		FB5A92A42520D7B000477E7A /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5A92A32520D7B000477E7A /* AboutView.swift */; };
+		FB5A92BC2520DDCF00477E7A /* LogFileListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5A92BB2520DDCF00477E7A /* LogFileListView.swift */; };
 		FB6E89232516025900DAB2F4 /* Timetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E89222516025900DAB2F4 /* Timetable.swift */; };
 		FB6E892725160B1500DAB2F4 /* TimetableCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E892625160B1500DAB2F4 /* TimetableCache.swift */; };
 		FB6E892B2516195800DAB2F4 /* Subjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E892A2516195800DAB2F4 /* Subjects.swift */; };
@@ -36,6 +41,10 @@
 		FB6E89E825163B1E00DAB2F4 /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E89E725163B1E00DAB2F4 /* Throttler.swift */; };
 		FB6E89F625163FF300DAB2F4 /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E89F525163FF300DAB2F4 /* AddView.swift */; };
 		FB6E89FC25165A2600DAB2F4 /* onChangeChim.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E89FB25165A2600DAB2F4 /* onChangeChim.swift */; };
+		FB7A8F712520E1780010FDE5 /* RelativeTimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7A8F702520E1780010FDE5 /* RelativeTimeFormatter.swift */; };
+		FB7A8F7F2520E3040010FDE5 /* LogFileViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7A8F7E2520E3040010FDE5 /* LogFileViewer.swift */; };
+		FB7A8F852520E3F10010FDE5 /* LazyStackPolyfill.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7A8F842520E3F10010FDE5 /* LazyStackPolyfill.swift */; };
+		FB7A8F8C25210CA00010FDE5 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7A8F8B25210CA00010FDE5 /* ShareSheet.swift */; };
 		FB7F6A1725175E870052F679 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7F6A1625175E870052F679 /* SearchBar.swift */; };
 		FB7F6A252517617B0052F679 /* Encodable+asDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7F6A242517617B0052F679 /* Encodable+asDictionary.swift */; };
 		FB7F6A7A251787570052F679 /* activity.png in Resources */ = {isa = PBXBuildFile; fileRef = FB7F6A79251787570052F679 /* activity.png */; };
@@ -70,7 +79,7 @@
 		FB9EC0F52517C954002D7E16 /* UntisUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9EC0F42517C954002D7E16 /* UntisUtil.swift */; };
 		FB9EC1032517CBB2002D7E16 /* PeriodWithTimegrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9EC1022517CBB2002D7E16 /* PeriodWithTimegrid.swift */; };
 		FB9EC1092517D170002D7E16 /* Timetable+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9EC1082517D170002D7E16 /* Timetable+Util.swift */; };
-		FBA95DA82514F53200494B5C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA95DA72514F53200494B5C /* ContentView.swift */; };
+		FBA95DA82514F53200494B5C /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA95DA72514F53200494B5C /* RootView.swift */; };
 		FBA95DAA2514F53400494B5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBA95DA92514F53400494B5C /* Assets.xcassets */; };
 		FBA95DAD2514F53400494B5C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBA95DAC2514F53400494B5C /* Preview Assets.xcassets */; };
 		FBA95DB72514F63D00494B5C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = FBA95DB62514F63D00494B5C /* Alamofire */; };
@@ -148,6 +157,10 @@
 		FB36E8252518EAD40039DFC9 /* Storyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		FB36E82F2518EE860039DFC9 /* TimetableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableRowView.swift; sourceTree = "<group>"; };
 		FB4CC36325190CC7001E7F69 /* BackgroundUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundUtility.swift; sourceTree = "<group>"; };
+		FB5A92912520B36F00477E7A /* LogFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogFiles.swift; sourceTree = "<group>"; };
+		FB5A929C2520D6A000477E7A /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		FB5A92A32520D7B000477E7A /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		FB5A92BB2520DDCF00477E7A /* LogFileListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogFileListView.swift; sourceTree = "<group>"; };
 		FB6E89222516025900DAB2F4 /* Timetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timetable.swift; sourceTree = "<group>"; };
 		FB6E892625160B1500DAB2F4 /* TimetableCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableCache.swift; sourceTree = "<group>"; };
 		FB6E892A2516195800DAB2F4 /* Subjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subjects.swift; sourceTree = "<group>"; };
@@ -172,6 +185,10 @@
 		FB6E89E725163B1E00DAB2F4 /* Throttler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttler.swift; sourceTree = "<group>"; };
 		FB6E89F525163FF300DAB2F4 /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		FB6E89FB25165A2600DAB2F4 /* onChangeChim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = onChangeChim.swift; sourceTree = "<group>"; };
+		FB7A8F702520E1780010FDE5 /* RelativeTimeFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelativeTimeFormatter.swift; sourceTree = "<group>"; };
+		FB7A8F7E2520E3040010FDE5 /* LogFileViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogFileViewer.swift; sourceTree = "<group>"; };
+		FB7A8F842520E3F10010FDE5 /* LazyStackPolyfill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyStackPolyfill.swift; sourceTree = "<group>"; };
+		FB7A8F8B25210CA00010FDE5 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		FB7F6A1625175E870052F679 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		FB7F6A242517617B0052F679 /* Encodable+asDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+asDictionary.swift"; sourceTree = "<group>"; };
 		FB7F6A79251787570052F679 /* activity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activity.png; sourceTree = "<group>"; };
@@ -184,7 +201,7 @@
 		FB9EC1022517CBB2002D7E16 /* PeriodWithTimegrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodWithTimegrid.swift; sourceTree = "<group>"; };
 		FB9EC1082517D170002D7E16 /* Timetable+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Timetable+Util.swift"; sourceTree = "<group>"; };
 		FBA95DA22514F53200494B5C /* Project SITNU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project SITNU.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FBA95DA72514F53200494B5C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		FBA95DA72514F53200494B5C /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		FBA95DA92514F53400494B5C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FBA95DAC2514F53400494B5C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FBA95DAE2514F53400494B5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -254,6 +271,16 @@
 			path = Utility;
 			sourceTree = "<group>";
 		};
+		FB5A92BA2520DDBD00477E7A /* AboutView */ = {
+			isa = PBXGroup;
+			children = (
+				FB5A92A32520D7B000477E7A /* AboutView.swift */,
+				FB5A92BB2520DDCF00477E7A /* LogFileListView.swift */,
+				FB7A8F7E2520E3040010FDE5 /* LogFileViewer.swift */,
+			);
+			path = AboutView;
+			sourceTree = "<group>";
+		};
 		FB6E896A251624DA00DAB2F4 /* Watch */ = {
 			isa = PBXGroup;
 			children = (
@@ -311,6 +338,7 @@
 			isa = PBXGroup;
 			children = (
 				FB6E89CA25162F6400DAB2F4 /* AccountContext.swift */,
+				FB5A92912520B36F00477E7A /* LogFiles.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -318,9 +346,12 @@
 		FB6E89D42516341900DAB2F4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FBA95DA72514F53200494B5C /* ContentView.swift */,
+				FBA95DA72514F53200494B5C /* RootView.swift */,
 				FB6E89D52516342700DAB2F4 /* SchoolSearchView.swift */,
 				FB6E89F525163FF300DAB2F4 /* AddView.swift */,
+				FB5A929C2520D6A000477E7A /* AccountView.swift */,
+				FB7A8F702520E1780010FDE5 /* RelativeTimeFormatter.swift */,
+				FB5A92BA2520DDBD00477E7A /* AboutView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -331,6 +362,8 @@
 				FB6E89E725163B1E00DAB2F4 /* Throttler.swift */,
 				FB6E89FB25165A2600DAB2F4 /* onChangeChim.swift */,
 				FB7F6A242517617B0052F679 /* Encodable+asDictionary.swift */,
+				FB7A8F842520E3F10010FDE5 /* LazyStackPolyfill.swift */,
+				FB7A8F8B25210CA00010FDE5 /* ShareSheet.swift */,
 			);
 			path = External;
 			sourceTree = "<group>";
@@ -710,6 +743,7 @@
 				FB7F6AEC251790200052F679 /* TimetableCache.swift in Sources */,
 				FB7F6AE72517901F0052F679 /* TimegridCache.swift in Sources */,
 				FB8E7B00251CC31600D4C43C /* DateOffset.swift in Sources */,
+				FB5A92932520B36F00477E7A /* LogFiles.swift in Sources */,
 				FB6E897F251624DD00DAB2F4 /* ExtensionDelegate.swift in Sources */,
 				FB7F6AC4251790110052F679 /* Auth.swift in Sources */,
 				FB7F6AA625178FFD0052F679 /* DictionaryKeyPath.swift in Sources */,
@@ -727,15 +761,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB7A8F7F2520E3040010FDE5 /* LogFileViewer.swift in Sources */,
 				FBA95DC72514F98A00494B5C /* Authenticator.swift in Sources */,
+				FB5A92A42520D7B000477E7A /* AboutView.swift in Sources */,
 				FBA95DD22515104B00494B5C /* DictionaryKeyPath.swift in Sources */,
 				FB6E89562516221D00DAB2F4 /* AppDelegate.swift in Sources */,
 				FBA95E0C25155DC800494B5C /* Timegrid.swift in Sources */,
 				FBA95DD925151B6F00494B5C /* ResponseSerializer.swift in Sources */,
+				FB7A8F8C25210CA00010FDE5 /* ShareSheet.swift in Sources */,
+				FB5A92922520B36F00477E7A /* LogFiles.swift in Sources */,
 				FBA95E142515627C00494B5C /* TimegridCache.swift in Sources */,
 				FB6E89D62516342700DAB2F4 /* SchoolSearchView.swift in Sources */,
-				FBA95DA82514F53200494B5C /* ContentView.swift in Sources */,
+				FB5A92BC2520DDCF00477E7A /* LogFileListView.swift in Sources */,
+				FBA95DA82514F53200494B5C /* RootView.swift in Sources */,
 				FBA95E102515616E00494B5C /* Decodable.swift in Sources */,
+				FB7A8F852520E3F10010FDE5 /* LazyStackPolyfill.swift in Sources */,
+				FB7A8F712520E1780010FDE5 /* RelativeTimeFormatter.swift in Sources */,
 				FBA95E082515595C00494B5C /* AuthSession.swift in Sources */,
 				FBA95DD62515158800494B5C /* Methods.swift in Sources */,
 				FB6E892B2516195800DAB2F4 /* Subjects.swift in Sources */,
@@ -750,6 +791,7 @@
 				FBA95DCE2514FD2500494B5C /* Errors.swift in Sources */,
 				FB6E89FC25165A2600DAB2F4 /* onChangeChim.swift in Sources */,
 				FBA95DC02514F69200494B5C /* Auth.swift in Sources */,
+				FB5A929D2520D6A000477E7A /* AccountView.swift in Sources */,
 				FB6E89F625163FF300DAB2F4 /* AddView.swift in Sources */,
 				FB8E7AFF251CC31600D4C43C /* DateOffset.swift in Sources */,
 				FB6E89E825163B1E00DAB2F4 /* Throttler.swift in Sources */,
@@ -804,7 +846,7 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_ASSET_PATHS = "\"Watch Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				ENABLE_PREVIEWS = YES;
@@ -834,7 +876,7 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_ASSET_PATHS = "\"Watch Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				ENABLE_PREVIEWS = YES;
@@ -864,7 +906,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				IBSC_MODULE = Watch_Extension;
 				INFOPLIST_FILE = Watch/Info.plist;
@@ -885,7 +927,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				IBSC_MODULE = Watch_Extension;
 				INFOPLIST_FILE = Watch/Info.plist;
@@ -1023,7 +1065,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SITNU/Preview Content\"";
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				ENABLE_PREVIEWS = YES;
@@ -1052,7 +1094,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SITNU/Preview Content\"";
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				ENABLE_PREVIEWS = YES;

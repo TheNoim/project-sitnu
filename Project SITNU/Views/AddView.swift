@@ -22,7 +22,6 @@ struct AddView: View {
     @State var untis: UntisClient?;
     @State var basicCredentials: BasicUntisCredentials?;
     @EnvironmentObject var store: WatchStore
-    // @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @EnvironmentObject var addNavigationController: AddNavigationController;
     
     var body: some View {

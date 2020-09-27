@@ -33,14 +33,18 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     // MARK: - Timeline Configuration
     
     func getTimelineEndDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
+        log.debug("Get timeline end date")
         // Call the handler with the last entry date you can currently provide or nil if you can't support future timelines
         self.getUntisTimeline(start: getDateWithOffset(for: Date())) { (periods) in
             guard let periods = periods else {
+                log.error("No periods")
                 return handler(nil);
             }
             guard let last = periods.last else {
+                log.error("No last period")
                 return handler(nil);
             }
+            log.debug("New timeline end date", context: ["endTime": last.endTime])
             handler(last.endTime);
         }
         
@@ -55,12 +59,14 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     
     func getCurrentTimelineEntry(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimelineEntry?) -> Void) {
         let currentDate = Date();
+        log.debug("Get current timeline entry")
         self.getAllUntisInformation(for: currentDate) {
             handler(nil);
         } handler: { (periods, timegrid, subjects) in
             // If there is currently a period
             if let currentPeriod = periods.first(where: { $0.startTime < currentDate && $0.endTime > currentDate }) {
                 let currentEntry = self.getComplicationEntry(for: complication, period: currentPeriod, timegrid: timegrid, subjects: subjects);
+                log.debug("Current entry is current period", context: ["currentDate": currentDate, "startTime": currentPeriod.startTime, "endTime": currentPeriod.endTime]);
                 handler(currentEntry);
             } else {
                 // It is currently a break
@@ -74,8 +80,10 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                         breakDate = Calendar.current.date(byAdding: .nanosecond, value: 1, to: lastPeriod.endTime)!;
                     }
                     let breakEntry = self.getBreakComplicationEntry(for: complication, date: breakDate, period: nextPeriod, timegrid: timegrid, subjects: subjects);
+                    log.debug("Current entry needs break template", context: ["currentDate": currentDate, "nextPeriodStartTime": nextPeriod.startTime, "nextPeriodEndTime": nextPeriod.endTime, "breakDate": breakDate]);
                     handler(breakEntry);
                 } else {
+                    log.debug("Current entry is timeline end");
                     // End of timeline
                     let endOfTimelineEntry = self.getTimelineEndEntry(for: complication, and: currentDate);
                     handler(endOfTimelineEntry);

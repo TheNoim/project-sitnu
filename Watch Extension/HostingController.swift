@@ -23,6 +23,46 @@ class HostingController: WKHostingController<AnyView>, WCSessionDelegate {
         self.setContext(applicationContext);
     }
     
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+        guard let action: String = message["action"] as? String else {
+            log.error("Failed to decode WCSession message", context: ["message": message]);
+            return;
+        }
+        log.info("Received action", context: ["action": action]);
+        if action == "copyLogs" {
+            guard let delegate: ExtensionDelegate = WKExtension.shared().delegate as? ExtensionDelegate else {
+                log.error("Missing Extension delegate");
+                return;
+            }
+            guard let logLocation: URL = delegate.logLocation else {
+                log.error("Missing log location");
+                return;
+            }
+            if !FileManager.default.fileExists(atPath: logLocation.relativePath) {
+                log.error("Log file doesn't exist");
+                return;
+            }
+            let logDirectory: URL = logLocation.deletingLastPathComponent();
+            let copyDate: Date = Date();
+            let copyLogLocation: URL = logDirectory.appendingPathComponent("sitnu-\(copyDate.timeIntervalSince1970).log", isDirectory: false);
+            try? FileManager.default.copyItem(at: logLocation, to: copyLogLocation);
+            if !FileManager.default.fileExists(atPath: copyLogLocation.relativePath) {
+                log.error("Failed to duplicate log file");
+                return;
+            }
+            log.info("Start log transfer", context: ["location": copyLogLocation.absoluteURL]);
+            session.transferFile(copyLogLocation, metadata: ["date": copyDate, "type": "log"]);
+        }
+    }
+    
+    func session(_ session: WCSession, didFinish fileTransfer: WCSessionFileTransfer, error: Error?) {
+        if let error = error {
+            log.error("File transfer finished with an error", context: ["error": error]);
+            return
+        }
+        log.info("File transfer finished successfully");
+    }
+    
     @ObservedObject var accountStore: AccountStore = AccountStore();
     
     let contentView = ContentView();

@@ -24,6 +24,7 @@ struct TimetableView: View {
     @State var subjects: [Subject]?;
     @State var date: Date = Calendar.current.startOfDay(for: Date());
     @State var title: String = "";
+    @State var checkedDate: Date = Date();
     
     // Swipe detection
     @State var startPos : CGPoint = .zero
@@ -107,6 +108,16 @@ struct TimetableView: View {
                 self.isSwipping.toggle()
             }
         )
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name("applicationDidBecomeActive"))) { _ in
+            log.debug("Received notification applicationDidBecomeActive")
+            DispatchQueue.main.async {
+                self.setTitle();
+                if !Calendar.current.isDate(self.checkedDate, inSameDayAs: Date()) {
+                    log.debug("Last time app was opened was yesterday. Set date to today");
+                    self.setDate(to: Calendar.current.startOfDay(for: Date()));
+                }
+            }
+        }
     }
     
     func setDate(to date: Date) {
@@ -114,6 +125,7 @@ struct TimetableView: View {
         self.periods = nil;
         self.setTitle();
         self.getTimetable(finish: nil);
+        self.checkedDate = Date();
     }
     
     func setTitle() {
@@ -177,9 +189,12 @@ struct TimetableView: View {
             lastImportTime = importTime;
         }, completion: { result in
             guard let newImportTime = try? result.get() else {
+                if BackgroundUtility.shared.shouldReloadComplications() {
+                    BackgroundUtility.shared.reloadComplications();
+                }
                 return finishCall();
             }
-            if force || lastImportTime == nil || lastImportTime! != newImportTime {
+            if force || lastImportTime == nil || lastImportTime! != newImportTime || BackgroundUtility.shared.shouldReloadComplications() {
                 BackgroundUtility.shared.reloadComplications();
             }
             return finishCall();

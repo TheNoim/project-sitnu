@@ -10,7 +10,9 @@ import Combine
 
 final class WatchStore: ObservableObject {
     @Published var available: Bool = false;
+    @Published var canSendMessages: Bool = false;
     @Published var accounts: [UntisAccount] = [];
+    @Published var logFiles: [LogFile] = [];
     
     var syncCallback: (([String: Any]) -> Void)?;
     
@@ -28,5 +30,9 @@ final class WatchStore: ObservableObject {
         } else {
             print("Error while encoding context as dictionary");
         }
+    }
+    
+    func updateLogFiles() {
+        self.logFiles = LogFileManager.default.loadLogFiles();
     }
 }
