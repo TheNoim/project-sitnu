@@ -59,7 +59,7 @@ class Project_SITNUTests: XCTestCase {
         let credentials = self.credentials!;
         let client = UntisClient(credentials: credentials);
         
-        client.getLatestImportTime(force: false) { (time) in
+        client.getLatestImportTime(force: true) { (time) in
             print("Cached time: \(time)");
         } completion: { (response) in
             switch response {

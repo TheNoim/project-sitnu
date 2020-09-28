@@ -51,6 +51,8 @@ final class LogFileManager {
             logFiles.append(LogFile(url: url, date: date, type: .watchOS));
         }
         
+        logFiles.sort(by: { $0.date.compare($1.date) == .orderedDescending })
+        
         return logFiles;
     }
     

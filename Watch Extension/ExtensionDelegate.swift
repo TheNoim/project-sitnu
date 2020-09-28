@@ -86,7 +86,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         
         
         log.info("Schedule background refresh", context: ["targetDate": targetDate]);
-        
+                
         // Schedule the background refresh task.
         watchExtension.scheduleBackgroundRefresh(withPreferredDate: targetDate, userInfo: nil) { (error) in
             // Check for errors.

@@ -8,11 +8,15 @@
 import Foundation
 import Alamofire
 
-struct UntisResponseSerializer<Result>: ResponseSerializer {
-    typealias SerializedObject = Result;
+struct UntisResponseSerializer: ResponseSerializer {
+    let baseSerializer: JSONResponseSerializer;
     
-    func serialize<Result>(request: URLRequest?, response: HTTPURLResponse?, data: Data?, error: Error?) throws -> Result {
-        let json = try JSONResponseSerializer().serialize(request: request, response: response, data: data, error: error);
+    init() {
+        self.baseSerializer = JSONResponseSerializer();
+    }
+    
+    func serialize(request: URLRequest?, response: HTTPURLResponse?, data: Data?, error: Error?) throws -> [String: Any] {
+        let json = try self.baseSerializer.serialize(request: request, response: response, data: data, error: error);
         
         guard let root = json as? [String: Any] else {
             throw UntisError.untis(type: .serverError);
@@ -35,8 +39,60 @@ struct UntisResponseSerializer<Result>: ResponseSerializer {
                 throw UntisError.untis(type: .unknown);
             }
         }
+        return root;
+    }
+}
+
+struct UntisIntSerializer: ResponseSerializer {
+    let baseUntisResponseSerializer: UntisResponseSerializer;
+    
+    init() {
+        self.baseUntisResponseSerializer = UntisResponseSerializer();
+    }
+    
+    func serialize(request: URLRequest?, response: HTTPURLResponse?, data: Data?, error: Error?) throws -> Int {
+        let root = try self.baseUntisResponseSerializer.serialize(request: request, response: response, data: data, error: error);
         
-        guard let result = root["result"] as? Result else {
+        guard let result = root["result"] as? Int else {
+            log.error("Missing server result", context: ["json": root, "error": error as Any, "usedSerializer": "Int"])
+            throw UntisError.untis(type: .serverMissingResult);
+        }
+        
+        return result;
+    }
+}
+
+struct UntisArraySerializer: ResponseSerializer {
+    let baseUntisResponseSerializer: UntisResponseSerializer;
+    
+    init() {
+        self.baseUntisResponseSerializer = UntisResponseSerializer();
+    }
+    
+    func serialize(request: URLRequest?, response: HTTPURLResponse?, data: Data?, error: Error?) throws -> [Any] {
+        let root = try self.baseUntisResponseSerializer.serialize(request: request, response: response, data: data, error: error);
+        
+        guard let result = root["result"] as? [Any] else {
+            log.error("Missing server result", context: ["json": root, "error": error as Any, "usedSerializer": "Array"])
+            throw UntisError.untis(type: .serverMissingResult);
+        }
+        
+        return result;
+    }
+}
+
+struct UntisObjectSerializer: ResponseSerializer {
+    let baseUntisResponseSerializer: UntisResponseSerializer;
+    
+    init() {
+        self.baseUntisResponseSerializer = UntisResponseSerializer();
+    }
+    
+    func serialize(request: URLRequest?, response: HTTPURLResponse?, data: Data?, error: Error?) throws -> [String: Any] {
+        let root = try self.baseUntisResponseSerializer.serialize(request: request, response: response, data: data, error: error);
+        
+        guard let result = root["result"] as? [String: Any] else {
+            log.error("Missing server result", context: ["json": root, "error": error as Any, "usedSerializer": "Object"])
             throw UntisError.untis(type: .serverMissingResult);
         }
         

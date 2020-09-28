@@ -14,6 +14,9 @@ class UntisClient {
     private var session: Session;
     private var storage: Storage<String>?;
     private var disableCache: Bool = false;
+    private lazy var intSerializer: UntisIntSerializer = UntisIntSerializer();
+    private lazy var objectSerializer: UntisObjectSerializer = UntisObjectSerializer();
+    private lazy var arraySerializer: UntisArraySerializer = UntisArraySerializer();
     
     typealias JsonObject = [String: Any];
     typealias JsonArray = [Any];
@@ -218,7 +221,7 @@ class UntisClient {
             refresh = true;
         }
         if refresh {
-            self.doRequest(method: .IMPORT_TIME, type: Int.self) { response in
+            self.doRequest(method: .IMPORT_TIME, serializer: self.intSerializer) { response in
                 if let time = try? response.get() {
                     let timeCache = ImportTimeCache(time: time);
                     try? intStorage!.setObject(timeCache, forKey: cacheKey);
@@ -247,26 +250,25 @@ class UntisClient {
     // MARK: - Do Request
     
     private func doObjectRequest(method: WebUntisMethod, parameters: [String: Any] = [:], completion: @escaping (Swift.Result<JsonObject, Error>) -> Void) {
-        self.doRequest(method: method, parameters: parameters, type: JsonObject.self) { result in
+        self.doRequest(method: method, parameters: parameters, serializer: self.objectSerializer) { result in
             completion(result);
         }
     }
     
     private func doArrayRequest(method: WebUntisMethod, parameters: [String: Any] = [:], completion: @escaping (Swift.Result<JsonArray, Error>) -> Void) {
-        self.doRequest(method: method, parameters: parameters, type: JsonArray.self) { result in
+        self.doRequest(method: method, parameters: parameters, serializer: self.arraySerializer) { result in
             completion(result);
         }
     }
     
-    private func doRequest<T>(method: WebUntisMethod, parameters: [String: Any] = [:], type: T.Type, completion: @escaping (Swift.Result<T, Error>) -> Void) {
+    private func doRequest<T: ResponseSerializer>(method: WebUntisMethod, parameters: [String: Any] = [:], serializer: T, completion: @escaping (Swift.Result<T.SerializedObject, Error>) -> Void) {
         let body: Parameters = [
             "id": "SITNU",
             "method": method.rawValue,
             "jsonrpc": "2.0",
             "params": parameters
         ];
-        let serializer = UntisResponseSerializer<T>();
-        self.session.request("https://\(self.credentials.server)/WebUntis/jsonrpc.do?school=\(self.credentials.school)", method: .post, parameters: body, encoding: JSONEncoding.default).response(responseSerializer: serializer) { response in
+        self.session.download("https://\(self.credentials.server)/WebUntis/jsonrpc.do?school=\(self.credentials.school)", method: .post, parameters: body, encoding: JSONEncoding.default).response(responseSerializer: serializer) { response in
             switch response.result {
             case .success(let serializedObject):
                 completion(.success(serializedObject));
