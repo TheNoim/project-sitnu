@@ -146,12 +146,12 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
             log.warning("End Background Task, because Untis Client is missing")
             return backgroundTask.setTaskCompletedWithSnapshot(false);
         }
-        var lastImportTime: Int?;
+        var lastImportTime: Int64?;
         untis.getLatestImportTime(force: true, cachedHandler: { (importTime) in
             log.info("Background Task: Cached import time.", context: ["importTime": importTime]);
             lastImportTime = importTime;
         }, completion: { result in
-            var newImportTime: Int;
+            var newImportTime: Int64;
             switch result {
             case.failure(let error):
                 log.error("End Background Task, because newImportTime is missing", context: ["error": error]);

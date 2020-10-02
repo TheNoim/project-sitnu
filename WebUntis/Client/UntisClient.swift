@@ -23,16 +23,16 @@ class UntisClient {
     
     init(credentials: BasicUntisCredentials) {
         self.credentials = credentials;
-        let diskConfig = DiskConfig(name: "Untis", expiry: .date(Date().addingTimeInterval(60 * 60 * 24 * 14)), maxSize: 52428800)
-        let memoryConfig = MemoryConfig(expiry: .never, countLimit: 40, totalCostLimit: 10)
+        let diskConfig: DiskConfig = DiskConfig(name: "Untis", expiry: .date(Date().addingTimeInterval(60 * 60 * 24 * 14)), maxSize: 52428800)
+        let memoryConfig: MemoryConfig = MemoryConfig(expiry: .never, countLimit: 40, totalCostLimit: 10)
         do {
             self.storage = try Storage(diskConfig: diskConfig, memoryConfig: memoryConfig, transformer: TransformerFactory.forCodable(ofType: String.self));
         } catch {
             self.disableCache = true;
         }
-        let authStorage = self.storage?.transformCodable(ofType: AuthSession.self);
-        let authKey = "\(self.credentials.username):\(self.credentials.school)@\(self.credentials.server)->AUTH";
-        let authenticator = UntisAuthenticator(storage: authStorage, key: authKey);
+        let authStorage: Storage<AuthSession>? = self.storage?.transformCodable(ofType: AuthSession.self);
+        let authKey: String = "\(self.credentials.username):\(self.credentials.school)@\(self.credentials.server)->AUTH";
+        let authenticator: UntisAuthenticator = UntisAuthenticator(storage: authStorage, key: authKey);
         
         var alamofireCredentials: UntisCredentials = UntisCredentials(username: credentials.username, password: credentials.password, server: credentials.server, school: credentials.school);
         
@@ -49,10 +49,10 @@ class UntisClient {
             }
         }
         
-        let interceptor = AuthenticationInterceptor(authenticator: authenticator, credential: alamofireCredentials);
-        let rootQueue = DispatchQueue(label: "com.app.session.rootQueue")
-        let requestQueue = DispatchQueue(label: "com.app.session.requestQueue")
-        let serializationQueue = DispatchQueue(label: "com.app.session.serializationQueue")
+        let interceptor: AuthenticationInterceptor = AuthenticationInterceptor(authenticator: authenticator, credential: alamofireCredentials);
+        let rootQueue: DispatchQueue = DispatchQueue(label: "com.app.session.rootQueue")
+        let requestQueue: DispatchQueue = DispatchQueue(label: "com.app.session.requestQueue")
+        let serializationQueue: DispatchQueue = DispatchQueue(label: "com.app.session.serializationQueue")
         self.session = Session(rootQueue: rootQueue, requestQueue: requestQueue, serializationQueue: serializationQueue, interceptor: interceptor);
         
     }
@@ -206,7 +206,7 @@ class UntisClient {
     
     // MARK: Latest Import Time
     
-    public func getLatestImportTime(force: Bool = false, cachedHandler: ((Int) -> Void)?, completion: @escaping (Swift.Result<Int, Error>) -> Void) {
+    public func getLatestImportTime(force: Bool = false, cachedHandler: ((Int64) -> Void)?, completion: @escaping (Swift.Result<Int64, Error>) -> Void) {
         var refresh: Bool = force;
         let intStorage = self.storage?.transformCodable(ofType: ImportTimeCache.self);
         let cacheKey = self.getCacheKey(for: "IMPORT_TIME");

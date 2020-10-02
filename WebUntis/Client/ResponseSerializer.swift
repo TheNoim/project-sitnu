@@ -50,10 +50,14 @@ struct UntisIntSerializer: ResponseSerializer {
         self.baseUntisResponseSerializer = UntisResponseSerializer();
     }
     
-    func serialize(request: URLRequest?, response: HTTPURLResponse?, data: Data?, error: Error?) throws -> Int {
+    func serialize(request: URLRequest?, response: HTTPURLResponse?, data: Data?, error: Error?) throws -> Int64 {
+        log.debug("Start serializing")
+        
         let root = try self.baseUntisResponseSerializer.serialize(request: request, response: response, data: data, error: error);
         
-        guard let result = root["result"] as? Int else {
+        log.debug("Got this as result", context: ["result": root["result"]]);
+        
+        guard let result = root["result"] as? Int64 else {
             log.error("Missing server result", context: ["json": root, "error": error as Any, "usedSerializer": "Int"])
             throw UntisError.untis(type: .serverMissingResult);
         }

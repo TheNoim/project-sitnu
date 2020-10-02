@@ -87,7 +87,7 @@ struct AddView: View {
         }
     }
     
-    func handleUntisResponse(result: Swift.Result<Int, Error>) {
+    func handleUntisResponse(result: Swift.Result<Int64, Error>) {
         switch result {
         case .success:
             let id = UUID();

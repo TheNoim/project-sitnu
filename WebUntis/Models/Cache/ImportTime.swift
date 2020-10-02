@@ -8,7 +8,7 @@
 import Foundation
 
 struct ImportTimeCache: Codable {
-    let time: Int;
+    let time: Int64;
     var date: Date = Date();
     
     var expired: Bool { Calendar.current.date(byAdding: .minute, value: 5, to: self.date)! > Date() }

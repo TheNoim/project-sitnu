@@ -184,7 +184,7 @@ struct TimetableView: View {
         if !self.account.primary {
             return finishCall();
         }
-        var lastImportTime: Int?;
+        var lastImportTime: Int64?;
         self.untis?.getLatestImportTime(force: force, cachedHandler: { (importTime) in
             lastImportTime = importTime;
         }, completion: { result in
