@@ -23,6 +23,18 @@ extension Period.SubType {
         }
     }
     
+    var shortDisplayName: String {
+        if let name = name {
+            return name;
+        } else {
+            if let formattedInt = try? String(from: id) {
+                return formattedInt;
+            } else {
+                return "";
+            }
+        }
+    }
+    
 }
 
 extension Array where Element == Period {

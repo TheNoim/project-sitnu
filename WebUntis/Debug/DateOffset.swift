@@ -17,6 +17,7 @@ let timeOffsetCalculations: [OffsetCalc] = [
     //OffsetCalc(value: 1, com: .hour)
     // OffsetCalc(value: 2, com: .hour),
     // OffsetCalc(value: 18, com: .minute)
+    // OffsetCalc(value: -8, com: .hour)
 ]
 
 func getDateWithOffset(for date: Date, startOfDay: Bool = false) -> Date {

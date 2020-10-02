@@ -49,6 +49,16 @@ class UntisUtil {
         }
     }
     
+    func getShortRowTitle(period: Period, timegrid: Timegrid?) -> String {
+        let periodWithUnit = self.getPeriodWithUnit(period: period, timegrid: timegrid);
+        let subjectList = ListFormatter.localizedString(byJoining: period.subjects.map({ $0.shortDisplayName }));
+        if periodWithUnit.combinedUnit == nil {
+            return subjectList;
+        } else {
+            return "\(periodWithUnit.combinedUnit!.unit.name) \(subjectList)";
+        }
+    }
+    
     func getColor(for period: Period, subjects: [Subject]?) -> Color {
         if subjects == nil {
             return .white;

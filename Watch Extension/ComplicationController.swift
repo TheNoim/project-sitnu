@@ -11,24 +11,6 @@ import Cache
 class ComplicationController: NSObject, CLKComplicationDataSource {
     
     var bgUtility: BackgroundUtility = BackgroundUtility();
-    
-    // MARK: - Complication Configuration
-
-    @available(watchOSApplicationExtension 7.0, *)
-    func getComplicationDescriptors(handler: @escaping ([CLKComplicationDescriptor]) -> Void) {
-        let descriptors = [
-            CLKComplicationDescriptor(identifier: "complication", displayName: "Project SITNU", supportedFamilies: CLKComplicationFamily.allCases)
-            // Multiple complication support can be added here with more descriptors
-        ]
-        
-        // Call the handler with the currently supported complication descriptors
-        handler(descriptors)
-    }
-    
-    @available(watchOSApplicationExtension 7.0, *)
-    func handleSharedComplicationDescriptors(_ complicationDescriptors: [CLKComplicationDescriptor]) {
-        // Do any necessary work to support these newly shared complication descriptors
-    }
 
     // MARK: - Timeline Configuration
     
@@ -187,7 +169,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         var template: CLKComplicationTemplate?;
         
         switch complication.family {
-        case .modularLarge:
+        case .modularLarge, .graphicRectangular:
             var title = "Next";
             if period.subjects.count > 0 {
                 title = "Next: \(UntisUtil.default.getSubtypeListString(subTypes: period.subjects))"
@@ -209,11 +191,78 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             }
             let subTitleTextProvider = CLKSimpleTextProvider(text: subTitle);
             let relativeTextProvder = CLKRelativeDateTextProvider(date: period.startTime, style: .timer, units: [.hour, .minute, .second]);
-            let localTemplate = CLKComplicationTemplateModularLargeStandardBody()
-            localTemplate.headerTextProvider = titleTextProvider;
-            localTemplate.body1TextProvider = subTitleTextProvider;
-            localTemplate.body2TextProvider = relativeTextProvder;
+            if complication.family == .modularLarge {
+                let localTemplate = CLKComplicationTemplateModularLargeStandardBody()
+                localTemplate.headerTextProvider = titleTextProvider;
+                localTemplate.body1TextProvider = subTitleTextProvider;
+                localTemplate.body2TextProvider = relativeTextProvder;
+                template = localTemplate;
+            } else {
+                let localTemplate = CLKComplicationTemplateGraphicRectangularStandardBody()
+                localTemplate.headerTextProvider = titleTextProvider;
+                localTemplate.body1TextProvider = subTitleTextProvider;
+                localTemplate.body2TextProvider = relativeTextProvder;
+                template = localTemplate;
+            }
+            break;
+        // https://developer.apple.com/documentation/clockkit/clkcomplicationtemplategraphiccircularstacktext
+        case .graphicCorner:
+            let innerColor = UntisUtil.default.getColor(for: period, subjects: subjects);
+            let title = "Break";
+            let relativeTextProvder = CLKRelativeDateTextProvider(date: period.startTime, style: .timer, units: [.hour, .minute, .second]);
+            if let uiColor = UIColor(hex: innerColor.description) {
+                relativeTextProvder.tintColor = uiColor;
+            }
+            let titleTextProvider = CLKSimpleTextProvider(text: title);
+            let localTemplate = CLKComplicationTemplateGraphicCornerStackText();
+            localTemplate.outerTextProvider = titleTextProvider;
+            localTemplate.innerTextProvider = relativeTextProvder;
             template = localTemplate;
+            break;
+        // https://developer.apple.com/documentation/clockkit/clkcomplicationtemplategraphiccornerstacktext
+        // https://developer.apple.com/documentation/clockkit/clkcomplicationtemplatecircularsmallstacktext
+        // https://developer.apple.com/documentation/clockkit/clkcomplicationtemplatemodularsmallstacktext
+        case .graphicCircular, .modularSmall, .circularSmall:
+            let innerColor = UntisUtil.default.getColor(for: period, subjects: subjects);
+            let title = "Break";
+            let relativeTextProvder = CLKRelativeDateTextProvider(date: period.startTime, style: .timer, units: [.hour, .minute, .second]);
+            if let uiColor = UIColor(hex: innerColor.description) {
+                relativeTextProvder.tintColor = uiColor;
+            }
+            let titleTextProvider = CLKSimpleTextProvider(text: title);
+            if complication.family == .graphicCircular {
+                let localTemplate = CLKComplicationTemplateGraphicCircularStackText();
+                localTemplate.line1TextProvider = titleTextProvider;
+                localTemplate.line2TextProvider = relativeTextProvder;
+                template = localTemplate;
+            } else if complication.family == .modularSmall {
+                let localTemplate = CLKComplicationTemplateModularSmallStackText();
+                localTemplate.line1TextProvider = titleTextProvider;
+                localTemplate.line2TextProvider = relativeTextProvder;
+                template = localTemplate;
+            } else {
+                let localTemplate = CLKComplicationTemplateCircularSmallStackText();
+                localTemplate.line1TextProvider = titleTextProvider;
+                localTemplate.line2TextProvider = relativeTextProvder;
+                template = localTemplate;
+            }
+            break;
+        // https://developer.apple.com/documentation/clockkit/clkcomplicationtemplategraphicextralargecircularstacktext
+        case .graphicExtraLarge:
+            if #available(watchOSApplicationExtension 7.0, *) {
+                let titleColor = UntisUtil.default.getColor(for: period, subjects: subjects);
+                let title = "Break";
+                let titleTextProvider = CLKSimpleTextProvider(text: title);
+                let relativeTextProvder = CLKRelativeDateTextProvider(date: period.startTime, style: .timer, units: [.hour, .minute, .second]);
+                if let uiColor = UIColor(hex: titleColor.description) {
+                    relativeTextProvder.tintColor = uiColor;
+                }
+                let localTemplate = CLKComplicationTemplateGraphicExtraLargeCircularStackText();
+                localTemplate.line1TextProvider = titleTextProvider;
+                localTemplate.line2TextProvider = relativeTextProvder;
+                template = localTemplate;
+                break;
+            }
             break;
         @unknown default:
             return nil;
@@ -229,7 +278,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         var template: CLKComplicationTemplate?;
         
         switch complication.family {
-        case .modularLarge:
+        case .modularLarge, .graphicRectangular:
             let title = UntisUtil.default.getRowTitle(period: period, timegrid: timegrid);
             let titleColor = UntisUtil.default.getColor(for: period, subjects: subjects);
             let titleTextProvider = CLKSimpleTextProvider(text: title);
@@ -248,11 +297,77 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             }
             let subTitleTextProvider = CLKSimpleTextProvider(text: subTitle);
             let relativeTextProvder = CLKRelativeDateTextProvider(date: period.endTime, style: .timer, units: [.hour, .minute, .second]);
-            let localTemplate = CLKComplicationTemplateModularLargeStandardBody()
-            localTemplate.headerTextProvider = titleTextProvider;
-            localTemplate.body1TextProvider = subTitleTextProvider;
-            localTemplate.body2TextProvider = relativeTextProvder;
+            if complication.family == .modularLarge {
+                let localTemplate = CLKComplicationTemplateModularLargeStandardBody()
+                localTemplate.headerTextProvider = titleTextProvider;
+                localTemplate.body1TextProvider = subTitleTextProvider;
+                localTemplate.body2TextProvider = relativeTextProvder;
+                template = localTemplate;
+            } else {
+                let localTemplate = CLKComplicationTemplateGraphicRectangularStandardBody()
+                localTemplate.headerTextProvider = titleTextProvider;
+                localTemplate.body1TextProvider = subTitleTextProvider;
+                localTemplate.body2TextProvider = relativeTextProvder;
+                template = localTemplate;
+            }
+            break;
+        // https://developer.apple.com/documentation/clockkit/clkcomplicationtemplategraphiccircularstacktext
+        // https://developer.apple.com/documentation/clockkit/clkcomplicationtemplatecircularsmallstacktext
+        // https://developer.apple.com/documentation/clockkit/clkcomplicationtemplatemodularsmallstacktext
+        case .graphicCircular, .modularSmall, .circularSmall:
+            let title = UntisUtil.default.getShortRowTitle(period: period, timegrid: timegrid);
+            let innerColor = UntisUtil.default.getColor(for: period, subjects: subjects);
+            let relativeTextProvder = CLKRelativeDateTextProvider(date: period.endTime, style: .timer, units: [.hour, .minute, .second]);
+            if let uiColor = UIColor(hex: innerColor.description) {
+                relativeTextProvder.tintColor = uiColor;
+            }
+            let titleTextProvider = CLKSimpleTextProvider(text: title);
+            if complication.family == .graphicCircular {
+                let localTemplate = CLKComplicationTemplateGraphicCircularStackText();
+                localTemplate.line1TextProvider = titleTextProvider;
+                localTemplate.line2TextProvider = relativeTextProvder;
+                template = localTemplate;
+            } else if complication.family == .modularSmall {
+                let localTemplate = CLKComplicationTemplateModularSmallStackText();
+                localTemplate.line1TextProvider = titleTextProvider;
+                localTemplate.line2TextProvider = relativeTextProvder;
+                template = localTemplate;
+            } else {
+                let localTemplate = CLKComplicationTemplateCircularSmallStackText();
+                localTemplate.line1TextProvider = titleTextProvider;
+                localTemplate.line2TextProvider = relativeTextProvder;
+                template = localTemplate;
+            }
+            break;
+        // https://developer.apple.com/documentation/clockkit/clkcomplicationtemplategraphiccornerstacktext
+        case .graphicCorner:
+            let title = UntisUtil.default.getShortRowTitle(period: period, timegrid: timegrid);
+            let innerColor = UntisUtil.default.getColor(for: period, subjects: subjects);
+            let relativeTextProvder = CLKRelativeDateTextProvider(date: period.endTime, style: .timer, units: [.hour, .minute, .second]);
+            if let uiColor = UIColor(hex: innerColor.description) {
+                relativeTextProvder.tintColor = uiColor;
+            }
+            let titleTextProvider = CLKSimpleTextProvider(text: title);
+            let localTemplate = CLKComplicationTemplateGraphicCornerStackText();
+            localTemplate.outerTextProvider = titleTextProvider;
+            localTemplate.innerTextProvider = relativeTextProvder;
             template = localTemplate;
+            break;
+        // https://developer.apple.com/documentation/clockkit/clkcomplicationtemplategraphicextralargecircularstacktext
+        case .graphicExtraLarge:
+            if #available(watchOSApplicationExtension 7.0, *) {
+                let title = UntisUtil.default.getShortRowTitle(period: period, timegrid: timegrid);
+                let titleColor = UntisUtil.default.getColor(for: period, subjects: subjects);
+                let relativeTextProvder = CLKRelativeDateTextProvider(date: period.endTime, style: .timer, units: [.hour, .minute, .second]);
+                let titleTextProvider = CLKSimpleTextProvider(text: title);
+                if let uiColor = UIColor(hex: titleColor.description) {
+                    titleTextProvider.tintColor = uiColor;
+                }
+                let localTemplate = CLKComplicationTemplateGraphicExtraLargeCircularStackText();
+                localTemplate.line1TextProvider = titleTextProvider;
+                localTemplate.line2TextProvider = relativeTextProvder;
+                template = localTemplate;
+            }
             break;
         @unknown default:
             return nil;
@@ -277,6 +392,70 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             localTemplate.headerTextProvider = titleTextProvider;
             localTemplate.body1TextProvider = subTitleTextProvider;
             template = localTemplate;
+            break;
+        // https://developer.apple.com/documentation/clockkit/clkcomplicationtemplategraphicrectangularstandardbody
+        case .graphicRectangular:
+            let title = "End of Timeline";
+            let titleColor: UIColor = .yellow;
+            let titleTextProvider = CLKSimpleTextProvider(text: title);
+            titleTextProvider.tintColor = titleColor;
+            let subTitleTextProvider = CLKSimpleTextProvider(text: "You did it!");
+            let localTemplate = CLKComplicationTemplateGraphicRectangularStandardBody()
+            localTemplate.headerTextProvider = titleTextProvider;
+            localTemplate.body1TextProvider = subTitleTextProvider;
+            template = localTemplate;
+            break;
+        // https://developer.apple.com/documentation/clockkit/clkcomplicationtemplategraphiccircularstacktext
+        // https://developer.apple.com/documentation/clockkit/clkcomplicationtemplatecircularsmallstacktext
+        // https://developer.apple.com/documentation/clockkit/clkcomplicationtemplatemodularsmallstacktext
+        case .graphicCircular, .modularSmall, .circularSmall:
+            let title = "End";
+            let innerColor: UIColor = .yellow;
+            let titleTextProvider = CLKSimpleTextProvider(text: title);
+            let subTitleTextProvider = CLKSimpleTextProvider(text: ":-)");
+            subTitleTextProvider.tintColor = innerColor;
+            if complication.family == .graphicCircular {
+                let localTemplate = CLKComplicationTemplateGraphicCircularStackText();
+                localTemplate.line1TextProvider = titleTextProvider;
+                localTemplate.line2TextProvider = subTitleTextProvider;
+                template = localTemplate;
+            } else if complication.family == .modularSmall {
+                let localTemplate = CLKComplicationTemplateModularSmallStackText();
+                localTemplate.line1TextProvider = titleTextProvider;
+                localTemplate.line2TextProvider = subTitleTextProvider;
+                template = localTemplate;
+            } else {
+                let localTemplate = CLKComplicationTemplateCircularSmallStackText();
+                localTemplate.line1TextProvider = titleTextProvider;
+                localTemplate.line2TextProvider = subTitleTextProvider;
+                template = localTemplate;
+            }
+            break;
+        // https://developer.apple.com/documentation/clockkit/clkcomplicationtemplategraphiccornerstacktext
+        case .graphicCorner:
+            let title = "End";
+            let innerColor: UIColor = .yellow;
+            let titleTextProvider = CLKSimpleTextProvider(text: title);
+            let subTitleTextProvider = CLKSimpleTextProvider(text: "You did it!");
+            subTitleTextProvider.tintColor = innerColor;
+            let localTemplate = CLKComplicationTemplateGraphicCornerStackText();
+            localTemplate.outerTextProvider = titleTextProvider;
+            localTemplate.innerTextProvider = subTitleTextProvider;
+            template = localTemplate;
+            break;
+        // https://developer.apple.com/documentation/clockkit/clkcomplicationtemplategraphicextralargecircularstacktext
+        case .graphicExtraLarge:
+            if #available(watchOSApplicationExtension 7.0, *) {
+                let title = "End";
+                let titleColor: UIColor = .yellow;
+                let titleTextProvider = CLKSimpleTextProvider(text: title);
+                let subTitleTextProvider = CLKSimpleTextProvider(text: ":-)");
+                titleTextProvider.tintColor = titleColor;
+                let localTemplate = CLKComplicationTemplateGraphicExtraLargeCircularStackText();
+                localTemplate.line1TextProvider = titleTextProvider;
+                localTemplate.line2TextProvider = subTitleTextProvider;
+                template = localTemplate;
+            }
             break;
         @unknown default:
             return nil;
