@@ -14,6 +14,10 @@ struct ContentView: View {
     var body: some View {
         if !self.accountStore.initialFetch {
             ActivityIndicator(active: true)
+            Text("Loading accounts...")
+            Text("If you haven't added any account yet, you need to add one first on your iPhone")
+                .font(.footnote)
+                .foregroundColor(.secondary)
         } else {
             if self.accountStore.selected != nil {
                 let acc = self.accountStore.selected!;

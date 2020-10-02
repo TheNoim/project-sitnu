@@ -47,11 +47,8 @@
 		FB7A8F8C25210CA00010FDE5 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7A8F8B25210CA00010FDE5 /* ShareSheet.swift */; };
 		FB7F6A1725175E870052F679 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7F6A1625175E870052F679 /* SearchBar.swift */; };
 		FB7F6A252517617B0052F679 /* Encodable+asDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7F6A242517617B0052F679 /* Encodable+asDictionary.swift */; };
-		FB7F6A7A251787570052F679 /* activity.png in Resources */ = {isa = PBXBuildFile; fileRef = FB7F6A79251787570052F679 /* activity.png */; };
 		FB7F6A88251789EA0052F679 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = FB7F6A87251789EA0052F679 /* Alamofire */; };
 		FB7F6A8A251789EA0052F679 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = FB7F6A89251789EA0052F679 /* Cache */; };
-		FB7F6A8C251789EA0052F679 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = FB7F6A8B251789EA0052F679 /* SDWebImageSwiftUI */; };
-		FB7F6A9125178A960052F679 /* activity.png in Resources */ = {isa = PBXBuildFile; fileRef = FB7F6A79251787570052F679 /* activity.png */; };
 		FB7F6A9725178B270052F679 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7F6A9625178B270052F679 /* ActivityIndicator.swift */; };
 		FB7F6A9C25178E600052F679 /* AccountContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E89CA25162F6400DAB2F4 /* AccountContext.swift */; };
 		FB7F6AA125178FDC0052F679 /* Encodable+asDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7F6A242517617B0052F679 /* Encodable+asDictionary.swift */; };
@@ -191,7 +188,6 @@
 		FB7A8F8B25210CA00010FDE5 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		FB7F6A1625175E870052F679 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		FB7F6A242517617B0052F679 /* Encodable+asDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+asDictionary.swift"; sourceTree = "<group>"; };
-		FB7F6A79251787570052F679 /* activity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activity.png; sourceTree = "<group>"; };
 		FB7F6A9625178B270052F679 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		FB7F6B0A2517A0670052F679 /* AccountStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStore.swift; sourceTree = "<group>"; };
 		FB8E7AFE251CC31600D4C43C /* DateOffset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateOffset.swift; sourceTree = "<group>"; };
@@ -228,7 +224,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB7F6A8C251789EA0052F679 /* SDWebImageSwiftUI in Frameworks */,
 				FB7F6A88251789EA0052F679 /* Alamofire in Frameworks */,
 				FB7F6A8A251789EA0052F679 /* Cache in Frameworks */,
 				FBDAA1AB251FBE0A00104001 /* SwiftyBeaver in Frameworks */,
@@ -284,7 +279,6 @@
 		FB6E896A251624DA00DAB2F4 /* Watch */ = {
 			isa = PBXGroup;
 			children = (
-				FB7F6A79251787570052F679 /* activity.png */,
 				FB6E896B251624DA00DAB2F4 /* Interface.storyboard */,
 				FB6E896E251624DC00DAB2F4 /* Assets.xcassets */,
 				FB6E8970251624DC00DAB2F4 /* Info.plist */,
@@ -567,7 +561,6 @@
 			packageProductDependencies = (
 				FB7F6A87251789EA0052F679 /* Alamofire */,
 				FB7F6A89251789EA0052F679 /* Cache */,
-				FB7F6A8B251789EA0052F679 /* SDWebImageSwiftUI */,
 				FBDAA1AA251FBE0A00104001 /* SwiftyBeaver */,
 			);
 			productName = "Watch Extension";
@@ -657,7 +650,6 @@
 			packageReferences = (
 				FBA95DB52514F63D00494B5C /* XCRemoteSwiftPackageReference "Alamofire" */,
 				FB6E89B8251629F300DAB2F4 /* XCRemoteSwiftPackageReference "Cache" */,
-				FB7F6A5E251781590052F679 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				FBDAA1A3251FBDDB00104001 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
 			);
 			productRefGroup = FBA95DA32514F53200494B5C /* Products */;
@@ -678,7 +670,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB6E896F251624DC00DAB2F4 /* Assets.xcassets in Resources */,
-				FB7F6A7A251787570052F679 /* activity.png in Resources */,
 				FB6E896D251624DA00DAB2F4 /* Interface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -688,7 +679,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB6E8986251624DD00DAB2F4 /* Preview Assets.xcassets in Resources */,
-				FB7F6A9125178A960052F679 /* activity.png in Resources */,
 				FB6E8983251624DD00DAB2F4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -846,7 +836,7 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_ASSET_PATHS = "\"Watch Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				ENABLE_PREVIEWS = YES;
@@ -876,7 +866,7 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_ASSET_PATHS = "\"Watch Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				ENABLE_PREVIEWS = YES;
@@ -906,7 +896,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				IBSC_MODULE = Watch_Extension;
 				INFOPLIST_FILE = Watch/Info.plist;
@@ -927,7 +917,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				IBSC_MODULE = Watch_Extension;
 				INFOPLIST_FILE = Watch/Info.plist;
@@ -1065,7 +1055,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SITNU/Preview Content\"";
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				ENABLE_PREVIEWS = YES;
@@ -1094,7 +1084,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SITNU/Preview Content\"";
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				ENABLE_PREVIEWS = YES;
@@ -1212,14 +1202,6 @@
 				minimumVersion = 5.3.0;
 			};
 		};
-		FB7F6A5E251781590052F679 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.5.0;
-			};
-		};
 		FBA95DB52514F63D00494B5C /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -1253,11 +1235,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FB6E89B8251629F300DAB2F4 /* XCRemoteSwiftPackageReference "Cache" */;
 			productName = Cache;
-		};
-		FB7F6A8B251789EA0052F679 /* SDWebImageSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FB7F6A5E251781590052F679 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
-			productName = SDWebImageSwiftUI;
 		};
 		FBA95DB62514F63D00494B5C /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
