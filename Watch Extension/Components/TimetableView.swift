@@ -40,25 +40,41 @@ struct TimetableView: View {
         VStack {
             Text(title)
                 .font(.largeTitle)
-            if periods != nil {
+            if periods != nil && periods!.count > 0 {
                 ForEach(periods!) { period in
                     Button {
                         if forceRefresh {
                             return
                         }
-                        self.selectedPeriod = period;
-                        self.isDetail.toggle();
+                        withAnimation {
+                            self.selectedPeriod = period;
+                            self.isDetail.toggle();
+                        }
                     } label: {
                         TimetableRowView(period: period, timegrid: self.timegrid, subjects: self.subjects)
                     }
-                    .sheet(isPresented: $isDetail, content: {
-                        if selectedPeriod != nil {
-                            PeriodDetailView(period: selectedPeriod!, timegrid: self.timegrid, subjects: self.subjects)
-                        }
-                    })
                 }
-            } else {
+                .sheet(isPresented: $isDetail, content: {
+                    PeriodDetailView(period: selectedPeriod, timegrid: self.timegrid, subjects: self.subjects)
+                })
+            } else if periods == nil {
                 ActivityIndicator(active: true)
+            } else {
+                Text("No periods for this day")
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
+            }
+            HStack {
+                Button("<") {
+                    if forceRefresh == false {
+                        self.setDate(by: .back);
+                    }
+                }
+                Button(">") {
+                    if forceRefresh == false {
+                        self.setDate(by: .forward);
+                    }
+                }
             }
             Button(forceRefresh ? "..." : "Force refresh") {
                 if forceRefresh == false {
@@ -93,17 +109,13 @@ struct TimetableView: View {
                 }
                 let xDist: CGFloat = abs(gesture.location.x - self.startPos.x)
                 let yDist: CGFloat = abs(gesture.location.y - self.startPos.y)
-                var nextDate: Date?;
                 if self.startPos.x > gesture.location.x && yDist < xDist {
                     // LEFT
-                    nextDate = Calendar.current.date(byAdding: .day, value: 1, to: self.date);
+                    self.setDate(by: .forward);
                 }
                 else if self.startPos.x < gesture.location.x && yDist < xDist {
                     // RIGHT
-                    nextDate = Calendar.current.date(byAdding: .day, value: -1, to: self.date);
-                }
-                if let nextDate = nextDate {
-                    self.setDate(to: nextDate);
+                    self.setDate(by: .back);
                 }
                 self.isSwipping.toggle()
             }
@@ -117,6 +129,23 @@ struct TimetableView: View {
                     self.setDate(to: Calendar.current.startOfDay(for: Date()));
                 }
             }
+        }
+    }
+    
+    enum DateDirection {
+        case forward;
+        case back;
+    }
+    
+    func setDate(by direction: DateDirection) {
+        var nextDate: Date?;
+        if direction == .forward {
+            nextDate = Calendar.current.date(byAdding: .day, value: 1, to: self.date);
+        } else {
+            nextDate = Calendar.current.date(byAdding: .day, value: -1, to: self.date);
+        }
+        if let nextDate = nextDate {
+            self.setDate(to: nextDate);
         }
     }
     

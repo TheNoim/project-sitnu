@@ -10,6 +10,26 @@ import SwiftUI
 let formatter = ListFormatter()
 
 struct PeriodDetailView: View {
+    var period: Period?;
+    var subjects: [Subject]?;
+    var timegrid: Timegrid?;
+    
+    init(period: Period?, timegrid: Timegrid?, subjects: [Subject]?) {
+        self.period = period;
+        self.timegrid = timegrid;
+        self.subjects = subjects;
+    }
+    
+    var body: some View {
+        if period != nil {
+            _PeriodDetailView(period: period!, timegrid: timegrid, subjects: subjects)
+        } else {
+            EmptyView()
+        }
+    }
+}
+
+struct _PeriodDetailView: View {
     var period: Period;
     var subjects: [Subject]?;
     var timegrid: Timegrid?;
