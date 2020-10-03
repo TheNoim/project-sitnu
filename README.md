@@ -1,5 +1,10 @@
 ## Project S.I.T.N.U
 
+- [Project S.I.T.N.U](#project-sitnu)
+  - [TestFlight](#testflight)
+  - [Supported complications](#supported-complications)
+  - [Demo images:](#demo-images)
+
 The second generation of my WebUntis companion app. Currently it implements a WebUnits Apple Watch App with one complication for the modular watch face.
 
 #### TestFlight
