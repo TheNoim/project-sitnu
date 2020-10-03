@@ -15,15 +15,30 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     // MARK: - Timeline Configuration
     
     func getTimelineEndDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
+        let requestDate = Date();
         log.debug("Get timeline end date")
         // Call the handler with the last entry date you can currently provide or nil if you can't support future timelines
         self.getUntisTimeline(start: getDateWithOffset(for: Date())) { (periods) in
             guard let periods = periods else {
-                log.error("No periods")
+                log.warning("No periods")
+                if let endDate = Calendar.current.date(byAdding: .day, value: 1, to: requestDate) {
+                    let startOfDay = Calendar.current.startOfDay(for: endDate)
+                    if let endOfDay = Calendar.current.date(byAdding: .hour, value: 24, to: startOfDay) {
+                        log.debug("Set end of timeline to", context: ["endTime": endOfDay])
+                        return handler(endOfDay);
+                    }
+                }
                 return handler(nil);
             }
             guard let last = periods.last else {
-                log.error("No last period")
+                log.warning("No last period")
+                if let endDate = Calendar.current.date(byAdding: .day, value: 1, to: requestDate) {
+                    let startOfDay = Calendar.current.startOfDay(for: endDate)
+                    if let endOfDay = Calendar.current.date(byAdding: .hour, value: 24, to: startOfDay) {
+                        log.debug("Set end of timeline to", context: ["endTime": endOfDay])
+                        return handler(endOfDay);
+                    }
+                }
                 return handler(nil);
             }
             log.debug("New timeline end date", context: ["endTime": last.endTime])
@@ -43,6 +58,10 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         let currentDate = Date();
         log.debug("Get current timeline entry")
         self.getAllUntisInformation(for: currentDate) {
+            log.error("Failed handler was called. Error or End of Timeline")
+            if let endOfTimelineEntry = self.getTimelineEndEntry(for: complication, and: currentDate) {
+                return handler(endOfTimelineEntry);
+            }
             handler(nil);
         } handler: { (periods, timegrid, subjects) in
             // If there is currently a period
@@ -77,7 +96,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     
     func getTimelineEntries(for complication: CLKComplication, after date: Date, limit: Int, withHandler handler: @escaping ([CLKComplicationTimelineEntry]?) -> Void) {
         self.getAllUntisInformation(for: date) {
-            handler(nil);
+            log.error("Failed handler was called. Error or End of Timeline. Pass empty array")
+            handler([]);
         } handler: { (periods, timegrid, subjects) in
             // .filter({ $0.startTime > date || ($0.startTime < date && $0.endTime > date) })
             var entries: [CLKComplicationTimelineEntry] = [];
