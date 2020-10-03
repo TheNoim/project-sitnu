@@ -20,7 +20,9 @@ You can test the app until I release this on the App Store via [TestFlight](http
 ### Demo images:
 
 ![App Demo](assets/watch_app_demo.png)
+
 ![Complication Demo](assets/watch_complication_demo.png)
+
 ![Complication Demo: Time until end of lesson](assets/watch_complication_time_until_end.png)
 
 > You can view my website at [noim.io](https://noim.io/)
