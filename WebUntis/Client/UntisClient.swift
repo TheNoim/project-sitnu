@@ -12,7 +12,7 @@ import Cache
 class UntisClient {
     private var credentials: BasicUntisCredentials;
     private var session: Session;
-    private var storage: Storage<String>?;
+    private var storage: Storage<String, String>?;
     private var disableCache: Bool = false;
     private lazy var intSerializer: UntisIntSerializer = UntisIntSerializer();
     private lazy var objectSerializer: UntisObjectSerializer = UntisObjectSerializer();
@@ -30,7 +30,7 @@ class UntisClient {
         } catch {
             self.disableCache = true;
         }
-        let authStorage: Storage<AuthSession>? = self.storage?.transformCodable(ofType: AuthSession.self);
+        let authStorage: Storage<String, AuthSession>? = self.storage?.transformCodable(ofType: AuthSession.self);
         let authKey: String = "\(self.credentials.username):\(self.credentials.school)@\(self.credentials.server)->AUTH";
         let authenticator: UntisAuthenticator = UntisAuthenticator(storage: authStorage, key: authKey);
         

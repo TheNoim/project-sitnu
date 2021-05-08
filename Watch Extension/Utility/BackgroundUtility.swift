@@ -15,10 +15,10 @@ class BackgroundUtility {
     
     var untisClient: UntisClient?;
     
-    var backgroundTaskDiskStorage: DiskStorage<Date>?;
+    var backgroundTaskDiskStorage: DiskStorage<String, Date>?;
     
     public func getContext() -> SharedContext? {
-        if let storage = try? DiskStorage(config: DiskConfig(name: "UntisWA", expiry: .never), transformer: TransformerFactory.forCodable(ofType: SharedContext.self)) {
+        if let storage = try? DiskStorage<String, SharedContext>(config: DiskConfig(name: "UntisWA", expiry: .never), transformer: TransformerFactory.forCodable(ofType: SharedContext.self)) {
             if let sharedContext: SharedContext = try? storage.object(forKey: "context") {
                 return sharedContext;
             }
@@ -62,12 +62,12 @@ class BackgroundUtility {
         }
     }
     
-    func getBackgroundTaskDiskStorage() -> DiskStorage<Date>? {
+    func getBackgroundTaskDiskStorage() -> DiskStorage<String, Date>? {
         if self.backgroundTaskDiskStorage != nil {
             return self.backgroundTaskDiskStorage;
         }
         let diskConfig = DiskConfig(name: "UntisBackgroundTaskStorage", expiry: .never);
-        guard let backgroundTaskStorage = try? DiskStorage(config: diskConfig, transformer: TransformerFactory.forCodable(ofType: Date.self)) else {
+        guard let backgroundTaskStorage = try? DiskStorage<String, Date>(config: diskConfig, transformer: TransformerFactory.forCodable(ofType: Date.self)) else {
             return nil;
         }
         self.backgroundTaskDiskStorage = backgroundTaskStorage;

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FB2B57D92646BC64008CD6C4 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = FB2B57D82646BC64008CD6C4 /* Cache */; };
+		FB2B57DB2646BCDB008CD6C4 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = FB2B57DA2646BCDB008CD6C4 /* Cache */; };
 		FB36E7FE2518B35F0039DFC9 /* onChangeChim.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E89FB25165A2600DAB2F4 /* onChangeChim.swift */; };
 		FB36E80D2518B90B0039DFC9 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB36E80C2518B90B0039DFC9 /* Color+Hex.swift */; };
 		FB36E8172518B9BA0039DFC9 /* PeriodDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB36E8162518B9BA0039DFC9 /* PeriodDetailView.swift */; };
@@ -35,7 +37,6 @@
 		FB6E8986251624DD00DAB2F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB6E8985251624DD00DAB2F4 /* Preview Assets.xcassets */; };
 		FB6E898A251624DD00DAB2F4 /* Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = FB6E8969251624DA00DAB2F4 /* Watch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		FB6E89A52516259B00DAB2F4 /* WatchStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E89A42516259B00DAB2F4 /* WatchStore.swift */; };
-		FB6E89BA251629F300DAB2F4 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = FB6E89B9251629F300DAB2F4 /* Cache */; };
 		FB6E89CB25162F6400DAB2F4 /* AccountContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E89CA25162F6400DAB2F4 /* AccountContext.swift */; };
 		FB6E89D62516342700DAB2F4 /* SchoolSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E89D52516342700DAB2F4 /* SchoolSearchView.swift */; };
 		FB6E89E825163B1E00DAB2F4 /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E89E725163B1E00DAB2F4 /* Throttler.swift */; };
@@ -48,7 +49,6 @@
 		FB7F6A1725175E870052F679 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7F6A1625175E870052F679 /* SearchBar.swift */; };
 		FB7F6A252517617B0052F679 /* Encodable+asDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7F6A242517617B0052F679 /* Encodable+asDictionary.swift */; };
 		FB7F6A88251789EA0052F679 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = FB7F6A87251789EA0052F679 /* Alamofire */; };
-		FB7F6A8A251789EA0052F679 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = FB7F6A89251789EA0052F679 /* Cache */; };
 		FB7F6A9725178B270052F679 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7F6A9625178B270052F679 /* ActivityIndicator.swift */; };
 		FB7F6A9C25178E600052F679 /* AccountContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E89CA25162F6400DAB2F4 /* AccountContext.swift */; };
 		FB7F6AA125178FDC0052F679 /* Encodable+asDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7F6A242517617B0052F679 /* Encodable+asDictionary.swift */; };
@@ -224,8 +224,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB2B57DB2646BCDB008CD6C4 /* Cache in Frameworks */,
 				FB7F6A88251789EA0052F679 /* Alamofire in Frameworks */,
-				FB7F6A8A251789EA0052F679 /* Cache in Frameworks */,
 				FBDAA1AB251FBE0A00104001 /* SwiftyBeaver in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -234,7 +234,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB6E89BA251629F300DAB2F4 /* Cache in Frameworks */,
+				FB2B57D92646BC64008CD6C4 /* Cache in Frameworks */,
 				FBA95DB72514F63D00494B5C /* Alamofire in Frameworks */,
 				FBDAA1A5251FBDDB00104001 /* SwiftyBeaver in Frameworks */,
 			);
@@ -560,8 +560,8 @@
 			name = "Watch Extension";
 			packageProductDependencies = (
 				FB7F6A87251789EA0052F679 /* Alamofire */,
-				FB7F6A89251789EA0052F679 /* Cache */,
 				FBDAA1AA251FBE0A00104001 /* SwiftyBeaver */,
+				FB2B57DA2646BCDB008CD6C4 /* Cache */,
 			);
 			productName = "Watch Extension";
 			productReference = FB6E8975251624DD00DAB2F4 /* Watch Extension.appex */;
@@ -584,8 +584,8 @@
 			name = "Project SITNU";
 			packageProductDependencies = (
 				FBA95DB62514F63D00494B5C /* Alamofire */,
-				FB6E89B9251629F300DAB2F4 /* Cache */,
 				FBDAA1A4251FBDDB00104001 /* SwiftyBeaver */,
+				FB2B57D82646BC64008CD6C4 /* Cache */,
 			);
 			productName = "Project SITNU";
 			productReference = FBA95DA22514F53200494B5C /* Project SITNU.app */;
@@ -649,8 +649,8 @@
 			mainGroup = FBA95D992514F53200494B5C;
 			packageReferences = (
 				FBA95DB52514F63D00494B5C /* XCRemoteSwiftPackageReference "Alamofire" */,
-				FB6E89B8251629F300DAB2F4 /* XCRemoteSwiftPackageReference "Cache" */,
 				FBDAA1A3251FBDDB00104001 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
+				FB2B57D72646BC64008CD6C4 /* XCRemoteSwiftPackageReference "Cache" */,
 			);
 			productRefGroup = FBA95DA32514F53200494B5C /* Products */;
 			projectDirPath = "";
@@ -836,7 +836,7 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_ASSET_PATHS = "\"Watch Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				ENABLE_PREVIEWS = YES;
@@ -846,7 +846,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.noim.Project-SITNU.watchkitapp.watchkitextension";
 				PRODUCT_NAME = "${TARGET_NAME}";
@@ -866,7 +866,7 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_ASSET_PATHS = "\"Watch Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				ENABLE_PREVIEWS = YES;
@@ -876,7 +876,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.noim.Project-SITNU.watchkitapp.watchkitextension";
 				PRODUCT_NAME = "${TARGET_NAME}";
@@ -896,10 +896,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				IBSC_MODULE = Watch_Extension;
 				INFOPLIST_FILE = Watch/Info.plist;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.noim.Project-SITNU.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -917,10 +918,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				IBSC_MODULE = Watch_Extension;
 				INFOPLIST_FILE = Watch/Info.plist;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.noim.Project-SITNU.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -1055,7 +1057,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SITNU/Preview Content\"";
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				ENABLE_PREVIEWS = YES;
@@ -1066,6 +1068,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.noim.Project-SITNU";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1084,7 +1087,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SITNU/Preview Content\"";
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				ENABLE_PREVIEWS = YES;
@@ -1094,6 +1097,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.noim.Project-SITNU";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1194,12 +1198,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		FB6E89B8251629F300DAB2F4 /* XCRemoteSwiftPackageReference "Cache" */ = {
+		FB2B57D72646BC64008CD6C4 /* XCRemoteSwiftPackageReference "Cache" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/TheNoim/Cache.git";
+			repositoryURL = "https://github.com/hyperoslo/Cache.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.3.0;
+				minimumVersion = 6.0.0;
 			};
 		};
 		FBA95DB52514F63D00494B5C /* XCRemoteSwiftPackageReference "Alamofire" */ = {
@@ -1221,20 +1225,20 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		FB6E89B9251629F300DAB2F4 /* Cache */ = {
+		FB2B57D82646BC64008CD6C4 /* Cache */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = FB6E89B8251629F300DAB2F4 /* XCRemoteSwiftPackageReference "Cache" */;
+			package = FB2B57D72646BC64008CD6C4 /* XCRemoteSwiftPackageReference "Cache" */;
+			productName = Cache;
+		};
+		FB2B57DA2646BCDB008CD6C4 /* Cache */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FB2B57D72646BC64008CD6C4 /* XCRemoteSwiftPackageReference "Cache" */;
 			productName = Cache;
 		};
 		FB7F6A87251789EA0052F679 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FBA95DB52514F63D00494B5C /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		FB7F6A89251789EA0052F679 /* Cache */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FB6E89B8251629F300DAB2F4 /* XCRemoteSwiftPackageReference "Cache" */;
-			productName = Cache;
 		};
 		FBA95DB62514F63D00494B5C /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;

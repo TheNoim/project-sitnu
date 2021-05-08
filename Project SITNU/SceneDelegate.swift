@@ -90,6 +90,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, WCSessionDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
+        print("Test")
+        
         self.watchStore.syncCallback = { context in
             do {
                 try self.sync(context: context)

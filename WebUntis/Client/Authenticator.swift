@@ -10,10 +10,10 @@ import Alamofire
 import Cache
 
 class UntisAuthenticator: Authenticator {
-    let cache: Storage<AuthSession>?;
+    let cache: Storage<String, AuthSession>?;
     let key: String;
     
-    init(storage: Storage<AuthSession>?, key: String) {
+    init(storage: Storage<String, AuthSession>?, key: String) {
         self.cache = storage;
         self.key = key;
     }

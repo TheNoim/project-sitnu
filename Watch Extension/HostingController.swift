@@ -86,7 +86,7 @@ class HostingController: WKHostingController<AnyView>, WCSessionDelegate {
         if let sharedContext: SharedContext = try? SharedContext(from: context) {
             DispatchQueue.main.async {
                 do {
-                    let storage = try DiskStorage(config: DiskConfig(name: "UntisWA", expiry: .never), transformer: TransformerFactory.forCodable(ofType: SharedContext.self));
+                    let storage = try DiskStorage<String, SharedContext>(config: DiskConfig(name: "UntisWA", expiry: .never), transformer: TransformerFactory.forCodable(ofType: SharedContext.self));
                     try storage.setObject(sharedContext, forKey: "context");
                 } catch {
                     print(error)

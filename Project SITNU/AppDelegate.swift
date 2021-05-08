@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 import SwiftyBeaver
 
 let log = SwiftyBeaver.self
