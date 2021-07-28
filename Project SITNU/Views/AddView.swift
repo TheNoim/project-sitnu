@@ -27,8 +27,8 @@ struct AddView: View {
     var body: some View {
         Form {
             Section(header: Text("Server & School")) {
-                TextField("Server", text: .constant(self.school.server)).disabled(true)
-                TextField("School", text: .constant(self.school.loginName)).disabled(true)
+                TextField("Server", text: self.$school.server)
+                TextField("School", text: self.$school.loginName)
             }
             Section(header: Text("Settings")) {
                 TextField("Displayname (Optional)", text: self.$acc.setDisplayName)
@@ -80,7 +80,7 @@ struct AddView: View {
         }
         self.untis = nil;
         self.basicCredentials = nil;
-        self.basicCredentials = BasicUntisCredentials(username: self.acc.username, password: self.acc.password, server: self.school.server, school: self.school.loginName);
+        self.basicCredentials = BasicUntisCredentials(username: self.acc.username, password: self.acc.password, server: self.school.server, school: self.school.loginName.replacingOccurrences(of: " ", with: "+"));
         self.untis = UntisClient(credentials: self.basicCredentials!);
         self.untis!.getLatestImportTime(force: true, cachedHandler: nil) { result in
             self.handleUntisResponse(result: result);
@@ -93,7 +93,7 @@ struct AddView: View {
             let id = UUID();
             let primary = self.needsToBePrimary() || self.acc.primary;
             let setDisplayName: String? = self.acc.setDisplayName.isEmpty ? nil : self.acc.setDisplayName;
-            let acc = UntisAccount(id: id, username: self.acc.username, password: self.acc.password, server: self.school.server, school: self.school.loginName, setDisplayName: setDisplayName, primary: primary);
+            let acc = UntisAccount(id: id, username: self.acc.username, password: self.acc.password, server: self.school.server, school: self.school.loginName.replacingOccurrences(of: " ", with: "+"), setDisplayName: setDisplayName, primary: primary);
             if primary {
                 for (index, _) in self.store.accounts.enumerated() {
                     if self.store.accounts[index].primary {
