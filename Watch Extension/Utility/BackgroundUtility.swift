@@ -40,7 +40,7 @@ class BackgroundUtility {
         guard let primaryAccount: UntisAccount = sharedContext.accounts.first(where: { $0.primary }) else {
             return nil;
         }
-        let credentials = BasicUntisCredentials(username: primaryAccount.username, password: primaryAccount.password, server: primaryAccount.server, school: primaryAccount.school);
+        let credentials = BasicUntisCredentials(username: primaryAccount.username, password: primaryAccount.password, server: primaryAccount.server, school: primaryAccount.school, authType: primaryAccount.authType);
         self.untisClient = UntisClient(credentials: credentials);
         return self.untisClient;
     }

@@ -75,6 +75,8 @@ extension UntisError.Enums {
         case resultParseError
         case invalidLogin
         case custom(errorCode: Int?, errorDescription: String?)
+        case missingSessionCookie
+        case missingUserData
         
         static let ErrorMap: [Int: UntisErrors] = [
             -32601: .methodNotFound,
@@ -116,6 +118,8 @@ extension UntisError.Enums.UntisErrors: LocalizedError {
             case .methodNotFound: return "Method not found"
             case .resultParseError: return "Server result parse error"
             case .invalidLogin: return "Invalid credentials"
+            case .missingSessionCookie: return "No session cookie got returned from the WebUntis server"
+            case .missingUserData: return "No user data got returned from the WebUntis server"
         }
     }
 

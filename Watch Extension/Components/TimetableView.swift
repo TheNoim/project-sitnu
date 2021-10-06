@@ -163,7 +163,7 @@ struct TimetableView: View {
     }
     
     func createClient() {
-        let credentials: BasicUntisCredentials = BasicUntisCredentials(username: self.account.username, password: self.account.password, server: self.account.server, school: self.account.school);
+        let credentials: BasicUntisCredentials = BasicUntisCredentials(username: self.account.username, password: self.account.password, server: self.account.server, school: self.account.school, authType: self.account.authType);
         self.untis = UntisClient(credentials: credentials);
     }
     

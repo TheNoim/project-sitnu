@@ -10,6 +10,14 @@ import SwiftUI
 class UntisAccountStore: ObservableObject {
     @Published var username: String = "";
     @Published var password: String = "";
+    @Published var useSecretLogin: Bool = false;
+    
+    var authType: AuthType {
+        if useSecretLogin {
+            return .SECRET
+        }
+        return .PASSWORD;
+    };
     @Published var setDisplayName: String = "";
     @Published var primary: Bool = false;
 }
@@ -23,6 +31,17 @@ struct AddView: View {
     @State var basicCredentials: BasicUntisCredentials?;
     @EnvironmentObject var store: WatchStore
     @EnvironmentObject var addNavigationController: AddNavigationController;
+    
+    init(school: School) {
+        self.school = school;
+        self.acc.useSecretLogin = school.useSecret;
+        if !school.user.isEmpty {
+            self.acc.username = school.user;
+        }
+        if !school.password.isEmpty {
+            self.acc.password = school.password;
+        }
+    }
     
     var body: some View {
         Form {
@@ -47,6 +66,7 @@ struct AddView: View {
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
                     .disabled(testing)
+                Toggle("Use secret", isOn: self.$acc.useSecretLogin)
                 if self.error != nil {
                     Text(self.error!)
                         .foregroundColor(.red)
@@ -80,7 +100,7 @@ struct AddView: View {
         }
         self.untis = nil;
         self.basicCredentials = nil;
-        self.basicCredentials = BasicUntisCredentials(username: self.acc.username, password: self.acc.password, server: self.school.server, school: self.school.loginName.replacingOccurrences(of: " ", with: "+"));
+        self.basicCredentials = BasicUntisCredentials(username: self.acc.username, password: self.acc.password, server: self.school.server, school: self.school.loginName.replacingOccurrences(of: " ", with: "+"), authType: self.acc.authType);
         self.untis = UntisClient(credentials: self.basicCredentials!);
         self.untis!.getLatestImportTime(force: true, cachedHandler: nil) { result in
             self.handleUntisResponse(result: result);
@@ -93,7 +113,7 @@ struct AddView: View {
             let id = UUID();
             let primary = self.needsToBePrimary() || self.acc.primary;
             let setDisplayName: String? = self.acc.setDisplayName.isEmpty ? nil : self.acc.setDisplayName;
-            let acc = UntisAccount(id: id, username: self.acc.username, password: self.acc.password, server: self.school.server, school: self.school.loginName.replacingOccurrences(of: " ", with: "+"), setDisplayName: setDisplayName, primary: primary);
+            let acc = UntisAccount(id: id, username: self.acc.username, password: self.acc.password, server: self.school.server, school: self.school.loginName.replacingOccurrences(of: " ", with: "+"), setDisplayName: setDisplayName, authType: self.acc.authType, primary: primary);
             if primary {
                 for (index, _) in self.store.accounts.enumerated() {
                     if self.store.accounts[index].primary {

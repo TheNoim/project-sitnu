@@ -34,7 +34,7 @@ class UntisClient {
         let authKey: String = "\(self.credentials.username):\(self.credentials.school)@\(self.credentials.server)->AUTH";
         let authenticator: UntisAuthenticator = UntisAuthenticator(storage: authStorage, key: authKey);
         
-        var alamofireCredentials: UntisCredentials = UntisCredentials(username: credentials.username, password: credentials.password, server: credentials.server, school: credentials.school);
+        var alamofireCredentials: UntisCredentials = UntisCredentials(username: credentials.username, password: credentials.password, server: credentials.server, school: credentials.school, authType: credentials.authType);
         
         if authStorage != nil  {
             if let exists = try? authStorage?.existsObject(forKey: authKey) {

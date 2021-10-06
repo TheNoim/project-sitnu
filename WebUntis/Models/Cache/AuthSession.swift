@@ -15,7 +15,7 @@ struct AuthSession: Codable {
     let password: String;
     let server: String;
     let school: String;
-    
+    let authType: AuthType;
     
     
     /**
