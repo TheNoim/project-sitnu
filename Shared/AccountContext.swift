@@ -18,6 +18,7 @@ struct UntisAccount: Codable, Identifiable {
     let server: String;
     let school: String;
     let setDisplayName: String?;
+    let authType: AuthType;
     var primary: Bool;
     
     var displayName: String {

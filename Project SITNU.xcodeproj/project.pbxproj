@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FB16A5FD270DF3D200C6EAAB /* SwiftOTP in Frameworks */ = {isa = PBXBuildFile; productRef = FB16A5FC270DF3D200C6EAAB /* SwiftOTP */; };
+		FB16A5FF270E013E00C6EAAB /* SwiftOTP in Frameworks */ = {isa = PBXBuildFile; productRef = FB16A5FE270E013E00C6EAAB /* SwiftOTP */; };
+		FB16A602270E06C900C6EAAB /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = FB16A601270E06C900C6EAAB /* CodeScanner */; };
 		FB2B57D92646BC64008CD6C4 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = FB2B57D82646BC64008CD6C4 /* Cache */; };
 		FB2B57DB2646BCDB008CD6C4 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = FB2B57DA2646BCDB008CD6C4 /* Cache */; };
 		FB36E7FE2518B35F0039DFC9 /* onChangeChim.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E89FB25165A2600DAB2F4 /* onChangeChim.swift */; };
@@ -224,6 +227,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB16A5FF270E013E00C6EAAB /* SwiftOTP in Frameworks */,
 				FB2B57DB2646BCDB008CD6C4 /* Cache in Frameworks */,
 				FB7F6A88251789EA0052F679 /* Alamofire in Frameworks */,
 				FBDAA1AB251FBE0A00104001 /* SwiftyBeaver in Frameworks */,
@@ -234,9 +238,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB16A5FD270DF3D200C6EAAB /* SwiftOTP in Frameworks */,
 				FB2B57D92646BC64008CD6C4 /* Cache in Frameworks */,
 				FBA95DB72514F63D00494B5C /* Alamofire in Frameworks */,
 				FBDAA1A5251FBDDB00104001 /* SwiftyBeaver in Frameworks */,
+				FB16A602270E06C900C6EAAB /* CodeScanner in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -562,6 +568,7 @@
 				FB7F6A87251789EA0052F679 /* Alamofire */,
 				FBDAA1AA251FBE0A00104001 /* SwiftyBeaver */,
 				FB2B57DA2646BCDB008CD6C4 /* Cache */,
+				FB16A5FE270E013E00C6EAAB /* SwiftOTP */,
 			);
 			productName = "Watch Extension";
 			productReference = FB6E8975251624DD00DAB2F4 /* Watch Extension.appex */;
@@ -586,6 +593,8 @@
 				FBA95DB62514F63D00494B5C /* Alamofire */,
 				FBDAA1A4251FBDDB00104001 /* SwiftyBeaver */,
 				FB2B57D82646BC64008CD6C4 /* Cache */,
+				FB16A5FC270DF3D200C6EAAB /* SwiftOTP */,
+				FB16A601270E06C900C6EAAB /* CodeScanner */,
 			);
 			productName = "Project SITNU";
 			productReference = FBA95DA22514F53200494B5C /* Project SITNU.app */;
@@ -651,6 +660,8 @@
 				FBA95DB52514F63D00494B5C /* XCRemoteSwiftPackageReference "Alamofire" */,
 				FBDAA1A3251FBDDB00104001 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
 				FB2B57D72646BC64008CD6C4 /* XCRemoteSwiftPackageReference "Cache" */,
+				FB16A5FB270DF3D200C6EAAB /* XCRemoteSwiftPackageReference "SwiftOTP" */,
+				FB16A600270E06C900C6EAAB /* XCRemoteSwiftPackageReference "CodeScanner" */,
 			);
 			productRefGroup = FBA95DA32514F53200494B5C /* Products */;
 			projectDirPath = "";
@@ -836,7 +847,7 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 28;
+				CURRENT_PROJECT_VERSION = 29;
 				DEVELOPMENT_ASSET_PATHS = "\"Watch Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				ENABLE_PREVIEWS = YES;
@@ -846,7 +857,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.1.0;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.noim.Project-SITNU.watchkitapp.watchkitextension";
 				PRODUCT_NAME = "${TARGET_NAME}";
@@ -866,7 +877,7 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 28;
+				CURRENT_PROJECT_VERSION = 29;
 				DEVELOPMENT_ASSET_PATHS = "\"Watch Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				ENABLE_PREVIEWS = YES;
@@ -876,7 +887,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.1.0;
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.noim.Project-SITNU.watchkitapp.watchkitextension";
 				PRODUCT_NAME = "${TARGET_NAME}";
@@ -896,11 +907,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 28;
+				CURRENT_PROJECT_VERSION = 29;
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				IBSC_MODULE = Watch_Extension;
 				INFOPLIST_FILE = Watch/Info.plist;
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.noim.Project-SITNU.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -918,11 +929,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 28;
+				CURRENT_PROJECT_VERSION = 29;
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				IBSC_MODULE = Watch_Extension;
 				INFOPLIST_FILE = Watch/Info.plist;
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.noim.Project-SITNU.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -1057,7 +1068,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 28;
+				CURRENT_PROJECT_VERSION = 29;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SITNU/Preview Content\"";
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				ENABLE_PREVIEWS = YES;
@@ -1068,7 +1079,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.noim.Project-SITNU";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1087,7 +1098,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 28;
+				CURRENT_PROJECT_VERSION = 29;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SITNU/Preview Content\"";
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				ENABLE_PREVIEWS = YES;
@@ -1097,7 +1108,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.noim.Project-SITNU";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1198,6 +1209,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		FB16A5FB270DF3D200C6EAAB /* XCRemoteSwiftPackageReference "SwiftOTP" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/lachlanbell/SwiftOTP.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+		FB16A600270E06C900C6EAAB /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/CodeScanner";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		FB2B57D72646BC64008CD6C4 /* XCRemoteSwiftPackageReference "Cache" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hyperoslo/Cache.git";
@@ -1225,6 +1252,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		FB16A5FC270DF3D200C6EAAB /* SwiftOTP */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FB16A5FB270DF3D200C6EAAB /* XCRemoteSwiftPackageReference "SwiftOTP" */;
+			productName = SwiftOTP;
+		};
+		FB16A5FE270E013E00C6EAAB /* SwiftOTP */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FB16A5FB270DF3D200C6EAAB /* XCRemoteSwiftPackageReference "SwiftOTP" */;
+			productName = SwiftOTP;
+		};
+		FB16A601270E06C900C6EAAB /* CodeScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FB16A600270E06C900C6EAAB /* XCRemoteSwiftPackageReference "CodeScanner" */;
+			productName = CodeScanner;
+		};
 		FB2B57D82646BC64008CD6C4 /* Cache */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FB2B57D72646BC64008CD6C4 /* XCRemoteSwiftPackageReference "Cache" */;

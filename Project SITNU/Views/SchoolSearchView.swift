@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Alamofire
+import CodeScanner
 
 struct School: Codable, Identifiable {
     var id: Int { self.schoolId }
@@ -14,6 +15,9 @@ struct School: Codable, Identifiable {
     var server: String;
     let displayName: String;
     var loginName: String;
+    var user: String = "";
+    var password: String = "";
+    var useSecret: Bool = false;
     let schoolId: Int;
     let address: String;
 }
@@ -23,6 +27,8 @@ struct SchoolSearchView: View {
     @State var searchTerm: String = "";
     @State var dataRequest: DataRequest?;
     @State var error: String = "";
+    @State var qrSchool: School?;
+    @State var scannedCode = false;
     let throttler = Throttler(minimumDelay: 0.5)
     
     var body: some View {
@@ -51,6 +57,82 @@ struct SchoolSearchView: View {
                                             .fontWeight(.light)
                                         Spacer()
                                     }
+                                }
+                            }
+                        }
+                        NavigationLink(destination: AddView(school: School(server: "", displayName: "", loginName: "", password: "", schoolId: 0, address: ""))) {
+                            VStack {
+                                HStack {
+                                    Text("Manual")
+                                        .bold()
+                                    Spacer()
+                                }
+                                HStack {
+                                    Text("Enter Details Manual")
+                                        .italic()
+                                        .fontWeight(.light)
+                                    Spacer()
+                                }
+                            }
+                        }
+                        if scannedCode {
+                            NavigationLink(destination: AddView(school: qrSchool ?? School(server: "", displayName: "", loginName: "", password: "", schoolId: 0, address: "")), isActive: $scannedCode) {
+                                EmptyView()
+                            }
+                        }
+                        NavigationLink(destination: CodeScannerView(codeTypes: [.qr], completion: { result in
+                            if case let .success(code) = result {
+                                print("Code: \(code)");
+                                guard let url = URL(string: code) else {
+                                    print("Failed");
+                                    return;
+                                }
+                                if url.scheme != "untis" {
+                                    return;
+                                }
+                                if url.host != "setschool" {
+                                    return;
+                                }
+                                guard let components = url.components else {
+                                    print("Failed to parse get parameters");
+                                    return;
+                                }
+                                guard let schoolUrl = components.queryItems?["url"] else {
+                                    print("No url");
+                                    return;
+                                }
+                                guard let school = components.queryItems?["school"] else {
+                                    print("No school");
+                                    return;
+                                }
+                                guard let user = components.queryItems?["user"] else {
+                                    print("No user");
+                                    return;
+                                }
+                                guard let key = components.queryItems?["key"] else {
+                                    print("No key");
+                                    return;
+                                }
+                                guard let schoolNumberString = components.queryItems?["schoolNumber"], let schoolNumber = Int(schoolNumberString) else {
+                                    print("No schoolNumber");
+                                    return;
+                                }
+                                print("key: \(key) user: \(user) school: \(school) url: \(schoolUrl)")
+                                self.qrSchool = School(server: schoolUrl, displayName: "", loginName: school, user: user, password: key, useSecret: true, schoolId: schoolNumber, address: "")
+                                self.scannedCode = true;
+                            }
+                        })) {
+                            VStack {
+                                HStack {
+                                    Text("QR Code")
+                                        .bold()
+                                    Spacer()
+                                }
+                                HStack {
+                                    Text("Use your camera to scan an QR-Code")
+                                        .italic()
+                                        .fontWeight(.light)
+                                    Spacer()
                                 }
                             }
                         }
@@ -118,5 +200,17 @@ struct SchoolSearchView: View {
 struct SchoolSearchView_Previews: PreviewProvider {
     static var previews: some View {
         SchoolSearchView()
+    }
+}
+
+extension URL {
+    var components: URLComponents? {
+        return URLComponents(url: self, resolvingAgainstBaseURL: false)
+    }
+}
+
+extension Array where Iterator.Element == URLQueryItem {
+    subscript(_ key: String) -> String? {
+        return first(where: { $0.name == key })?.value
     }
 }

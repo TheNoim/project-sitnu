@@ -8,11 +8,17 @@
 import Foundation
 import Alamofire
 
+enum AuthType: Codable {
+    case PASSWORD
+    case SECRET
+}
+
 struct BasicUntisCredentials: Codable {
     let username: String;
     let password: String;
     let server: String;
     let school: String;
+    let authType: AuthType;
 }
 
 struct UntisCredentials: AuthenticationCredential {
@@ -23,6 +29,7 @@ struct UntisCredentials: AuthenticationCredential {
     let password: String;
     let server: String;
     let school: String;
+    let authType: AuthType;
     
     /**
      Optional
