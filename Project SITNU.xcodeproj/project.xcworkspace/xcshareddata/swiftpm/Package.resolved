@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
         "state": {
           "branch": null,
-          "revision": "f96b619bcb2383b43d898402283924b80e2c4bae",
-          "version": "5.4.3"
+          "revision": "d120af1e8638c7da36c8481fd61a66c0c08dc4fc",
+          "version": "5.4.4"
         }
       },
       {
@@ -29,21 +29,12 @@
         }
       },
       {
-        "package": "swift-crypto",
-        "repositoryURL": "https://github.com/apple/swift-crypto.git",
-        "state": {
-          "branch": null,
-          "revision": "3bea268b223651c4ab7b7b9ad62ef9b2d4143eb6",
-          "version": "1.1.6"
-        }
-      },
-      {
         "package": "SwiftOTP",
-        "repositoryURL": "https://github.com/lachlanbell/SwiftOTP.git",
+        "repositoryURL": "https://github.com/TheNoim/SwiftOTP",
         "state": {
-          "branch": null,
-          "revision": "315acdb759083fd8f3c37b02fc021321c8934f9c",
-          "version": "3.0.0"
+          "branch": "master",
+          "revision": "11f4743ebc7850245e5f0458bb2105f32237527e",
+          "version": null
         }
       },
       {
@@ -51,8 +42,8 @@
         "repositoryURL": "https://github.com/SwiftyBeaver/SwiftyBeaver.git",
         "state": {
           "branch": null,
-          "revision": "5cfd6888447adcc49b80b625281b6177104f011f",
-          "version": "1.9.4"
+          "revision": "2c039501d6eeb4d4cd4aec4a8d884ad28862e044",
+          "version": "1.9.5"
         }
       }
     ]

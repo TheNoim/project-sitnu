@@ -68,7 +68,7 @@ struct SchoolSearchView: View {
                                     Spacer()
                                 }
                                 HStack {
-                                    Text("Enter Details Manual")
+                                    Text("Enter details manual")
                                         .italic()
                                         .fontWeight(.light)
                                     Spacer()
@@ -129,7 +129,7 @@ struct SchoolSearchView: View {
                                     Spacer()
                                 }
                                 HStack {
-                                    Text("Use your camera to scan an QR-Code")
+                                    Text("Use your camera to scan a QR-Code")
                                         .italic()
                                         .fontWeight(.light)
                                     Spacer()
