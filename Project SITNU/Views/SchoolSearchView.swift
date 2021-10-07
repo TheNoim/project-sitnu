@@ -82,8 +82,9 @@ struct SchoolSearchView: View {
                         }
                         NavigationLink(destination: CodeScannerView(codeTypes: [.qr], completion: { result in
                             if case let .success(code) = result {
-                                print("Code: \(code)");
-                                guard let url = URL(string: code) else {
+                                let cleanedUrl = code.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!;
+                                print("Code: \(cleanedUrl)");
+                                guard let url = URL(string: cleanedUrl) else {
                                     print("Failed");
                                     return;
                                 }

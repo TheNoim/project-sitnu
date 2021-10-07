@@ -50,6 +50,9 @@ class UntisAuthenticator: Authenticator {
     }
     
     func refresh(_ credential: UntisCredentials, for session: Session, completion: @escaping (Swift.Result<UntisCredentials, Error>) -> Void) {
+        let configuration = URLSessionConfiguration.af.default;
+        configuration.httpShouldSetCookies = false;
+        let session = Session(configuration: configuration)
         if credential.authType == AuthType.PASSWORD {
             let login: Parameters = [
                 "id": "SITNU",
@@ -61,7 +64,8 @@ class UntisAuthenticator: Authenticator {
                     "client": "SITNU"
                 ]
             ];
-            AF.request("https://\(credential.server)/WebUntis/jsonrpc.do?school=\(credential.school)", method: .post, parameters: login, encoding: JSONEncoding.default).responseJSON { response in
+            session.request("https://\(credential.server)/WebUntis/jsonrpc.do?school=\(credential.school)", method: .post, parameters: login, encoding: JSONEncoding.default).responseJSON { response in
+                let _ = session; // Keep reference
                 switch response.result {
                     case .failure(let error):
                         completion(.failure(UntisError.alamofire(error: error)));
@@ -136,7 +140,8 @@ class UntisAuthenticator: Authenticator {
                     ]
                 ]
             ];
-            AF.request("https://\(credential.server)/WebUntis/jsonrpc_intern.do?school=\(credential.school)&a=0&s=\(credential.server)&m=getUserData2017&v=i3.23.0", method: .post, parameters: login, encoding: JSONEncoding.default).responseJSON { response in
+            session.request("https://\(credential.server)/WebUntis/jsonrpc_intern.do?school=\(credential.school)&a=0&s=\(credential.server)&m=getUserData2017&v=i3.23.0", method: .post, parameters: login, encoding: JSONEncoding.default).responseJSON { response in
+                let _ = session; // Keep reference
                 switch response.result {
                     case .failure(let error):
                         completion(.failure(UntisError.alamofire(error: error)));
