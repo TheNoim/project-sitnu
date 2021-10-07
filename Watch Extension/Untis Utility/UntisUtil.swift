@@ -39,9 +39,9 @@ class UntisUtil {
         return PeriodWithUnit(period: period, startUnit: startUnitInfo, endUnit: endUnitInfo);
     }
     
-    func getRowTitle(period: Period, timegrid: Timegrid?) -> String {
+    func getRowTitle(acc: UntisAccount, period: Period, timegrid: Timegrid?) -> String {
         let periodWithUnit = self.getPeriodWithUnit(period: period, timegrid: timegrid);
-        let subjectList = ListFormatter.localizedString(byJoining: period.subjects.map({ $0.displayName }));
+        let subjectList = ListFormatter.localizedString(byJoining: period.subjects.map({ acc.preferShortSubject ? $0.shortDisplayName : $0.displayName }));
         if periodWithUnit.combinedUnit == nil {
             return subjectList;
         } else {

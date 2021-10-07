@@ -51,11 +51,11 @@ struct TimetableView: View {
                             self.isDetail.toggle();
                         }
                     } label: {
-                        TimetableRowView(period: period, timegrid: self.timegrid, subjects: self.subjects)
+                        TimetableRowView(account: account, period: period, timegrid: self.timegrid, subjects: self.subjects)
                     }
                 }
                 .sheet(isPresented: $isDetail, content: {
-                    PeriodDetailView(period: selectedPeriod, timegrid: self.timegrid, subjects: self.subjects)
+                    PeriodDetailView(account: account, period: selectedPeriod, timegrid: self.timegrid, subjects: self.subjects)
                 })
             } else if periods == nil {
                 ActivityIndicator(active: true)

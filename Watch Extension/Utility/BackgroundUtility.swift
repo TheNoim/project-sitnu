@@ -26,11 +26,7 @@ class BackgroundUtility {
         return nil;
     }
     
-    
-    public func getUntisClient() -> UntisClient? {
-        if let untisClient: UntisClient = self.untisClient {
-            return untisClient;
-        }
+    public func getPrimaryAccount() -> UntisAccount? {
         guard let sharedContext: SharedContext = self.getContext() else {
             return nil;
         }
@@ -38,6 +34,16 @@ class BackgroundUtility {
             return nil;
         }
         guard let primaryAccount: UntisAccount = sharedContext.accounts.first(where: { $0.primary }) else {
+            return nil;
+        }
+        return primaryAccount;
+    }
+    
+    public func getUntisClient() -> UntisClient? {
+        if let untisClient: UntisClient = self.untisClient {
+            return untisClient;
+        }
+        guard let primaryAccount: UntisAccount = self.getPrimaryAccount() else {
             return nil;
         }
         let credentials = BasicUntisCredentials(username: primaryAccount.username, password: primaryAccount.password, server: primaryAccount.server, school: primaryAccount.school, authType: primaryAccount.authType);
