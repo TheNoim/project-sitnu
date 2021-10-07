@@ -16,10 +16,12 @@ class HostingController: WKHostingController<AnyView>, WCSessionDelegate {
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         let context: [String: Any] = session.receivedApplicationContext;
+        log.debug("activationDidCompleteWith: \(context)");
         self.setContext(context);
     }
     
     func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
+        log.debug("didReceiveApplicationContext: \(applicationContext)");
         self.setContext(applicationContext);
     }
     
@@ -79,6 +81,9 @@ class HostingController: WKHostingController<AnyView>, WCSessionDelegate {
         if WCSession.isSupported() && self.activated == false {
             self.activated = true;
             WCSession.default.activate();
+            log.debug("Call WCSession.default.activate()");
+        } else {
+            log.debug("Session not activated or not supported");
         }
     }
     
