@@ -19,13 +19,15 @@ struct TimetableRowView: View {
     let title: String;
     let subtitle: String;
     let color: Color;
+    let acc: UntisAccount;
     
-    init(period: Period, timegrid: Timegrid?, subjects: [Subject]?) {
+    init(account: UntisAccount, period: Period, timegrid: Timegrid?, subjects: [Subject]?) {
         self.period = period;
         self.timegrid = timegrid;
         self.subjects = subjects;
+        self.acc = account;
         
-        self.title = UntisUtil.default.getRowTitle(period: period, timegrid: self.timegrid);
+        self.title = UntisUtil.default.getRowTitle(acc: account, period: period, timegrid: self.timegrid);
         self.subtitle = UntisUtil.default.getRowSubtitle(period: period);
         self.color = UntisUtil.default.getColor(for: period, subjects: self.subjects);
     }

@@ -20,6 +20,10 @@ class UntisAccountStore: ObservableObject {
     };
     @Published var setDisplayName: String = "";
     @Published var primary: Bool = false;
+    @Published var preferShortRoom: Bool = false;
+    @Published var preferShortSubject: Bool = false;
+    @Published var preferShortTeacher: Bool = false;
+    @Published var preferShortClass: Bool = false;
 }
 
 struct AddView: View {
@@ -56,6 +60,11 @@ struct AddView: View {
                         Text("Add as Primary")
                     }.disabled(testing)
                 }
+                Text("Prefer the short representation of: ")
+                Toggle("Rooms", isOn: self.$acc.preferShortRoom)
+                Toggle("Teachers", isOn: self.$acc.preferShortTeacher)
+                Toggle("Subjects", isOn: self.$acc.preferShortSubject)
+                // Toggle("Classes", isOn: self.$acc.preferShortClass) // Currently not in use
             }
             Section(header: Text("Login")) {
                 TextField("Username", text: self.$acc.username)
@@ -113,7 +122,7 @@ struct AddView: View {
             let id = UUID();
             let primary = self.needsToBePrimary() || self.acc.primary;
             let setDisplayName: String? = self.acc.setDisplayName.isEmpty ? nil : self.acc.setDisplayName;
-            let acc = UntisAccount(id: id, username: self.acc.username, password: self.acc.password, server: self.school.server, school: self.school.loginName.replacingOccurrences(of: " ", with: "+"), setDisplayName: setDisplayName, authType: self.acc.authType, primary: primary);
+            let acc = UntisAccount(id: id, username: self.acc.username, password: self.acc.password, server: self.school.server, school: self.school.loginName.replacingOccurrences(of: " ", with: "+"), setDisplayName: setDisplayName, authType: self.acc.authType, primary: primary, preferShortRoom: self.acc.preferShortRoom, preferShortSubject: self.acc.preferShortSubject, preferShortTeacher: self.acc.preferShortTeacher, preferShortClass: self.acc.preferShortClass);
             if primary {
                 for (index, _) in self.store.accounts.enumerated() {
                     if self.store.accounts[index].primary {

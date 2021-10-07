@@ -19,7 +19,7 @@ final class WatchStore: ObservableObject {
     func sync() {
         var accounts: [UntisAccount] = [];
         for acc in self.accounts {
-            let untisAccount = UntisAccount(id: acc.id, username: acc.username, password: acc.password, server: acc.server, school: acc.school, setDisplayName: acc.setDisplayName, authType: acc.authType, primary: acc.primary);
+            let untisAccount = acc.copy();
             accounts.append(untisAccount);
         }
         let context = SharedContext(accounts: accounts);

@@ -66,7 +66,10 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         } handler: { (periods, timegrid, subjects) in
             // If there is currently a period
             if let currentPeriod = periods.first(where: { $0.startTime < currentDate && $0.endTime > currentDate }) {
-                let currentEntry = self.getComplicationEntry(for: complication, period: currentPeriod, timegrid: timegrid, subjects: subjects);
+                guard let account = self.bgUtility.getPrimaryAccount() else {
+                    return handler(nil);
+                }
+                let currentEntry = self.getComplicationEntry(for: complication, account: account, period: currentPeriod, timegrid: timegrid, subjects: subjects);
                 log.debug("Current entry is current period", context: ["currentDate": currentDate, "startTime": currentPeriod.startTime, "endTime": currentPeriod.endTime]);
                 handler(currentEntry);
             } else {
@@ -102,6 +105,9 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             // .filter({ $0.startTime > date || ($0.startTime < date && $0.endTime > date) })
             var entries: [CLKComplicationTimelineEntry] = [];
             var lastEndTime: Date = date;
+            guard let account = self.bgUtility.getPrimaryAccount() else {
+                return handler(nil);
+            }
             
             if let currentPeriod = periods.first(where: { $0.startTime <= date && $0.endTime >= date }) {
                 if let nextPeriod = periods.first(where: { $0.startTime >= date && $0.id != currentPeriod.id }) {
@@ -109,13 +115,13 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                     let c = currentPeriod.endTime.timeIntervalSince1970;
                     if abs(n - c) <= 1 {
                         // The next entry is the next period
-                        let nextEntry = self.getComplicationEntry(for: complication, period: nextPeriod, timegrid: timegrid, subjects: subjects);
+                        let nextEntry = self.getComplicationEntry(for: complication, account: account, period: nextPeriod, timegrid: timegrid, subjects: subjects);
                         entries.appendWithLimitCheck(limit, item: nextEntry!);
                     } else {
                         // We need to add a break entry
                         let nextEntry = self.getBreakComplicationEntry(for: complication, date: currentPeriod.endTime, period: nextPeriod, timegrid: timegrid, subjects: subjects);
                         entries.appendWithLimitCheck(limit, item: nextEntry!);
-                        let nextPeriodEntry = self.getComplicationEntry(for: complication, period: nextPeriod, timegrid: timegrid, subjects: subjects);
+                        let nextPeriodEntry = self.getComplicationEntry(for: complication, account: account, period: nextPeriod, timegrid: timegrid, subjects: subjects);
                         entries.appendWithLimitCheck(limit, item: nextPeriodEntry!);
                     }
                     // Every next period needs to be after this time
@@ -132,7 +138,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                     // New Timeline
                     let nextEntry = self.getBreakComplicationEntry(for: complication, date: lastEndTime, period: nextPeriod, timegrid: timegrid, subjects: subjects);
                     entries.appendWithLimitCheck(limit, item: nextEntry!);
-                    let nextPeriodEntry = self.getComplicationEntry(for: complication, period: nextPeriod, timegrid: timegrid, subjects: subjects);
+                    let nextPeriodEntry = self.getComplicationEntry(for: complication, account: account, period: nextPeriod, timegrid: timegrid, subjects: subjects);
                     entries.appendWithLimitCheck(limit, item: nextPeriodEntry!);
                     lastEndTime = nextPeriod.endTime;
                 } else {
@@ -150,13 +156,13 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                     let c = lastEndTime.timeIntervalSince1970;
                     if abs(n - c) <= 1 {
                         // We don't need a break entry
-                        let nextEntry = self.getComplicationEntry(for: complication, period: nextPeriod, timegrid: timegrid, subjects: subjects);
+                        let nextEntry = self.getComplicationEntry(for: complication, account: account, period: nextPeriod, timegrid: timegrid, subjects: subjects);
                         entries.appendWithLimitCheck(limit, item: nextEntry!);
                     } else {
                         // We need to add a break entry, because there is time between last period and next period
                         let breakEntry = self.getBreakComplicationEntry(for: complication, date: lastEndTime, period: nextPeriod, timegrid: timegrid, subjects: subjects);
                         entries.appendWithLimitCheck(limit, item: breakEntry!);
-                        let nextPeriodEntry = self.getComplicationEntry(for: complication, period: nextPeriod, timegrid: timegrid, subjects: subjects);
+                        let nextPeriodEntry = self.getComplicationEntry(for: complication, account: account, period: nextPeriod, timegrid: timegrid, subjects: subjects);
                         entries.appendWithLimitCheck(limit, item: nextPeriodEntry!);
                     }
                     lastEndTime = nextPeriod.endTime;
@@ -294,12 +300,12 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         return nil;
     }
     
-    func getComplicationEntry(for complication: CLKComplication, period: Period, timegrid: Timegrid, subjects: [Subject]) -> CLKComplicationTimelineEntry? {
+    func getComplicationEntry(for complication: CLKComplication, account: UntisAccount, period: Period, timegrid: Timegrid, subjects: [Subject]) -> CLKComplicationTimelineEntry? {
         var template: CLKComplicationTemplate?;
         
         switch complication.family {
         case .modularLarge, .graphicRectangular:
-            let title = UntisUtil.default.getRowTitle(period: period, timegrid: timegrid);
+            let title = UntisUtil.default.getRowTitle(acc: account, period: period, timegrid: timegrid);
             let titleColor = UntisUtil.default.getColor(for: period, subjects: subjects);
             let titleTextProvider = CLKSimpleTextProvider(text: title);
             if let uiColor = UIColor(hex: titleColor.description) {

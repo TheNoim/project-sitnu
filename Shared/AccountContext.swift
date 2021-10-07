@@ -20,6 +20,10 @@ struct UntisAccount: Codable, Identifiable {
     let setDisplayName: String?;
     let authType: AuthType;
     var primary: Bool;
+    var preferShortRoom: Bool = false;
+    var preferShortSubject: Bool = false;
+    var preferShortTeacher: Bool = false;
+    var preferShortClass: Bool = false;
     
     var displayName: String {
         if self.setDisplayName != nil {
@@ -27,5 +31,10 @@ struct UntisAccount: Codable, Identifiable {
         } else {
             return "\(self.username) @ \(self.school)"
         }
+    }
+    
+    func copy() -> UntisAccount {
+        let copy = UntisAccount(id: id, username: username, password: password, server: server, school: school, setDisplayName: setDisplayName, authType: authType, primary: primary, preferShortRoom: preferShortRoom, preferShortSubject: preferShortSubject, preferShortTeacher: preferShortTeacher, preferShortClass: preferShortClass);
+        return copy;
     }
 }
