@@ -56,8 +56,10 @@
       debugServiceExtension = "internal"
       enableGPUValidationMode = "1"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.Carousel"
+         RemotePath = "/Project S.I.T.N.U">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FB6E8968251624DA00DAB2F4"
@@ -65,7 +67,7 @@
             BlueprintName = "Watch"
             ReferencedContainer = "container:Project SITNU.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </RemoteRunnable>
       <AdditionalOptions>
          <AdditionalOption
             key = "NSZombieEnabled"
