@@ -9,14 +9,14 @@ on:
 jobs:
   build:
     name: Build and analyse default scheme using xcodebuild command
-    runs-on: macos-latest
+    runs-on: macos-12
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: latest
+          xcode-version: "latest"
       - name: Build archive
         run: xcodebuild -scheme "Project SITNU" -target "Project SITNU" -configuration Release clean archive -archivePath "build/sitnu.xcarchive" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO | xcbeautify
       - name: Export ipa
