@@ -76,6 +76,8 @@
 		FB7F6B0B2517A0670052F679 /* AccountStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7F6B0A2517A0670052F679 /* AccountStore.swift */; };
 		FB8E7AFF251CC31600D4C43C /* DateOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8E7AFE251CC31600D4C43C /* DateOffset.swift */; };
 		FB8E7B00251CC31600D4C43C /* DateOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8E7AFE251CC31600D4C43C /* DateOffset.swift */; };
+		FB986BA12901C02B00C06F6D /* CodableIgnored.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB986BA02901C02B00C06F6D /* CodableIgnored.swift */; };
+		FB986BA22901C02B00C06F6D /* CodableIgnored.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB986BA02901C02B00C06F6D /* CodableIgnored.swift */; };
 		FB9EC0E42517ACA4002D7E16 /* AccountSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9EC0E32517ACA4002D7E16 /* AccountSelector.swift */; };
 		FB9EC0EA2517AEA7002D7E16 /* TimetableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9EC0E92517AEA7002D7E16 /* TimetableView.swift */; };
 		FB9EC0F52517C954002D7E16 /* UntisUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9EC0F42517C954002D7E16 /* UntisUtil.swift */; };
@@ -198,6 +200,7 @@
 		FB7F6A9625178B270052F679 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		FB7F6B0A2517A0670052F679 /* AccountStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStore.swift; sourceTree = "<group>"; };
 		FB8E7AFE251CC31600D4C43C /* DateOffset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateOffset.swift; sourceTree = "<group>"; };
+		FB986BA02901C02B00C06F6D /* CodableIgnored.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableIgnored.swift; sourceTree = "<group>"; };
 		FB9EC0E32517ACA4002D7E16 /* AccountSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSelector.swift; sourceTree = "<group>"; };
 		FB9EC0E92517AEA7002D7E16 /* TimetableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableView.swift; sourceTree = "<group>"; };
 		FB9EC0F42517C954002D7E16 /* UntisUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UntisUtil.swift; sourceTree = "<group>"; };
@@ -347,6 +350,7 @@
 			children = (
 				FB6E89CA25162F6400DAB2F4 /* AccountContext.swift */,
 				FB5A92912520B36F00477E7A /* LogFiles.swift */,
+				FB986BA02901C02B00C06F6D /* CodableIgnored.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -640,6 +644,7 @@
 				TargetAttributes = {
 					FB6E8968251624DA00DAB2F4 = {
 						CreatedOnToolsVersion = 12.0;
+						LastSwiftMigration = 1410;
 					};
 					FB6E8974251624DD00DAB2F4 = {
 						CreatedOnToolsVersion = 12.0;
@@ -748,6 +753,7 @@
 				FB9EC0F52517C954002D7E16 /* UntisUtil.swift in Sources */,
 				FB7F6ABF2517900D0052F679 /* ResponseSerializer.swift in Sources */,
 				FB36E8302518EE870039DFC9 /* TimetableRowView.swift in Sources */,
+				FB986BA22901C02B00C06F6D /* CodableIgnored.swift in Sources */,
 				FB7F6B0B2517A0670052F679 /* AccountStore.swift in Sources */,
 				FB7F6AEC251790200052F679 /* TimetableCache.swift in Sources */,
 				FB7F6AE72517901F0052F679 /* TimegridCache.swift in Sources */,
@@ -791,6 +797,7 @@
 				FB6E892B2516195800DAB2F4 /* Subjects.swift in Sources */,
 				FB7F6A252517617B0052F679 /* Encodable+asDictionary.swift in Sources */,
 				FB6E892F251619EB00DAB2F4 /* SubjectsCache.swift in Sources */,
+				FB986BA12901C02B00C06F6D /* CodableIgnored.swift in Sources */,
 				FB7F6A1725175E870052F679 /* SearchBar.swift in Sources */,
 				FB6E892725160B1500DAB2F4 /* TimetableCache.swift in Sources */,
 				FBA95DC42514F90A00494B5C /* UntisClient.swift in Sources */,
@@ -914,16 +921,23 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 32;
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				IBSC_MODULE = Watch_Extension;
 				INFOPLIST_FILE = Watch/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.noim.Project-SITNU.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 6.0;
@@ -936,11 +950,17 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 32;
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				IBSC_MODULE = Watch_Extension;
 				INFOPLIST_FILE = Watch/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.noim.Project-SITNU.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -8,6 +8,7 @@
 import SwiftUI
 import Alamofire
 import CodeScanner
+import SwiftyBeaver
 
 struct School: Codable, Identifiable {
     var id: Int { self.schoolId }
@@ -20,6 +21,10 @@ struct School: Codable, Identifiable {
     var useSecret: Bool = false;
     let schoolId: Int;
     let address: String;
+    
+    private enum CodingKeys: String, CodingKey {
+        case server, displayName, loginName, schoolId, address
+    }
 }
 
 struct SchoolSearchView: View {
@@ -36,7 +41,7 @@ struct SchoolSearchView: View {
             VStack {
                 SearchBar(placeholder: "School name", text: $searchTerm.onChange({ _ in
                     self.throttler.throttle {
-                        print("Call search")
+                        log.debug("Call search")
                         self.search();
                     }
                 }))
@@ -83,9 +88,9 @@ struct SchoolSearchView: View {
                         NavigationLink(destination: CodeScannerView(codeTypes: [.qr], completion: { result in
                             if case let .success(code) = result {
                                 let cleanedUrl = code.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!;
-                                print("Code: \(cleanedUrl)");
+                                log.debug("Code", cleanedUrl);
                                 guard let url = URL(string: cleanedUrl) else {
-                                    print("Failed");
+                                    log.error("Failed to parse url");
                                     return;
                                 }
                                 if url.scheme != "untis" {
@@ -95,30 +100,30 @@ struct SchoolSearchView: View {
                                     return;
                                 }
                                 guard let components = url.components else {
-                                    print("Failed to parse get parameters");
+                                    log.error("Failed to parse get parameters");
                                     return;
                                 }
                                 guard let schoolUrl = components.queryItems?["url"] else {
-                                    print("No url");
+                                    log.error("No url");
                                     return;
                                 }
                                 guard let school = components.queryItems?["school"] else {
-                                    print("No school");
+                                    log.error("No school");
                                     return;
                                 }
                                 guard let user = components.queryItems?["user"] else {
-                                    print("No user");
+                                    log.error("No user");
                                     return;
                                 }
                                 guard let key = components.queryItems?["key"] else {
-                                    print("No key");
+                                    log.error("No key");
                                     return;
                                 }
                                 guard let schoolNumberString = components.queryItems?["schoolNumber"], let schoolNumber = Int(schoolNumberString) else {
-                                    print("No schoolNumber");
+                                    log.error("No schoolNumber");
                                     return;
                                 }
-                                print("key: \(key) user: \(user) school: \(school) url: \(schoolUrl)")
+                                log.debug("key: \(key) user: \(user) school: \(school) url: \(schoolUrl)")
                                 self.qrSchool = School(server: schoolUrl, displayName: "", loginName: school, user: user, password: key, useSecret: true, schoolId: schoolNumber, address: "")
                                 self.scannedCode = true;
                             }
@@ -168,7 +173,7 @@ struct SchoolSearchView: View {
             ], encoding: JSONEncoding.default).responseJSON { response in
                 switch response.result {
                 case .failure(let error):
-                    print("School search error: \(error.localizedDescription)")
+                    log.error("School search error", error.localizedDescription);
                     break;
                 case .success(let result):
                     if let dic = result as? [String: Any] {
@@ -177,6 +182,8 @@ struct SchoolSearchView: View {
                                 withAnimation {
                                     self.schools = schools;
                                 }
+                            } else {
+                                log.error("Failed to parse result.schools")
                             }
                         }
                         if let errorCode = dic[keyPath: "error.code"] as? Int {
