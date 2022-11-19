@@ -28,6 +28,15 @@
       }
     },
     {
+      "identity" : "defaultcodable",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/gonzalezreal/DefaultCodable",
+      "state" : {
+        "revision" : "b75cdb44b772cdd278ea0d029d3f079384b0d87d",
+        "version" : "1.2.1"
+      }
+    },
+    {
       "identity" : "swiftotp",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/TheNoim/SwiftOTP",

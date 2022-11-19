@@ -133,7 +133,9 @@ class UntisClient {
         ]];
         let timetableStorage = self.storage?.transformCodable(ofType: TimetableCache.self);
         let cacheKey = self.getCacheKey(for: "TIMETABLE_\(untisDate)_\(flags.map({ $0.rawValue }))");
+        
         if let timetableCache = try? timetableStorage?.object(forKey: cacheKey) {
+            log.debug("set refresh=\(timetableCache.expired || force)")
             refresh = timetableCache.expired || force;
             if refresh && cachedHandler != nil {
                 cachedHandler!(timetableCache.periods);
@@ -141,6 +143,7 @@ class UntisClient {
                 completion(.success(timetableCache.periods));
             }
         } else {
+            log.debug("set refresh=true")
             refresh = true;
         }
         if refresh {
@@ -148,9 +151,19 @@ class UntisClient {
                 switch response {
                 case .success(let timetableEncoded):
                     var periodsArray: [Period] = [];
+                    log.debug("timetableEncoded=\(timetableEncoded)");
                     for entry in timetableEncoded {
+                        log.debug("Try decode entry=\(entry)");
                         if let period = try? Period(from: entry) {
                             periodsArray.append(period);
+                            log.debug("Decode success")
+                        } else {
+                            do {
+                                try Period(from: entry)
+                            } catch {
+                                log.error("Failed to decode");
+                                log.error(error);
+                            }
                         }
                     }
                     let timetableCache = TimetableCache(periods: periodsArray);

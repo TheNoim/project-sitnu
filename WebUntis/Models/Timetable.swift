@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import DefaultCodable
 
 let dateFormatter = { () -> DateFormatter in
     let f = DateFormatter();
@@ -31,10 +32,10 @@ struct Period: Codable, Identifiable {
     let studentGroup: String?;
     let bkRemark: String?;
     let bkText: String?;
-    let klassen: [SubType];
-    let teachers: [SubType];
-    let subjects: [SubType];
-    let rooms: [SubType];
+    @Default<Empty> var klassen: [SubType];
+    @Default<Empty> var teachers: [SubType];
+    @Default<Empty> var subjects: [SubType];
+    @Default<Empty> var rooms: [SubType];
     
     // MARK: Computed
     
@@ -87,7 +88,7 @@ struct Period: Codable, Identifiable {
     
     // MARK: Untis structs
     
-    struct SubType: Codable {
+    struct SubType: Codable, Equatable {
         let id: Int;
         let name: String?;
         let longname: String?;
