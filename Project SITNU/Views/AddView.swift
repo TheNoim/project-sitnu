@@ -109,7 +109,9 @@ struct AddView: View {
         }
         self.untis = nil;
         self.basicCredentials = nil;
-        self.basicCredentials = BasicUntisCredentials(username: self.acc.username, password: self.acc.password, server: self.school.server, school: self.school.loginName.replacingOccurrences(of: " ", with: "+"), authType: self.acc.authType);
+        self.basicCredentials = BasicUntisCredentials(username: self.acc.username, password: self.acc.password, server: self.school.server, school: self.school.loginName.replacingOccurrences(of: " ", with: "+").components(separatedBy: "+").map({ $0.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)! }).joined(separator: "+"), authType: self.acc.authType);
+        
+        print(self.basicCredentials)
         self.untis = UntisClient(credentials: self.basicCredentials!);
         self.untis!.getLatestImportTime(force: true, cachedHandler: nil) { result in
             self.handleUntisResponse(result: result);
@@ -122,7 +124,7 @@ struct AddView: View {
             let id = UUID();
             let primary = self.needsToBePrimary() || self.acc.primary;
             let setDisplayName: String? = self.acc.setDisplayName.isEmpty ? nil : self.acc.setDisplayName;
-            let acc = UntisAccount(id: id, username: self.acc.username, password: self.acc.password, server: self.school.server, school: self.school.loginName.replacingOccurrences(of: " ", with: "+"), setDisplayName: setDisplayName, authType: self.acc.authType, primary: primary, preferShortRoom: self.acc.preferShortRoom, preferShortSubject: self.acc.preferShortSubject, preferShortTeacher: self.acc.preferShortTeacher, preferShortClass: self.acc.preferShortClass);
+            let acc = UntisAccount(id: id, username: self.acc.username, password: self.acc.password, server: self.school.server, school: self.school.loginName.replacingOccurrences(of: " ", with: "+").components(separatedBy: "+").map({ $0.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)! }).joined(separator: "+"), setDisplayName: setDisplayName, authType: self.acc.authType, primary: primary, preferShortRoom: self.acc.preferShortRoom, preferShortSubject: self.acc.preferShortSubject, preferShortTeacher: self.acc.preferShortTeacher, preferShortClass: self.acc.preferShortClass);
             if primary {
                 for (index, _) in self.store.accounts.enumerated() {
                     if self.store.accounts[index].primary {

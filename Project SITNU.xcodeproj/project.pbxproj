@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FB0DF3B429291C070098517D /* DefaultCodable in Frameworks */ = {isa = PBXBuildFile; productRef = FB0DF3B329291C070098517D /* DefaultCodable */; };
+		FB0DF3B629291C740098517D /* DefaultCodable in Frameworks */ = {isa = PBXBuildFile; productRef = FB0DF3B529291C740098517D /* DefaultCodable */; };
 		FB16A602270E06C900C6EAAB /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = FB16A601270E06C900C6EAAB /* CodeScanner */; };
 		FB16A60A270E206300C6EAAB /* CryptoKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB16A609270E206300C6EAAB /* CryptoKit.framework */; };
 		FB16A60C270E206C00C6EAAB /* CryptoKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB16A60B270E206C00C6EAAB /* CryptoKit.framework */; };
@@ -236,6 +238,7 @@
 				FB7F6A88251789EA0052F679 /* Alamofire in Frameworks */,
 				FB16A611270E21B000C6EAAB /* SwiftOTP in Frameworks */,
 				FBDAA1AB251FBE0A00104001 /* SwiftyBeaver in Frameworks */,
+				FB0DF3B629291C740098517D /* DefaultCodable in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +251,7 @@
 				FB16A60A270E206300C6EAAB /* CryptoKit.framework in Frameworks */,
 				FBDAA1A5251FBDDB00104001 /* SwiftyBeaver in Frameworks */,
 				FB16A60F270E219E00C6EAAB /* SwiftOTP in Frameworks */,
+				FB0DF3B429291C070098517D /* DefaultCodable in Frameworks */,
 				FB16A602270E06C900C6EAAB /* CodeScanner in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -577,6 +581,7 @@
 				FBDAA1AA251FBE0A00104001 /* SwiftyBeaver */,
 				FB2B57DA2646BCDB008CD6C4 /* Cache */,
 				FB16A610270E21B000C6EAAB /* SwiftOTP */,
+				FB0DF3B529291C740098517D /* DefaultCodable */,
 			);
 			productName = "Watch Extension";
 			productReference = FB6E8975251624DD00DAB2F4 /* Watch Extension.appex */;
@@ -603,6 +608,7 @@
 				FB2B57D82646BC64008CD6C4 /* Cache */,
 				FB16A601270E06C900C6EAAB /* CodeScanner */,
 				FB16A60E270E219E00C6EAAB /* SwiftOTP */,
+				FB0DF3B329291C070098517D /* DefaultCodable */,
 			);
 			productName = "Project SITNU";
 			productReference = FBA95DA22514F53200494B5C /* Project SITNU.app */;
@@ -672,6 +678,7 @@
 				FB2B57D72646BC64008CD6C4 /* XCRemoteSwiftPackageReference "Cache" */,
 				FB16A600270E06C900C6EAAB /* XCRemoteSwiftPackageReference "CodeScanner" */,
 				FB16A60D270E219E00C6EAAB /* XCRemoteSwiftPackageReference "SwiftOTP" */,
+				FB0DF3B229291C070098517D /* XCRemoteSwiftPackageReference "DefaultCodable" */,
 			);
 			productRefGroup = FBA95DA32514F53200494B5C /* Products */;
 			projectDirPath = "";
@@ -857,7 +864,7 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 34;
+				CURRENT_PROJECT_VERSION = 35;
 				DEVELOPMENT_ASSET_PATHS = "\"Watch Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				ENABLE_PREVIEWS = YES;
@@ -867,7 +874,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.2.2;
+				MARKETING_VERSION = 1.2.3;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.noim.Project-SITNU.watchkitapp.watchkitextension";
 				PRODUCT_NAME = "${TARGET_NAME}";
@@ -887,7 +894,7 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 34;
+				CURRENT_PROJECT_VERSION = 35;
 				DEVELOPMENT_ASSET_PATHS = "\"Watch Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				ENABLE_PREVIEWS = YES;
@@ -897,7 +904,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.2.2;
+				MARKETING_VERSION = 1.2.3;
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.noim.Project-SITNU.watchkitapp.watchkitextension";
 				PRODUCT_NAME = "${TARGET_NAME}";
@@ -918,7 +925,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 34;
+				CURRENT_PROJECT_VERSION = 35;
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				IBSC_MODULE = Watch_Extension;
 				INFOPLIST_FILE = Watch/Info.plist;
@@ -927,7 +934,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.2.2;
+				MARKETING_VERSION = 1.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.noim.Project-SITNU.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -947,7 +954,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 34;
+				CURRENT_PROJECT_VERSION = 35;
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				IBSC_MODULE = Watch_Extension;
 				INFOPLIST_FILE = Watch/Info.plist;
@@ -956,7 +963,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.2.2;
+				MARKETING_VERSION = 1.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.noim.Project-SITNU.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -1091,7 +1098,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 34;
+				CURRENT_PROJECT_VERSION = 35;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SITNU/Preview Content\"";
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				ENABLE_PREVIEWS = YES;
@@ -1102,7 +1109,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.2;
+				MARKETING_VERSION = 1.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.noim.Project-SITNU";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1121,7 +1128,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 34;
+				CURRENT_PROJECT_VERSION = 35;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SITNU/Preview Content\"";
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				ENABLE_PREVIEWS = YES;
@@ -1131,7 +1138,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.2;
+				MARKETING_VERSION = 1.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.noim.Project-SITNU";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1232,6 +1239,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		FB0DF3B229291C070098517D /* XCRemoteSwiftPackageReference "DefaultCodable" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gonzalezreal/DefaultCodable";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		FB16A600270E06C900C6EAAB /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/twostraws/CodeScanner";
@@ -1275,6 +1290,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		FB0DF3B329291C070098517D /* DefaultCodable */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FB0DF3B229291C070098517D /* XCRemoteSwiftPackageReference "DefaultCodable" */;
+			productName = DefaultCodable;
+		};
+		FB0DF3B529291C740098517D /* DefaultCodable */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FB0DF3B229291C070098517D /* XCRemoteSwiftPackageReference "DefaultCodable" */;
+			productName = DefaultCodable;
+		};
 		FB16A601270E06C900C6EAAB /* CodeScanner */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FB16A600270E06C900C6EAAB /* XCRemoteSwiftPackageReference "CodeScanner" */;

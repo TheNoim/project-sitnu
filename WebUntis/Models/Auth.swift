@@ -19,6 +19,14 @@ struct BasicUntisCredentials: Codable {
     let server: String;
     let school: String;
     let authType: AuthType;
+    
+    init(username: String, password: String, server: String, school: String, authType: AuthType) {
+        self.username = username
+        self.password = password
+        self.server = server
+        self.school = school
+        self.authType = authType
+    }
 }
 
 struct UntisCredentials: AuthenticationCredential {

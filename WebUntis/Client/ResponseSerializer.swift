@@ -9,16 +9,12 @@ import Foundation
 import Alamofire
 
 struct UntisResponseSerializer: ResponseSerializer {
-    let baseSerializer: JSONResponseSerializer;
-    
-    init() {
-        self.baseSerializer = JSONResponseSerializer();
-    }
-    
     func serialize(request: URLRequest?, response: HTTPURLResponse?, data: Data?, error: Error?) throws -> [String: Any] {
-        let json = try self.baseSerializer.serialize(request: request, response: response, data: data, error: error);
+        guard let data = data else {
+            throw UntisError.network(type: .custom(errorCode: -1337, errorDescription: "Invalid data"))
+        }
         
-        guard let root = json as? [String: Any] else {
+        guard let root = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
             throw UntisError.untis(type: .serverError);
         }
         
@@ -74,12 +70,18 @@ struct UntisArraySerializer: ResponseSerializer {
     }
     
     func serialize(request: URLRequest?, response: HTTPURLResponse?, data: Data?, error: Error?) throws -> [Any] {
+        log.debug("start")
+        
         let root = try self.baseUntisResponseSerializer.serialize(request: request, response: response, data: data, error: error);
+        
+        log.debug("root=\(root)")
         
         guard let result = root["result"] as? [Any] else {
             log.error("Missing server result", context: ["json": root, "error": error as Any, "usedSerializer": "Array"])
             throw UntisError.untis(type: .serverMissingResult);
         }
+        
+        log.debug("result=\(result)")
         
         return result;
     }
