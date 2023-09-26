@@ -194,12 +194,13 @@ final class WatchConnectivityStore: NSObject, WCSessionDelegate {
     }
     
     func selectPrimaryAccount() {
-        if currentlySelected == nil {
-            if let firstPrimaryIndex: Int = accounts.firstIndex(where: { $0.primary }) {
-                currentlySelected = accounts[firstPrimaryIndex]
-            } else {
-                currentlySelected = nil
-            }
+        if currentlySelected != nil {
+            return
+        }
+        if let firstPrimaryIndex: Int = accounts.firstIndex(where: { $0.primary }) {
+            currentlySelected = accounts[firstPrimaryIndex]
+        } else {
+            currentlySelected = nil
         }
     }
     
@@ -217,6 +218,20 @@ final class WatchConnectivityStore: NSObject, WCSessionDelegate {
     #if os(iOS)
     func updateLogFiles() {
         logFiles = LogFileManager.default.loadLogFiles();
+    }
+    
+    func requestLogFiles() {
+        if !wcSession.isReachable {
+            log.warning("Other device is not reachable. Can not request log files", "WatchConnectivityStore")
+            return
+        }
+        let dataMessage = MessageContainer.requestLogFile
+        guard let encodedData = try? encoder.encode(dataMessage) else {
+            log.warning("Failed to encode data. Can not send to other device", "WatchConnectivityStore")
+            return
+        }
+        wcSession.sendMessageData(encodedData, replyHandler: nil)
+        log.debug("Requested log files", "WatchConnectivityStore")
     }
     #endif
 }

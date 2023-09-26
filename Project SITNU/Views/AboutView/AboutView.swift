@@ -35,7 +35,7 @@ struct AboutView: View {
                     }
                     Button("Copy Apple Watch logs") {
                         log.info("Copy watch logs request")
-                        WCSession.default.sendMessage(["action": "copyLogs"], replyHandler: nil);
+                        store.requestLogFiles()
                     }
                     .disabled(!store.isReachable)
                     

@@ -37,6 +37,11 @@ struct AccountView: View {
                         self.store.sync();
                     }
                 }
+                .if(store.isReachable, transform: { view in
+                    view.refreshable {
+                        store.sync()
+                    }
+                })
                 .modifier(GroupedListModifier())
                 .environment(\.editMode, $editMode)
                 .navigationBarItems(leading: Button(action: {

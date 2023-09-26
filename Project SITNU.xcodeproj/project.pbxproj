@@ -75,6 +75,7 @@
 		FB7F6AEC251790200052F679 /* TimetableCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E892625160B1500DAB2F4 /* TimetableCache.swift */; };
 		FB7F6AF1251790220052F679 /* SubjectsCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E892E251619EB00DAB2F4 /* SubjectsCache.swift */; };
 		FB7F6B0B2517A0670052F679 /* AccountStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7F6B0A2517A0670052F679 /* AccountStore.swift */; };
+		FB80FBBC2AC36E0000D796F3 /* if.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB80FBBB2AC36E0000D796F3 /* if.swift */; };
 		FB8E7AFF251CC31600D4C43C /* DateOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8E7AFE251CC31600D4C43C /* DateOffset.swift */; };
 		FB8E7B00251CC31600D4C43C /* DateOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8E7AFE251CC31600D4C43C /* DateOffset.swift */; };
 		FB9EC0E42517ACA4002D7E16 /* AccountSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9EC0E32517ACA4002D7E16 /* AccountSelector.swift */; };
@@ -104,7 +105,6 @@
 		FBDAA1AB251FBE0A00104001 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = FBDAA1AA251FBE0A00104001 /* SwiftyBeaver */; };
 		FBE5AE682AC1BB0300E3EAA5 /* WatchConnectivityStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE5AE672AC1BB0300E3EAA5 /* WatchConnectivityStore.swift */; };
 		FBE5AE692AC1BB0300E3EAA5 /* WatchConnectivityStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE5AE672AC1BB0300E3EAA5 /* WatchConnectivityStore.swift */; };
-		FBE5AE6A2AC1BE6F00E3EAA5 /* Watch Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = FB6E8975251624DD00DAB2F4 /* Watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		FBE5AE702AC1D7C400E3EAA5 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FBE5AE6F2AC1D7C400E3EAA5 /* KeychainSwift */; };
 		FBE5AE722AC1D7CD00E3EAA5 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FBE5AE712AC1D7CD00E3EAA5 /* KeychainSwift */; };
 		FBE5AE742AC1DF6000E3EAA5 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE5AE732AC1DF6000E3EAA5 /* Message.swift */; };
@@ -119,26 +119,12 @@
 			remoteGlobalIDString = FB6E8974251624DD00DAB2F4;
 			remoteInfo = "Watch Extension";
 		};
-		FB6E8988251624DD00DAB2F4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FBA95D9A2514F53200494B5C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = FB6E8968251624DA00DAB2F4;
-			remoteInfo = Watch;
-		};
 		FBA95DF125154A2100494B5C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FBA95D9A2514F53200494B5C /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = FBA95DA12514F53200494B5C;
 			remoteInfo = "Project SITNU";
-		};
-		FBE5AE6B2AC1BE6F00E3EAA5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FBA95D9A2514F53200494B5C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = FB6E8974251624DD00DAB2F4;
-			remoteInfo = "Watch Extension";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -163,17 +149,6 @@
 				FB6E898A251624DD00DAB2F4 /* Watch.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FBE5AE6D2AC1BE6F00E3EAA5 /* Embed Foundation Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				FBE5AE6A2AC1BE6F00E3EAA5 /* Watch Extension.appex in Embed Foundation Extensions */,
-			);
-			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -222,6 +197,7 @@
 		FB7F6A242517617B0052F679 /* Encodable+asDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+asDictionary.swift"; sourceTree = "<group>"; };
 		FB7F6A9625178B270052F679 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		FB7F6B0A2517A0670052F679 /* AccountStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStore.swift; sourceTree = "<group>"; };
+		FB80FBBB2AC36E0000D796F3 /* if.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = if.swift; sourceTree = "<group>"; };
 		FB8E7AFE251CC31600D4C43C /* DateOffset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateOffset.swift; sourceTree = "<group>"; };
 		FB9EC0E32517ACA4002D7E16 /* AccountSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSelector.swift; sourceTree = "<group>"; };
 		FB9EC0E92517AEA7002D7E16 /* TimetableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableView.swift; sourceTree = "<group>"; };
@@ -396,6 +372,7 @@
 				FB7F6A242517617B0052F679 /* Encodable+asDictionary.swift */,
 				FB7A8F842520E3F10010FDE5 /* LazyStackPolyfill.swift */,
 				FB7A8F8B25210CA00010FDE5 /* ShareSheet.swift */,
+				FB80FBBB2AC36E0000D796F3 /* if.swift */,
 			);
 			path = External;
 			sourceTree = "<group>";
@@ -626,13 +603,10 @@
 				FBA95D9F2514F53200494B5C /* Frameworks */,
 				FBA95DA02514F53200494B5C /* Resources */,
 				FB6E8992251624DD00DAB2F4 /* Embed Watch Content */,
-				FBE5AE6D2AC1BE6F00E3EAA5 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				FB6E8989251624DD00DAB2F4 /* PBXTargetDependency */,
-				FBE5AE6C2AC1BE6F00E3EAA5 /* PBXTargetDependency */,
 			);
 			name = "Project SITNU";
 			packageProductDependencies = (
@@ -816,6 +790,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB80FBBC2AC36E0000D796F3 /* if.swift in Sources */,
 				FB7A8F7F2520E3040010FDE5 /* LogFileViewer.swift in Sources */,
 				FBA95DC72514F98A00494B5C /* Authenticator.swift in Sources */,
 				FB5A92A42520D7B000477E7A /* AboutView.swift in Sources */,
@@ -872,20 +847,10 @@
 			target = FB6E8974251624DD00DAB2F4 /* Watch Extension */;
 			targetProxy = FB6E8977251624DD00DAB2F4 /* PBXContainerItemProxy */;
 		};
-		FB6E8989251624DD00DAB2F4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = FB6E8968251624DA00DAB2F4 /* Watch */;
-			targetProxy = FB6E8988251624DD00DAB2F4 /* PBXContainerItemProxy */;
-		};
 		FBA95DF225154A2100494B5C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = FBA95DA12514F53200494B5C /* Project SITNU */;
 			targetProxy = FBA95DF125154A2100494B5C /* PBXContainerItemProxy */;
-		};
-		FBE5AE6C2AC1BE6F00E3EAA5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = FB6E8974251624DD00DAB2F4 /* Watch Extension */;
-			targetProxy = FBE5AE6B2AC1BE6F00E3EAA5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
