@@ -8,23 +8,45 @@
 import SwiftUI
 import ClockKit
 
-let timetableDayFormatter: RelativeDateTimeFormatter = {
-    let formatter: RelativeDateTimeFormatter = RelativeDateTimeFormatter();
-    formatter.dateTimeStyle = .named;
-    formatter.formattingContext = .dynamic;
-    formatter.unitsStyle = .abbreviated
-    return formatter;
-}();
-
 struct TimetableView: View {
     let account: UntisAccount;
+    @State private var currentDate = Calendar.current.startOfDay(for: Date())
+    @State private var currentDateOffset = Calendar.current.startOfDay(for: Date())
+    @State private var currentTab = 0
+    
+    var body: some View {
+        InfinitePageView(selection: $currentDateOffset, currentDate: $currentDate, currentTab: $currentTab, before: { Calendar.current.date(byAdding: .day, value: -1, to: $0)! }, after: { Calendar.current.date(byAdding: .day, value: 1, to: $0)! }) { date in
+            _TimetableView(account: account, date: date)
+        }
+        .onChange(of: currentDate) { oldValue, newValue in
+            log.debug("currentDate: \(formatDate(oldValue)) -> \(formatDate(newValue))")
+        }
+        .onChange(of: currentDateOffset) { oldValue, newValue in
+            log.debug("currentDateOffset: \(formatDate(oldValue)) -> \(formatDate(newValue))")
+        }
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name("applicationDidBecomeActive"))) { _ in
+            log.debug("Received notification applicationDidBecomeActive")
+            if !Calendar.current.isDate(currentDate, inSameDayAs: Date()) {
+                log.debug("Last time app was opened was yesterday. Set date to today");
+                withAnimation {
+                    currentDateOffset = Calendar.current.startOfDay(for: Date())
+                    currentDate = Calendar.current.startOfDay(for: Date())
+                    currentTab = 0
+                }
+            }
+        }
+    }
+}
+
+struct _TimetableView: View {
+    let account: UntisAccount;
+    let date: Date;
     @State var untis: UntisClient?;
     @State var timegrid: Timegrid?;
     @State var periods: [Period]?;
     @State var subjects: [Subject]?;
-    @State var date: Date = Calendar.current.startOfDay(for: Date());
-    @State var title: String = "";
     @State var checkedDate: Date = Date();
+    @State var isAccountChanger: Bool = false;
     
     // Swipe detection
     @State var startPos : CGPoint = .zero
@@ -35,133 +57,95 @@ struct TimetableView: View {
     @State var selectedPeriod: Period?;
     
     @State var forceRefresh: Bool = false;
-    
+    @State var tabStyle = Color.gray.gradient
+        
     var body: some View {
-        VStack {
-            Text(title)
-                .font(.largeTitle)
-            if periods != nil && periods!.count > 0 {
-                ForEach(periods!) { period in
-                    Button {
-                        if forceRefresh {
-                            return
+        ScrollViewReader { reader in
+            ScrollView {
+                RelativeDateTitle(date: date)
+                    .font(.largeTitle)
+                    .id("Top")
+                if periods != nil && periods!.count > 0 {
+                    ForEach(periods!) { period in
+                        Button {
+                            if forceRefresh {
+                                return
+                            }
+                            withAnimation {
+                                self.selectedPeriod = period;
+                                self.isDetail.toggle();
+                            }
+                        } label: {
+                            TimetableRowView(account: account, period: period, timegrid: self.timegrid, subjects: self.subjects)
                         }
-                        withAnimation {
-                            self.selectedPeriod = period;
-                            self.isDetail.toggle();
+                    }
+                    .sheet(isPresented: $isDetail, content: {
+                        if isDetail {
+                            PeriodDetailView(period: $selectedPeriod, subjects: self.subjects, timegrid: self.timegrid, acc: account)
                         }
-                    } label: {
-                        TimetableRowView(account: account, period: period, timegrid: self.timegrid, subjects: self.subjects)
-                    }
+                    })
+                } else if periods == nil {
+                    ActivityIndicator(active: true)
+                } else {
+                    Text("No periods for this day")
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
                 }
-                .sheet(isPresented: $isDetail, content: {
-                    if isDetail {
-                        PeriodDetailView(period: $selectedPeriod, subjects: self.subjects, timegrid: self.timegrid, acc: account)
-                    }
-                })
-            } else if periods == nil {
-                ActivityIndicator(active: true)
-            } else {
-                Text("No periods for this day")
-                    .font(.footnote)
-                    .foregroundColor(.secondary)
-            }
-            HStack {
-                Button("<") {
+                Button(forceRefresh ? "..." : "Force refresh") {
                     if forceRefresh == false {
-                        self.setDate(by: .back);
-                    }
-                }
-                Button(">") {
-                    if forceRefresh == false {
-                        self.setDate(by: .forward);
-                    }
-                }
-            }
-            Button(forceRefresh ? "..." : "Force refresh") {
-                if forceRefresh == false {
-                    forceRefresh = true;
-                    self.getTimetable(finish: {
-                        self.reloadComplications(finish: {
-                            self.forceRefresh = false;
+                        forceRefresh = true;
+                        self.getTimetable(finish: {
+                            self.reloadComplications(finish: {
+                                self.forceRefresh = false;
+                            }, force: true)
                         }, force: true)
-                    }, force: true)
+                    }
+                }
+                Divider()
+                Button("Change account") {
+                    self.isAccountChanger.toggle();
+                }
+                .id("Bottom")
+                .foregroundColor(.yellow)
+                .sheet(isPresented: $isAccountChanger, content: { AccountSelector(isOpen: $isAccountChanger) })
+                .onChange(of: date, initial: false) { oldValue, newValue in
+                    if oldValue < newValue {
+                        log.debug("Reset scroll position")
+                        reader.scrollTo("Top")
+                    }
+                    self.setShapeStyle()
+                    self.getTimegrid();
+                    self.getTimetable(finish: nil);
+                    self.getSubjects();
+                    self.reloadComplications(finish: nil);
                 }
             }
-        }
-        .onAppear() {
-            self.setTitle();
-            self.createClient()
-            self.getTimegrid();
-            self.getTimetable(finish: nil);
-            self.getSubjects();
-            self.reloadComplications(finish: nil);
-        }
-        .gesture(DragGesture()
-            .onChanged { gesture in
-                if self.isSwipping {
-                    self.startPos = gesture.location
-                    self.isSwipping.toggle()
-                }
+            .onAppear() {
+                self.setShapeStyle()
+                self.createClient()
+                self.getTimegrid();
+                self.getTimetable(finish: nil);
+                self.getSubjects();
+                self.reloadComplications(finish: nil);
             }
-            .onEnded { gesture in
-                if forceRefresh {
-                    self.isSwipping.toggle()
-                    return
-                }
-                let xDist: CGFloat = abs(gesture.location.x - self.startPos.x)
-                let yDist: CGFloat = abs(gesture.location.y - self.startPos.y)
-                if self.startPos.x > gesture.location.x && yDist < xDist {
-                    // LEFT
-                    self.setDate(by: .forward);
-                }
-                else if self.startPos.x < gesture.location.x && yDist < xDist {
-                    // RIGHT
-                    self.setDate(by: .back);
-                }
-                self.isSwipping.toggle()
+            .onReceive(NotificationCenter.default.publisher(for: Notification.Name("applicationDidBecomeActive"))) { _ in
+                log.debug("Received notification applicationDidBecomeActive")
+                self.setShapeStyle()
             }
-        )
-        .onReceive(NotificationCenter.default.publisher(for: Notification.Name("applicationDidBecomeActive"))) { _ in
-            log.debug("Received notification applicationDidBecomeActive")
-            DispatchQueue.main.async {
-                self.setTitle();
-                if !Calendar.current.isDate(self.checkedDate, inSameDayAs: Date()) {
-                    log.debug("Last time app was opened was yesterday. Set date to today");
-                    self.setDate(to: Calendar.current.startOfDay(for: Date()));
-                }
-            }
+            .containerBackground(self.tabStyle, for: .tabView)
         }
     }
     
-    enum DateDirection {
-        case forward;
-        case back;
-    }
-    
-    func setDate(by direction: DateDirection) {
-        var nextDate: Date?;
-        if direction == .forward {
-            nextDate = Calendar.current.date(byAdding: .day, value: 1, to: self.date);
+    func setShapeStyle() {
+        if Calendar.current.isDateInToday(date) {
+            tabStyle = Color.green.gradient
+        } else if Calendar.current.isDateInYesterday(date) {
+            tabStyle = Color.red.gradient
+        } else if Calendar.current.isDateInTomorrow(date) {
+            tabStyle = Color.blue.gradient
         } else {
-            nextDate = Calendar.current.date(byAdding: .day, value: -1, to: self.date);
+            tabStyle = Color.gray.gradient
         }
-        if let nextDate = nextDate {
-            self.setDate(to: nextDate);
-        }
-    }
-    
-    func setDate(to date: Date) {
-        self.date = date;
-        self.periods = nil;
-        self.setTitle();
-        self.getTimetable(finish: nil);
-        self.checkedDate = Date();
-    }
-    
-    func setTitle() {
-        let dateComponents: DateComponents = Calendar.current.dateComponents([Calendar.Component.day], from: Calendar.current.startOfDay(for: Date()), to: self.date)
-        self.title = timetableDayFormatter.localizedString(from: dateComponents);
     }
     
     func createClient() {

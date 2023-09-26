@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(WatchConnectivityStore.self) var watchConnectivityStore
-    @State var isAccountChanger: Bool = false;
     
     var body: some View {
         if watchConnectivityStore.accounts.count == 0 {
@@ -20,15 +19,7 @@ struct ContentView: View {
                 .foregroundColor(.secondary)
         } else {
             if watchConnectivityStore.currentlySelected != nil {
-                ScrollView {
-                    TimetableView(account: watchConnectivityStore.currentlySelected!)
-                    Divider()
-                    Button("Change account") {
-                        self.isAccountChanger.toggle();
-                    }
-                        .foregroundColor(.yellow)
-                    .sheet(isPresented: $isAccountChanger, content: { AccountSelector(isOpen: $isAccountChanger) })
-                }
+                TimetableView(account: watchConnectivityStore.currentlySelected!)
             } else {
                 Text("You need to add at least one primary account");
             }
