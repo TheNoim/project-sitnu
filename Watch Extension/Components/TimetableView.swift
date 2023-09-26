@@ -55,7 +55,9 @@ struct TimetableView: View {
                     }
                 }
                 .sheet(isPresented: $isDetail, content: {
-                    PeriodDetailView(account: account, period: selectedPeriod, timegrid: self.timegrid, subjects: self.subjects)
+                    if isDetail {
+                        PeriodDetailView(period: $selectedPeriod, subjects: self.subjects, timegrid: self.timegrid, acc: account)
+                    }
                 })
             } else if periods == nil {
                 ActivityIndicator(active: true)

@@ -12,7 +12,7 @@ struct LogFileListView: View {
     
     @State private var editMode = EditMode.inactive
     
-    @EnvironmentObject var store: WatchStore
+    @Environment(WatchConnectivityStore.self) var store
     
     var body: some View {
         List {

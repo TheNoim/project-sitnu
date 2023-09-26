@@ -12,7 +12,7 @@ class AddNavigationController: ObservableObject {
 }
 
 struct AccountView: View {
-    @EnvironmentObject var store: WatchStore
+    @Environment(WatchConnectivityStore.self) var store
     @ObservedObject var addNavigationController: AddNavigationController = AddNavigationController();
     
     @State private var editMode = EditMode.inactive
@@ -21,41 +21,36 @@ struct AccountView: View {
     var body: some View {
         NavigationView {
             VStack {
-                if !self.store.available {
-                    Text("Watch App is not available")
-                        .padding()
-                } else {
-                    List {
-                        ForEach(self.store.accounts) { (acc: UntisAccount) in
-                            if acc.primary {
-                                Text("\(acc.displayName) (Primary)")
-                            } else {
-                                Text(acc.displayName)
-                            }
-                        }
-                        .onDelete { (index) in
-                            self.store.accounts.remove(atOffsets: index);
-                            if self.store.accounts.firstIndex(where: { $0.primary }) == nil && self.store.accounts.count > 0 {
-                                self.store.accounts[0].primary = true;
-                            }
-                            self.store.sync();
+                List {
+                    ForEach(self.store.accounts) { (acc: UntisAccount) in
+                        if acc.primary {
+                            Text("\(acc.displayName) (Primary)")
+                        } else {
+                            Text(acc.displayName)
                         }
                     }
-                    .modifier(GroupedListModifier())
-                    .environment(\.editMode, $editMode)
-                    .navigationBarItems(leading: Button(action: {
-                        withAnimation {
-                            if self.editMode == .inactive {
-                                self.editMode = .active;
-                            } else {
-                                self.editMode = .inactive;
-                            }
+                    .onDelete { (index) in
+                        self.store.accounts.remove(atOffsets: index);
+                        if self.store.accounts.firstIndex(where: { $0.primary }) == nil && self.store.accounts.count > 0 {
+                            self.store.accounts[0].primary = true;
                         }
-                    }) {
-                        Text("Edit")
-                            .frame(height: 44)
-                    }, trailing: self.addButton)
+                        self.store.sync();
+                    }
                 }
+                .modifier(GroupedListModifier())
+                .environment(\.editMode, $editMode)
+                .navigationBarItems(leading: Button(action: {
+                    withAnimation {
+                        if self.editMode == .inactive {
+                            self.editMode = .active;
+                        } else {
+                            self.editMode = .inactive;
+                        }
+                    }
+                }) {
+                    Text("Edit")
+                        .frame(height: 44)
+                }, trailing: self.addButton)
             }
             .navigationBarTitle("WebUntis Accounts")
         }
@@ -70,10 +65,10 @@ struct AccountView: View {
                 }) {
                     Image(systemName: "plus")
                         .frame(width: 44, height: 44)
-                }.sheet(isPresented: self.$addNavigationController.addsAccount) {
+                }.disabled(!store.isReachable).sheet(isPresented: self.$addNavigationController.addsAccount) {
                     SchoolSearchView()
                         .environmentObject(self.addNavigationController)
-                        .environmentObject(self.store)
+                        .environment(self.store)
                 }
             )
         default:

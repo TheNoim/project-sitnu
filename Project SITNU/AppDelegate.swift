@@ -8,6 +8,7 @@
 import UIKit
 import SwiftUI
 import SwiftyBeaver
+import WatchConnectivity
 
 let log = SwiftyBeaver.self
 
@@ -22,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let logFormat: String = "$DHH:mm:ss.SSS$d $C$L$c $N.$F:$l - $M $X"
         
         let console: ConsoleDestination = ConsoleDestination()
+        console.useNSLog = true
         console.format = logFormat;
         log.addDestination(console)
                 
@@ -35,6 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 log.debug("Added file destination")
             }
         }
+        
+        WatchConnectivityStore.default.initialize()
         
         return true
     }

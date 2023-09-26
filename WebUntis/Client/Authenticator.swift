@@ -29,12 +29,14 @@ class UntisAuthenticator: Authenticator {
                 var update: Bool = false;
                 if let id: String = body[keyPath: "params.options.element.id"] as? String {
                     if id == "auto" {
+                        log.debug("Replace params.options.element.id with \(String(describing: credential.id))")
                         body[keyPath: "params.options.element.id"] = credential.id;
                         update = true;
                     }
                 }
                 if let type: String = body[keyPath: "params.options.element.type"] as? String {
                     if type == "auto" {
+                        log.debug("Replace params.options.element.type with \(String(describing: credential.type))")
                         body[keyPath: "params.options.element.type"] = credential.type;
                         update = true;
                     }

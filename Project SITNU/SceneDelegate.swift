@@ -9,106 +9,13 @@ import UIKit
 import SwiftUI
 import WatchConnectivity
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate, WCSessionDelegate {
-    private lazy var watchStore = WatchStore()
-    private let session: WCSession = .default;
-    
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        log.debug("WCSession activated", context: ["activationState": activationState.rawValue])
-        self.sessionWatchStateDidChange(session);
-        let context = session.applicationContext;
-        if let sharedContext = try? SharedContext(from: context) {
-            DispatchQueue.main.async {
-                self.watchStore.accounts = sharedContext.accounts;
-                self.watchStore.canSendMessages = session.isReachable;
-            }
-        }
-    }
-    
-    func session(_ session: WCSession, didReceive file: WCSessionFile) {
-        guard let metadata: [String: Any] = file.metadata else {
-            log.warning("Discard transferred file, because metadata is missing");
-            return;
-        }
-        guard let metaType: String = metadata["type"] as? String else {
-            log.warning("Discard transferred file, because type metadata is missing");
-            return;
-        }
-        if metaType == "log" {
-            guard let targetDirRoot: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
-                log.error("Missing target dir root")
-                return;
-            }
-            let targetDir = targetDirRoot.appendingPathComponent("Log/", isDirectory: true).appendingPathComponent(file.fileURL.lastPathComponent, isDirectory: false);
-            log.info("Move transferred file", context: ["at": file.fileURL, "to": targetDir]);
-            do {
-                try FileManager.default.moveItem(at: file.fileURL, to: targetDir);
-                DispatchQueue.main.async {
-                    self.watchStore.updateLogFiles();
-                }
-            } catch(let error) {
-                log.error("Failed to move transferred file", context: ["error": error]);
-            }
-        } else {
-            log.warning("Discard transferred file, because type metadata is unknown");
-        }
-    }
-    
-    func sessionDidBecomeInactive(_ session: WCSession) {
-        print("sessionDidBecomeInactive()")
-    }
-    
-    func sessionDidDeactivate(_ session: WCSession) {
-        print("sessionDidDeactivate()")
-    }
-    
-    func sessionWatchStateDidChange(_ session: WCSession) {
-        log.debug("WCSession state changed", context: ["isWatchAppInstalled": session.isWatchAppInstalled, "isPaired": session.isPaired])
-        DispatchQueue.main.async {
-            self.watchStore.available = session.isWatchAppInstalled && session.isPaired;
-        }
-    }
-    
-    func sessionReachabilityDidChange(_ session: WCSession) {
-        DispatchQueue.main.async {
-            self.watchStore.canSendMessages = session.isReachable;
-        }
-    }
-    
-    func sync(context: [String: Any]) throws {
-        if WCSession.isSupported() && session.isWatchAppInstalled && session.isPaired {
-            try self.session.updateApplicationContext(context);
-        } else {
-            print("Can't sync");
-        }
-    }
-
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-
-        print("Test")
-        
-        self.watchStore.syncCallback = { context in
-            do {
-                try self.sync(context: context)
-            } catch (let error) {
-                print("Error with syncCallback: \(error.localizedDescription)")
-            }
-        }
-        
-        DispatchQueue.main.async {
-            self.watchStore.updateLogFiles();
-        }
-        
-        self.session.delegate = self;
-        
-        if WCSession.isSupported() {
-            self.session.activate();
-        }
         
         // Create the SwiftUI view that provides the window contents.
         let contentView = RootView()
@@ -116,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, WCSessionDelegate {
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: contentView.environmentObject(self.watchStore))
+            window.rootViewController = UIHostingController(rootView: contentView.environment(WatchConnectivityStore.default))
             self.window = window
             window.makeKeyAndVisible()
         }

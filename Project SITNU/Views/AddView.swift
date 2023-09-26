@@ -33,7 +33,7 @@ struct AddView: View {
     @State var error: String?;
     @State var untis: UntisClient?;
     @State var basicCredentials: BasicUntisCredentials?;
-    @EnvironmentObject var store: WatchStore
+    @Environment(WatchConnectivityStore.self) var store
     @EnvironmentObject var addNavigationController: AddNavigationController;
     
     init(school: School) {
@@ -133,6 +133,7 @@ struct AddView: View {
                 }
             }
             self.store.accounts.append(acc);
+            self.store.saveToKeyChain()
             self.store.sync();
             self.addNavigationController.addsAccount = false;
             break;

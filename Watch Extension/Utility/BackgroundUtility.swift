@@ -17,23 +17,9 @@ class BackgroundUtility {
     
     var backgroundTaskDiskStorage: DiskStorage<String, Date>?;
     
-    public func getContext() -> SharedContext? {
-        if let storage = try? DiskStorage<String, SharedContext>(config: DiskConfig(name: "UntisWA", expiry: .never), transformer: TransformerFactory.forCodable(ofType: SharedContext.self)) {
-            if let sharedContext: SharedContext = try? storage.object(forKey: "context") {
-                return sharedContext;
-            }
-        }
-        return nil;
-    }
-    
     public func getPrimaryAccount() -> UntisAccount? {
-        guard let sharedContext: SharedContext = self.getContext() else {
-            return nil;
-        }
-        if sharedContext.accounts.count < 1 {
-            return nil;
-        }
-        guard let primaryAccount: UntisAccount = sharedContext.accounts.first(where: { $0.primary }) else {
+        WatchConnectivityStore.default.initialize(withWCSession: false)
+        guard let primaryAccount: UntisAccount = WatchConnectivityStore.default.accounts.first(where: { $0.primary }) else {
             return nil;
         }
         return primaryAccount;

@@ -10,17 +10,10 @@ import SwiftUI
 let formatter = ListFormatter()
 
 struct PeriodDetailView: View {
-    var period: Period?;
+    @Binding var period: Period?;
     var subjects: [Subject]?;
     var timegrid: Timegrid?;
     var acc: UntisAccount;
-    
-    init(account: UntisAccount, period: Period?, timegrid: Timegrid?, subjects: [Subject]?) {
-        self.period = period;
-        self.timegrid = timegrid;
-        self.subjects = subjects;
-        self.acc = account;
-    }
     
     var body: some View {
         if period != nil {

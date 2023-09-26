@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-enum AuthType: Codable {
+enum AuthType: String, Codable {
     case PASSWORD
     case SECRET
 }

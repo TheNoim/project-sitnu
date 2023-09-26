@@ -9,7 +9,7 @@ import SwiftUI
 import WatchConnectivity
 
 struct AboutView: View {
-    @EnvironmentObject var store: WatchStore
+    @Environment(WatchConnectivityStore.self) var store
     
     var body: some View {
         NavigationView {
@@ -37,7 +37,13 @@ struct AboutView: View {
                         log.info("Copy watch logs request")
                         WCSession.default.sendMessage(["action": "copyLogs"], replyHandler: nil);
                     }
-                        .disabled(!store.canSendMessages)
+                    .disabled(!store.isReachable)
+                    
+                    Button("Force sync") {
+                        log.debug("Force sync")
+                        store.sync()
+                    }
+                        .disabled(!store.isReachable)
                 }
             }
             .navigationBarTitle("About")

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 53;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -43,7 +43,6 @@
 		FB6E8983251624DD00DAB2F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB6E8982251624DD00DAB2F4 /* Assets.xcassets */; };
 		FB6E8986251624DD00DAB2F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB6E8985251624DD00DAB2F4 /* Preview Assets.xcassets */; };
 		FB6E898A251624DD00DAB2F4 /* Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = FB6E8969251624DA00DAB2F4 /* Watch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		FB6E89A52516259B00DAB2F4 /* WatchStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E89A42516259B00DAB2F4 /* WatchStore.swift */; };
 		FB6E89CB25162F6400DAB2F4 /* AccountContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E89CA25162F6400DAB2F4 /* AccountContext.swift */; };
 		FB6E89D62516342700DAB2F4 /* SchoolSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E89D52516342700DAB2F4 /* SchoolSearchView.swift */; };
 		FB6E89E825163B1E00DAB2F4 /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E89E725163B1E00DAB2F4 /* Throttler.swift */; };
@@ -103,6 +102,13 @@
 		FBA95E142515627C00494B5C /* TimegridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA95E132515627C00494B5C /* TimegridCache.swift */; };
 		FBDAA1A5251FBDDB00104001 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = FBDAA1A4251FBDDB00104001 /* SwiftyBeaver */; };
 		FBDAA1AB251FBE0A00104001 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = FBDAA1AA251FBE0A00104001 /* SwiftyBeaver */; };
+		FBE5AE682AC1BB0300E3EAA5 /* WatchConnectivityStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE5AE672AC1BB0300E3EAA5 /* WatchConnectivityStore.swift */; };
+		FBE5AE692AC1BB0300E3EAA5 /* WatchConnectivityStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE5AE672AC1BB0300E3EAA5 /* WatchConnectivityStore.swift */; };
+		FBE5AE6A2AC1BE6F00E3EAA5 /* Watch Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = FB6E8975251624DD00DAB2F4 /* Watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		FBE5AE702AC1D7C400E3EAA5 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FBE5AE6F2AC1D7C400E3EAA5 /* KeychainSwift */; };
+		FBE5AE722AC1D7CD00E3EAA5 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FBE5AE712AC1D7CD00E3EAA5 /* KeychainSwift */; };
+		FBE5AE742AC1DF6000E3EAA5 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE5AE732AC1DF6000E3EAA5 /* Message.swift */; };
+		FBE5AE752AC1DF6000E3EAA5 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE5AE732AC1DF6000E3EAA5 /* Message.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +133,13 @@
 			remoteGlobalIDString = FBA95DA12514F53200494B5C;
 			remoteInfo = "Project SITNU";
 		};
+		FBE5AE6B2AC1BE6F00E3EAA5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FBA95D9A2514F53200494B5C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FB6E8974251624DD00DAB2F4;
+			remoteInfo = "Watch Extension";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -150,6 +163,17 @@
 				FB6E898A251624DD00DAB2F4 /* Watch.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FBE5AE6D2AC1BE6F00E3EAA5 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				FBE5AE6A2AC1BE6F00E3EAA5 /* Watch Extension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -185,7 +209,6 @@
 		FB6E8982251624DD00DAB2F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FB6E8985251624DD00DAB2F4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FB6E8987251624DD00DAB2F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FB6E89A42516259B00DAB2F4 /* WatchStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchStore.swift; sourceTree = "<group>"; };
 		FB6E89CA25162F6400DAB2F4 /* AccountContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountContext.swift; sourceTree = "<group>"; };
 		FB6E89D52516342700DAB2F4 /* SchoolSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolSearchView.swift; sourceTree = "<group>"; };
 		FB6E89E725163B1E00DAB2F4 /* Throttler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttler.swift; sourceTree = "<group>"; };
@@ -226,6 +249,9 @@
 		FBA95E0B25155DC800494B5C /* Timegrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timegrid.swift; sourceTree = "<group>"; };
 		FBA95E0F2515616E00494B5C /* Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decodable.swift; sourceTree = "<group>"; };
 		FBA95E132515627C00494B5C /* TimegridCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimegridCache.swift; sourceTree = "<group>"; };
+		FBE5AE662AC1BB0200E3EAA5 /* Watch-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Watch-Bridging-Header.h"; sourceTree = "<group>"; };
+		FBE5AE672AC1BB0300E3EAA5 /* WatchConnectivityStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectivityStore.swift; sourceTree = "<group>"; };
+		FBE5AE732AC1DF6000E3EAA5 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +262,7 @@
 				FB16A60C270E206C00C6EAAB /* CryptoKit.framework in Frameworks */,
 				FB2B57DB2646BCDB008CD6C4 /* Cache in Frameworks */,
 				FB7F6A88251789EA0052F679 /* Alamofire in Frameworks */,
+				FBE5AE722AC1D7CD00E3EAA5 /* KeychainSwift in Frameworks */,
 				FB16A611270E21B000C6EAAB /* SwiftOTP in Frameworks */,
 				FBDAA1AB251FBE0A00104001 /* SwiftyBeaver in Frameworks */,
 				FB0DF3B629291C740098517D /* DefaultCodable in Frameworks */,
@@ -252,6 +279,7 @@
 				FBDAA1A5251FBDDB00104001 /* SwiftyBeaver in Frameworks */,
 				FB16A60F270E219E00C6EAAB /* SwiftOTP in Frameworks */,
 				FB0DF3B429291C070098517D /* DefaultCodable in Frameworks */,
+				FBE5AE702AC1D7C400E3EAA5 /* KeychainSwift in Frameworks */,
 				FB16A602270E06C900C6EAAB /* CodeScanner in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -336,14 +364,6 @@
 				FB16A609270E206300C6EAAB /* CryptoKit.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		FB6E89A32516259300DAB2F4 /* Stores */ = {
-			isa = PBXGroup;
-			children = (
-				FB6E89A42516259B00DAB2F4 /* WatchStore.swift */,
-			);
-			path = Stores;
 			sourceTree = "<group>";
 		};
 		FB6E89C925162F5300DAB2F4 /* Shared */ = {
@@ -434,6 +454,7 @@
 				FBA95DBD2514F67F00494B5C /* WebUntis */,
 				FBA95DA42514F53200494B5C /* Project SITNU */,
 				FBA95DED25154A2100494B5C /* Test */,
+				FBE5AE652AC1BAAC00E3EAA5 /* Watch Connectivity */,
 				FB6E896A251624DA00DAB2F4 /* Watch */,
 				FB6E8979251624DD00DAB2F4 /* Watch Extension */,
 				FBA95DA32514F53200494B5C /* Products */,
@@ -458,7 +479,6 @@
 				FB7F6A1525175E7B0052F679 /* Components */,
 				FB6E89E625163B0E00DAB2F4 /* External */,
 				FB6E89D42516341900DAB2F4 /* Views */,
-				FB6E89A32516259300DAB2F4 /* Stores */,
 				FB6E89552516221D00DAB2F4 /* AppDelegate.swift */,
 				FB6E89592516223B00DAB2F4 /* SceneDelegate.swift */,
 				FBA95DA92514F53400494B5C /* Assets.xcassets */,
@@ -543,6 +563,16 @@
 			path = Test;
 			sourceTree = "<group>";
 		};
+		FBE5AE652AC1BAAC00E3EAA5 /* Watch Connectivity */ = {
+			isa = PBXGroup;
+			children = (
+				FBE5AE672AC1BB0300E3EAA5 /* WatchConnectivityStore.swift */,
+				FBE5AE662AC1BB0200E3EAA5 /* Watch-Bridging-Header.h */,
+				FBE5AE732AC1DF6000E3EAA5 /* Message.swift */,
+			);
+			path = "Watch Connectivity";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -582,6 +612,7 @@
 				FB2B57DA2646BCDB008CD6C4 /* Cache */,
 				FB16A610270E21B000C6EAAB /* SwiftOTP */,
 				FB0DF3B529291C740098517D /* DefaultCodable */,
+				FBE5AE712AC1D7CD00E3EAA5 /* KeychainSwift */,
 			);
 			productName = "Watch Extension";
 			productReference = FB6E8975251624DD00DAB2F4 /* Watch Extension.appex */;
@@ -595,11 +626,13 @@
 				FBA95D9F2514F53200494B5C /* Frameworks */,
 				FBA95DA02514F53200494B5C /* Resources */,
 				FB6E8992251624DD00DAB2F4 /* Embed Watch Content */,
+				FBE5AE6D2AC1BE6F00E3EAA5 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				FB6E8989251624DD00DAB2F4 /* PBXTargetDependency */,
+				FBE5AE6C2AC1BE6F00E3EAA5 /* PBXTargetDependency */,
 			);
 			name = "Project SITNU";
 			packageProductDependencies = (
@@ -609,6 +642,7 @@
 				FB16A601270E06C900C6EAAB /* CodeScanner */,
 				FB16A60E270E219E00C6EAAB /* SwiftOTP */,
 				FB0DF3B329291C070098517D /* DefaultCodable */,
+				FBE5AE6F2AC1D7C400E3EAA5 /* KeychainSwift */,
 			);
 			productName = "Project SITNU";
 			productReference = FBA95DA22514F53200494B5C /* Project SITNU.app */;
@@ -647,7 +681,7 @@
 				TargetAttributes = {
 					FB6E8968251624DA00DAB2F4 = {
 						CreatedOnToolsVersion = 12.0;
-						LastSwiftMigration = 1410;
+						LastSwiftMigration = 1500;
 					};
 					FB6E8974251624DD00DAB2F4 = {
 						CreatedOnToolsVersion = 12.0;
@@ -679,6 +713,7 @@
 				FB16A600270E06C900C6EAAB /* XCRemoteSwiftPackageReference "CodeScanner" */,
 				FB16A60D270E219E00C6EAAB /* XCRemoteSwiftPackageReference "SwiftOTP" */,
 				FB0DF3B229291C070098517D /* XCRemoteSwiftPackageReference "DefaultCodable" */,
+				FBE5AE6E2AC1D7A700E3EAA5 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 			);
 			productRefGroup = FBA95DA32514F53200494B5C /* Products */;
 			projectDirPath = "";
@@ -743,6 +778,7 @@
 				FB7F6AE22517901D0052F679 /* AuthSession.swift in Sources */,
 				FB9EC1032517CBB2002D7E16 /* PeriodWithTimegrid.swift in Sources */,
 				FB7F6AB5251790090052F679 /* Authenticator.swift in Sources */,
+				FBE5AE752AC1DF6000E3EAA5 /* Message.swift in Sources */,
 				FB7F6AAB251790050052F679 /* Decodable.swift in Sources */,
 				FB7F6AD3251790170052F679 /* Timetable.swift in Sources */,
 				FB6E897D251624DD00DAB2F4 /* ContentView.swift in Sources */,
@@ -754,6 +790,7 @@
 				FB7F6A9725178B270052F679 /* ActivityIndicator.swift in Sources */,
 				FB6E8981251624DD00DAB2F4 /* ComplicationController.swift in Sources */,
 				FB6E897B251624DD00DAB2F4 /* HostingController.swift in Sources */,
+				FBE5AE692AC1BB0300E3EAA5 /* WatchConnectivityStore.swift in Sources */,
 				FB9EC0F52517C954002D7E16 /* UntisUtil.swift in Sources */,
 				FB7F6ABF2517900D0052F679 /* ResponseSerializer.swift in Sources */,
 				FB36E8302518EE870039DFC9 /* TimetableRowView.swift in Sources */,
@@ -787,6 +824,7 @@
 				FBA95E0C25155DC800494B5C /* Timegrid.swift in Sources */,
 				FBA95DD925151B6F00494B5C /* ResponseSerializer.swift in Sources */,
 				FB7A8F8C25210CA00010FDE5 /* ShareSheet.swift in Sources */,
+				FBE5AE742AC1DF6000E3EAA5 /* Message.swift in Sources */,
 				FB5A92922520B36F00477E7A /* LogFiles.swift in Sources */,
 				FBA95E142515627C00494B5C /* TimegridCache.swift in Sources */,
 				FB6E89D62516342700DAB2F4 /* SchoolSearchView.swift in Sources */,
@@ -794,6 +832,7 @@
 				FBA95DA82514F53200494B5C /* RootView.swift in Sources */,
 				FBA95E102515616E00494B5C /* Decodable.swift in Sources */,
 				FB7A8F852520E3F10010FDE5 /* LazyStackPolyfill.swift in Sources */,
+				FBE5AE682AC1BB0300E3EAA5 /* WatchConnectivityStore.swift in Sources */,
 				FB7A8F712520E1780010FDE5 /* RelativeTimeFormatter.swift in Sources */,
 				FBA95E082515595C00494B5C /* AuthSession.swift in Sources */,
 				FBA95DD62515158800494B5C /* Methods.swift in Sources */,
@@ -814,7 +853,6 @@
 				FB8E7AFF251CC31600D4C43C /* DateOffset.swift in Sources */,
 				FB6E89E825163B1E00DAB2F4 /* Throttler.swift in Sources */,
 				FBA95DDD2515403A00494B5C /* ImportTime.swift in Sources */,
-				FB6E89A52516259B00DAB2F4 /* WatchStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -844,6 +882,11 @@
 			target = FBA95DA12514F53200494B5C /* Project SITNU */;
 			targetProxy = FBA95DF125154A2100494B5C /* PBXContainerItemProxy */;
 		};
+		FBE5AE6C2AC1BE6F00E3EAA5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FB6E8974251624DD00DAB2F4 /* Watch Extension */;
+			targetProxy = FBE5AE6B2AC1BE6F00E3EAA5 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -864,7 +907,7 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 39;
 				DEVELOPMENT_ASSET_PATHS = "\"Watch Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				ENABLE_PREVIEWS = YES;
@@ -884,7 +927,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Debug;
 		};
@@ -894,7 +937,7 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 39;
 				DEVELOPMENT_ASSET_PATHS = "\"Watch Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				ENABLE_PREVIEWS = YES;
@@ -913,7 +956,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Release;
 		};
@@ -925,7 +968,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 39;
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				IBSC_MODULE = Watch_Extension;
 				INFOPLIST_FILE = Watch/Info.plist;
@@ -939,10 +982,11 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Watch Connectivity/Watch-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Debug;
 		};
@@ -954,7 +998,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 39;
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				IBSC_MODULE = Watch_Extension;
 				INFOPLIST_FILE = Watch/Info.plist;
@@ -968,9 +1012,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Watch Connectivity/Watch-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Release;
 		};
@@ -1098,13 +1143,13 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 39;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SITNU/Preview Content\"";
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
 				INFOPLIST_FILE = "Project SITNU/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1113,6 +1158,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "io.noim.Project-SITNU";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1128,12 +1176,12 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 39;
 				DEVELOPMENT_ASSET_PATHS = "\"Project SITNU/Preview Content\"";
 				DEVELOPMENT_TEAM = P88CDRP8CR;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Project SITNU/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1142,6 +1190,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "io.noim.Project-SITNU";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1287,6 +1338,14 @@
 				minimumVersion = 1.9.6;
 			};
 		};
+		FBE5AE6E2AC1D7A700E3EAA5 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 20.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1344,6 +1403,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FBDAA1A3251FBDDB00104001 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;
 			productName = SwiftyBeaver;
+		};
+		FBE5AE6F2AC1D7C400E3EAA5 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FBE5AE6E2AC1D7A700E3EAA5 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
+		};
+		FBE5AE712AC1D7CD00E3EAA5 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FBE5AE6E2AC1D7A700E3EAA5 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

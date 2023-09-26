@@ -8,27 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var accountStore: AccountStore;
+    @Environment(WatchConnectivityStore.self) var watchConnectivityStore
     @State var isAccountChanger: Bool = false;
     
     var body: some View {
-        if !self.accountStore.initialFetch {
+        if watchConnectivityStore.accounts.count == 0 {
             ActivityIndicator(active: true)
             Text("Loading accounts...")
             Text("If you haven't added any account yet, you need to add one first on your iPhone")
                 .font(.footnote)
                 .foregroundColor(.secondary)
         } else {
-            if self.accountStore.selected != nil {
-                let acc = self.accountStore.selected!;
+            if watchConnectivityStore.currentlySelected != nil {
                 ScrollView {
-                    TimetableView(account: acc)
+                    TimetableView(account: watchConnectivityStore.currentlySelected!)
                     Divider()
                     Button("Change account") {
                         self.isAccountChanger.toggle();
                     }
                         .foregroundColor(.yellow)
-                    .sheet(isPresented: $isAccountChanger, content: { AccountSelector(isOpen: $isAccountChanger).environmentObject(self.accountStore) })
+                    .sheet(isPresented: $isAccountChanger, content: { AccountSelector(isOpen: $isAccountChanger) })
                 }
             } else {
                 Text("You need to add at least one primary account");

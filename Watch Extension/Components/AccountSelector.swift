@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct AccountSelector: View {
-    @EnvironmentObject var accountStore: AccountStore;
+    @Environment(WatchConnectivityStore.self) var accountStore;
     @Binding var isOpen: Bool;
     
     var body: some View {
         List {
             ForEach(self.accountStore.accounts) { account in
                 Button(displayName(account: account)) {
-                    self.accountStore.selected = account;
+                    self.accountStore.currentlySelected = account;
                     self.isOpen.toggle();
                 }
             }
