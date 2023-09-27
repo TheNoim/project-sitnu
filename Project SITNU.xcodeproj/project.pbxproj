@@ -121,6 +121,13 @@
 			remoteGlobalIDString = FB6E8974251624DD00DAB2F4;
 			remoteInfo = "Watch Extension";
 		};
+		FB80FBC12AC43AC000D796F3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FBA95D9A2514F53200494B5C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FB6E8968251624DA00DAB2F4;
+			remoteInfo = Watch;
+		};
 		FBA95DF125154A2100494B5C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FBA95D9A2514F53200494B5C /* Project object */;
@@ -613,6 +620,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				FB80FBC22AC43AC000D796F3 /* PBXTargetDependency */,
 			);
 			name = "Project SITNU";
 			packageProductDependencies = (
@@ -854,6 +862,11 @@
 			isa = PBXTargetDependency;
 			target = FB6E8974251624DD00DAB2F4 /* Watch Extension */;
 			targetProxy = FB6E8977251624DD00DAB2F4 /* PBXContainerItemProxy */;
+		};
+		FB80FBC22AC43AC000D796F3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FB6E8968251624DA00DAB2F4 /* Watch */;
+			targetProxy = FB80FBC12AC43AC000D796F3 /* PBXContainerItemProxy */;
 		};
 		FBA95DF225154A2100494B5C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
