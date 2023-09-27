@@ -78,12 +78,8 @@ struct _TimetableView: View {
                         } label: {
                             TimetableRowView(account: account, period: period, timegrid: self.timegrid, subjects: self.subjects)
                         }
+                        .id(period.id)
                     }
-                    .sheet(isPresented: $isDetail, content: {
-                        if isDetail {
-                            PeriodDetailView(period: $selectedPeriod, subjects: self.subjects, timegrid: self.timegrid, acc: account)
-                        }
-                    })
                 } else if periods == nil {
                     ActivityIndicator(active: true)
                 } else {
@@ -132,8 +128,12 @@ struct _TimetableView: View {
                 log.debug("Received notification applicationDidBecomeActive")
                 self.setShapeStyle()
             }
+            .scrollTargetBehavior(.paging)
             .containerBackground(self.tabStyle, for: .tabView)
         }
+        .sheet(isPresented: $isDetail, content: {
+            PeriodDetailView(period: $selectedPeriod, subjects: self.subjects, timegrid: self.timegrid, acc: account)
+        })
     }
     
     func setShapeStyle() {

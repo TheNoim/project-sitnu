@@ -24,6 +24,7 @@ struct UntisAccount: Codable, Identifiable {
     var preferShortSubject: Bool = false
     var preferShortTeacher: Bool = false
     var preferShortClass: Bool = false
+    var showRoomInsteadOfTime: Bool = false
     
     var displayName: String {
         if let setDisplayName = setDisplayName {
@@ -33,7 +34,7 @@ struct UntisAccount: Codable, Identifiable {
         }
     }
     
-    init(id: UUID, username: String, password: String, server: String, school: String, setDisplayName: String?, authType: AuthType, primary: Bool, preferShortRoom: Bool, preferShortSubject: Bool, preferShortTeacher: Bool, preferShortClass: Bool) {
+    init(id: UUID, username: String, password: String, server: String, school: String, setDisplayName: String?, authType: AuthType, primary: Bool, preferShortRoom: Bool, preferShortSubject: Bool, preferShortTeacher: Bool, preferShortClass: Bool, showRoomInsteadOfTime: Bool) {
         self.id = id
         self.username = username
         self.password = password
@@ -46,6 +47,7 @@ struct UntisAccount: Codable, Identifiable {
         self.preferShortSubject = preferShortSubject
         self.preferShortTeacher = preferShortTeacher
         self.preferShortClass = preferShortClass
+        self.showRoomInsteadOfTime = showRoomInsteadOfTime
     }
     
     // MARK: - Codable Implementations
@@ -63,6 +65,7 @@ struct UntisAccount: Codable, Identifiable {
         case preferShortSubject
         case preferShortTeacher
         case preferShortClass
+        case showRoomInsteadOfTime
     }
     
     init(from decoder: Decoder) throws {
@@ -80,6 +83,9 @@ struct UntisAccount: Codable, Identifiable {
         preferShortSubject = try container.decode(Bool.self, forKey: .preferShortSubject)
         preferShortTeacher = try container.decode(Bool.self, forKey: .preferShortTeacher)
         preferShortClass = try container.decode(Bool.self, forKey: .preferShortClass)
+        if let showRoomInsteadOfTime = try container.decodeIfPresent(Bool.self, forKey: .showRoomInsteadOfTime) {
+            self.showRoomInsteadOfTime = showRoomInsteadOfTime
+        }
     }
     
     func encode(to encoder: Encoder) throws {
@@ -99,5 +105,6 @@ struct UntisAccount: Codable, Identifiable {
         try container.encode(preferShortSubject, forKey: .preferShortSubject)
         try container.encode(preferShortTeacher, forKey: .preferShortTeacher)
         try container.encode(preferShortClass, forKey: .preferShortClass)
+        try container.encode(showRoomInsteadOfTime, forKey: .showRoomInsteadOfTime)
     }
 }

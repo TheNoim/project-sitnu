@@ -28,7 +28,11 @@ struct TimetableRowView: View {
         self.acc = account;
         
         self.title = UntisUtil.default.getRowTitle(acc: account, period: period, timegrid: self.timegrid);
-        self.subtitle = UntisUtil.default.getRowSubtitle(period: period);
+        if account.showRoomInsteadOfTime, period.rooms.count > 0 {
+            self.subtitle = period.rooms.map({ account.preferShortRoom ? $0.shortDisplayName : $0.displayName }).joined(separator: ", ")
+        } else {
+            self.subtitle = UntisUtil.default.getRowSubtitle(period: period);
+        }
         self.color = UntisUtil.default.getColor(for: period, subjects: self.subjects);
     }
     
@@ -43,6 +47,7 @@ struct TimetableRowView: View {
             Divider()
             HStack {
                 Text(subtitle)
+                    .font(.caption)
                     .strikethrough(period.code == .cancelled)
                 Spacer()
             }

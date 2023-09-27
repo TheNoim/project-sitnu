@@ -194,6 +194,9 @@ final class WatchConnectivityStore: NSObject, WCSessionDelegate {
     }
     
     func selectPrimaryAccount() {
+        if accounts.count == 0 {
+            currentlySelected = nil
+        }
         if currentlySelected != nil {
             return
         }
