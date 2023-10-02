@@ -37,11 +37,16 @@ struct AccountView: View {
                         self.store.sync();
                     }
                 }
-                .if(store.isReachable, transform: { view in
-                    view.refreshable {
-                        store.sync()
-                    }
-                })
+//                .if(store.isReachable, transform: { view in
+//                    view.refreshable {
+//                        store.sync()
+//                        store.cacheData()
+//                    }
+//                })
+                .refreshable {
+                    store.sync()
+                    store.cacheData()
+                }
                 .modifier(GroupedListModifier())
                 .environment(\.editMode, $editMode)
                 .navigationBarItems(leading: Button(action: {
@@ -70,7 +75,7 @@ struct AccountView: View {
                 }) {
                     Image(systemName: "plus")
                         .frame(width: 44, height: 44)
-                }.disabled(!store.isReachable).sheet(isPresented: self.$addNavigationController.addsAccount) {
+                }.sheet(isPresented: self.$addNavigationController.addsAccount) {
                     SchoolSearchView()
                         .environmentObject(self.addNavigationController)
                         .environment(self.store)

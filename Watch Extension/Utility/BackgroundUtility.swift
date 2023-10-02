@@ -17,19 +17,21 @@ class BackgroundUtility {
     
     var backgroundTaskDiskStorage: DiskStorage<String, Date>?;
     
-    public func getPrimaryAccount() -> UntisAccount? {
-        WatchConnectivityStore.default.initialize(withWCSession: false)
+    public func getPrimaryAccount(initialize: Bool = true) -> UntisAccount? {
+        if initialize {
+            WatchConnectivityStore.default.initialize(withWCSession: false)
+        }
         guard let primaryAccount: UntisAccount = WatchConnectivityStore.default.accounts.first(where: { $0.primary }) else {
             return nil;
         }
         return primaryAccount;
     }
     
-    public func getUntisClient() -> UntisClient? {
+    public func getUntisClient(initialize: Bool = true) -> UntisClient? {
         if let untisClient: UntisClient = self.untisClient {
             return untisClient;
         }
-        guard let primaryAccount: UntisAccount = self.getPrimaryAccount() else {
+        guard let primaryAccount: UntisAccount = self.getPrimaryAccount(initialize: initialize) else {
             return nil;
         }
         let credentials = BasicUntisCredentials(username: primaryAccount.username, password: primaryAccount.password, server: primaryAccount.server, school: primaryAccount.school, authType: primaryAccount.authType);
@@ -37,6 +39,7 @@ class BackgroundUtility {
         return self.untisClient;
     }
 
+    #if os(watchOS)
     public func reloadComplications() {
         let server: CLKComplicationServer = CLKComplicationServer.sharedInstance()
         if server.activeComplications != nil {
@@ -53,6 +56,7 @@ class BackgroundUtility {
             }
         }
     }
+    #endif
     
     func getBackgroundTaskDiskStorage() -> DiskStorage<String, Date>? {
         if self.backgroundTaskDiskStorage != nil {

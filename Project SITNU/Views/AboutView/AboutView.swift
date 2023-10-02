@@ -37,13 +37,11 @@ struct AboutView: View {
                         log.info("Copy watch logs request")
                         store.requestLogFiles()
                     }
-                    .disabled(!store.isReachable)
                     
                     Button("Force sync") {
                         log.debug("Force sync")
                         store.sync()
                     }
-                        .disabled(!store.isReachable)
                 }
             }
             .navigationBarTitle("About")

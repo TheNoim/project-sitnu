@@ -10,8 +10,6 @@ import ClockKit
 import SwiftyBeaver
 import Cache
 
-let log = SwiftyBeaver.self
-
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
     
     lazy var bgUtility: BackgroundUtility = BackgroundUtility();

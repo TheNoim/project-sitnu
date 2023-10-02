@@ -78,6 +78,68 @@
 		FB80FBBC2AC36E0000D796F3 /* if.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB80FBBB2AC36E0000D796F3 /* if.swift */; };
 		FB80FBBE2AC370E500D796F3 /* InfinitePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB80FBBD2AC370E500D796F3 /* InfinitePageView.swift */; };
 		FB80FBC02AC37DA100D796F3 /* RelativeDateTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB80FBBF2AC37DA100D796F3 /* RelativeDateTitle.swift */; };
+		FB80FBC92AC4CAA800D796F3 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB80FBC82AC4CAA800D796F3 /* WidgetKit.framework */; };
+		FB80FBCB2AC4CAA800D796F3 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB80FBCA2AC4CAA800D796F3 /* SwiftUI.framework */; };
+		FB80FBCE2AC4CAA800D796F3 /* WidgetsBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB80FBCD2AC4CAA800D796F3 /* WidgetsBundle.swift */; };
+		FB80FBD42AC4CAA900D796F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB80FBD32AC4CAA900D796F3 /* Assets.xcassets */; };
+		FB80FBD82AC4CAA900D796F3 /* WidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = FB80FBC72AC4CAA800D796F3 /* WidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		FB80FBDF2AC4CBB000D796F3 /* PeriodTimelineEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB80FBDE2AC4CBB000D796F3 /* PeriodTimelineEntry.swift */; };
+		FB80FBE12AC4CDE500D796F3 /* PeriodTimelineProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB80FBE02AC4CDE500D796F3 /* PeriodTimelineProvider.swift */; };
+		FB80FBE22AC4CEF800D796F3 /* BackgroundUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4CC36325190CC7001E7F69 /* BackgroundUtility.swift */; };
+		FB80FBE32AC4CF0100D796F3 /* BackgroundUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4CC36325190CC7001E7F69 /* BackgroundUtility.swift */; };
+		FB80FBE52AC4CF1000D796F3 /* AccountContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E89CA25162F6400DAB2F4 /* AccountContext.swift */; };
+		FB80FBE62AC4CFAF00D796F3 /* Timetable+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9EC1082517D170002D7E16 /* Timetable+Util.swift */; };
+		FB80FBE72AC4CFB000D796F3 /* Timetable+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9EC1082517D170002D7E16 /* Timetable+Util.swift */; };
+		FB80FBEC2AC4D61700D796F3 /* PeriodTimelineWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB80FBEA2AC4D61700D796F3 /* PeriodTimelineWidgetView.swift */; };
+		FB80FBED2AC4D61D00D796F3 /* PeriodTimelineWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB80FBE82AC4D59800D796F3 /* PeriodTimelineWidget.swift */; };
+		FB80FBF12AC4D6A500D796F3 /* PeriodTimlineWidgetSmall.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB80FBEF2AC4D6A500D796F3 /* PeriodTimlineWidgetSmall.swift */; };
+		FB80FBF32AC4D6DF00D796F3 /* FakeWidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB80FBF22AC4D6DF00D796F3 /* FakeWidgetData.swift */; };
+		FB80FBF42AC4D6DF00D796F3 /* FakeWidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB80FBF22AC4D6DF00D796F3 /* FakeWidgetData.swift */; };
+		FB80FBF52AC4DA8F00D796F3 /* WatchConnectivityStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE5AE672AC1BB0300E3EAA5 /* WatchConnectivityStore.swift */; };
+		FB80FBF62AC4DABF00D796F3 /* PeriodTimelineEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB80FBDE2AC4CBB000D796F3 /* PeriodTimelineEntry.swift */; };
+		FB80FBF72AC4DAC300D796F3 /* PeriodTimelineEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB80FBDE2AC4CBB000D796F3 /* PeriodTimelineEntry.swift */; };
+		FB80FBF82AC4DAC600D796F3 /* PeriodTimelineProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB80FBE02AC4CDE500D796F3 /* PeriodTimelineProvider.swift */; };
+		FB80FBF92AC4DAC600D796F3 /* PeriodTimelineProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB80FBE02AC4CDE500D796F3 /* PeriodTimelineProvider.swift */; };
+		FB80FBFB2AC4DACF00D796F3 /* FakeWidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB80FBF22AC4D6DF00D796F3 /* FakeWidgetData.swift */; };
+		FB80FBFC2AC4DADF00D796F3 /* Timetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E89222516025900DAB2F4 /* Timetable.swift */; };
+		FB80FBFD2AC4DAFF00D796F3 /* Timegrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA95E0B25155DC800494B5C /* Timegrid.swift */; };
+		FB80FBFE2AC4DB0D00D796F3 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA95DBF2514F69200494B5C /* Auth.swift */; };
+		FB80FBFF2AC4DB1500D796F3 /* Subjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E892A2516195800DAB2F4 /* Subjects.swift */; };
+		FB80FC002AC4DB1F00D796F3 /* LogFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5A92912520B36F00477E7A /* LogFiles.swift */; };
+		FB80FC012AC4DB2900D796F3 /* UntisClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA95DC32514F90A00494B5C /* UntisClient.swift */; };
+		FB80FC022AC4DB3600D796F3 /* ResponseSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA95DD825151B6F00494B5C /* ResponseSerializer.swift */; };
+		FB80FC032AC4DB4900D796F3 /* Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA95DD52515158800494B5C /* Methods.swift */; };
+		FB80FC042AC4DB5400D796F3 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA95DCD2514FD2500494B5C /* Errors.swift */; };
+		FB80FC052AC4DB6100D796F3 /* DateOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8E7AFE251CC31600D4C43C /* DateOffset.swift */; };
+		FB80FC082AC4DBC300D796F3 /* AuthSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA95E072515595C00494B5C /* AuthSession.swift */; };
+		FB80FC092AC4DBD800D796F3 /* SubjectsCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E892E251619EB00DAB2F4 /* SubjectsCache.swift */; };
+		FB80FC0A2AC4DBE900D796F3 /* TimetableCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E892625160B1500DAB2F4 /* TimetableCache.swift */; };
+		FB80FC0B2AC4DBEF00D796F3 /* TimegridCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA95E132515627C00494B5C /* TimegridCache.swift */; };
+		FB80FC0C2AC4DBF400D796F3 /* ImportTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA95DDC2515403A00494B5C /* ImportTime.swift */; };
+		FB80FC0D2AC4DBFE00D796F3 /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA95DC62514F98A00494B5C /* Authenticator.swift */; };
+		FB80FC0E2AC4DC3500D796F3 /* DictionaryKeyPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA95DD12515104B00494B5C /* DictionaryKeyPath.swift */; };
+		FB80FC0F2AC4DC3800D796F3 /* Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA95E0F2515616E00494B5C /* Decodable.swift */; };
+		FB80FC102AC4DEF000D796F3 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE5AE732AC1DF6000E3EAA5 /* Message.swift */; };
+		FB80FC122AC4DF5B00D796F3 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = FB80FC112AC4DF5B00D796F3 /* Alamofire */; };
+		FB80FC142AC4DF5B00D796F3 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = FB80FC132AC4DF5B00D796F3 /* SwiftyBeaver */; };
+		FB80FC162AC4DF5B00D796F3 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = FB80FC152AC4DF5B00D796F3 /* Cache */; };
+		FB80FC182AC4DF5B00D796F3 /* SwiftOTP in Frameworks */ = {isa = PBXBuildFile; productRef = FB80FC172AC4DF5B00D796F3 /* SwiftOTP */; };
+		FB80FC1A2AC4DF5B00D796F3 /* DefaultCodable in Frameworks */ = {isa = PBXBuildFile; productRef = FB80FC192AC4DF5B00D796F3 /* DefaultCodable */; };
+		FB80FC1C2AC4DF5B00D796F3 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FB80FC1B2AC4DF5B00D796F3 /* KeychainSwift */; };
+		FB80FC1E2AC4DFA900D796F3 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB80FC1D2AC4DFA900D796F3 /* Log.swift */; };
+		FB80FC1F2AC4DFA900D796F3 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB80FC1D2AC4DFA900D796F3 /* Log.swift */; };
+		FB80FC202AC4DFB400D796F3 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB80FC1D2AC4DFA900D796F3 /* Log.swift */; };
+		FB80FC212AC4DFB500D796F3 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB80FC1D2AC4DFA900D796F3 /* Log.swift */; };
+		FB80FC242AC56C9C00D796F3 /* UntisUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9EC0F42517C954002D7E16 /* UntisUtil.swift */; };
+		FB80FC252AC56CA700D796F3 /* PeriodWithTimegrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9EC1022517CBB2002D7E16 /* PeriodWithTimegrid.swift */; };
+		FB80FC262AC56CDC00D796F3 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB36E80C2518B90B0039DFC9 /* Color+Hex.swift */; };
+		FB80FC2E2AC5752300D796F3 /* PeriodTimelineProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB80FC272AC5752300D796F3 /* PeriodTimelineProvider.swift */; };
+		FB80FC302AC5752300D796F3 /* PeriodTimelineWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB80FC282AC5752300D796F3 /* PeriodTimelineWidget.swift */; };
+		FB80FC322AC5752300D796F3 /* PeriodTimelineWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB80FC292AC5752300D796F3 /* PeriodTimelineWidgetView.swift */; };
+		FB80FC332AC5752300D796F3 /* Sizes in Resources */ = {isa = PBXBuildFile; fileRef = FB80FC2A2AC5752300D796F3 /* Sizes */; };
+		FB80FC342AC5752300D796F3 /* Sizes in Resources */ = {isa = PBXBuildFile; fileRef = FB80FC2A2AC5752300D796F3 /* Sizes */; };
+		FB80FC362AC5752300D796F3 /* FakeWidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB80FC2B2AC5752300D796F3 /* FakeWidgetData.swift */; };
+		FB80FC382AC5752300D796F3 /* PeriodTimelineEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB80FC2C2AC5752300D796F3 /* PeriodTimelineEntry.swift */; };
 		FB8E7AFF251CC31600D4C43C /* DateOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8E7AFE251CC31600D4C43C /* DateOffset.swift */; };
 		FB8E7B00251CC31600D4C43C /* DateOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8E7AFE251CC31600D4C43C /* DateOffset.swift */; };
 		FB9EC0E42517ACA4002D7E16 /* AccountSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9EC0E32517ACA4002D7E16 /* AccountSelector.swift */; };
@@ -128,6 +190,13 @@
 			remoteGlobalIDString = FB6E8968251624DA00DAB2F4;
 			remoteInfo = Watch;
 		};
+		FB80FBD62AC4CAA900D796F3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FBA95D9A2514F53200494B5C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FB80FBC62AC4CAA800D796F3;
+			remoteInfo = WidgetsExtension;
+		};
 		FBA95DF125154A2100494B5C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FBA95D9A2514F53200494B5C /* Project object */;
@@ -158,6 +227,17 @@
 				FB6E898A251624DD00DAB2F4 /* Watch.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FB80FBDC2AC4CAAA00D796F3 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				FB80FBD82AC4CAA900D796F3 /* WidgetsExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -209,6 +289,28 @@
 		FB80FBBB2AC36E0000D796F3 /* if.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = if.swift; sourceTree = "<group>"; };
 		FB80FBBD2AC370E500D796F3 /* InfinitePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfinitePageView.swift; sourceTree = "<group>"; };
 		FB80FBBF2AC37DA100D796F3 /* RelativeDateTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelativeDateTitle.swift; sourceTree = "<group>"; };
+		FB80FBC72AC4CAA800D796F3 /* WidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB80FBC82AC4CAA800D796F3 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		FB80FBCA2AC4CAA800D796F3 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		FB80FBCD2AC4CAA800D796F3 /* WidgetsBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetsBundle.swift; sourceTree = "<group>"; };
+		FB80FBD32AC4CAA900D796F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FB80FBD52AC4CAA900D796F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FB80FBDE2AC4CBB000D796F3 /* PeriodTimelineEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodTimelineEntry.swift; sourceTree = "<group>"; };
+		FB80FBE02AC4CDE500D796F3 /* PeriodTimelineProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodTimelineProvider.swift; sourceTree = "<group>"; };
+		FB80FBE82AC4D59800D796F3 /* PeriodTimelineWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodTimelineWidget.swift; sourceTree = "<group>"; };
+		FB80FBEA2AC4D61700D796F3 /* PeriodTimelineWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodTimelineWidgetView.swift; sourceTree = "<group>"; };
+		FB80FBEF2AC4D6A500D796F3 /* PeriodTimlineWidgetSmall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodTimlineWidgetSmall.swift; sourceTree = "<group>"; };
+		FB80FBF22AC4D6DF00D796F3 /* FakeWidgetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeWidgetData.swift; sourceTree = "<group>"; };
+		FB80FC1D2AC4DFA900D796F3 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		FB80FC272AC5752300D796F3 /* PeriodTimelineProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeriodTimelineProvider.swift; path = "Project SITNU/Widget Stuff/PeriodTimelineProvider.swift"; sourceTree = SOURCE_ROOT; };
+		FB80FC282AC5752300D796F3 /* PeriodTimelineWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeriodTimelineWidget.swift; path = "Project SITNU/Widget Stuff/PeriodTimelineWidget.swift"; sourceTree = SOURCE_ROOT; };
+		FB80FC292AC5752300D796F3 /* PeriodTimelineWidgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeriodTimelineWidgetView.swift; path = "Project SITNU/Widget Stuff/PeriodTimelineWidgetView.swift"; sourceTree = SOURCE_ROOT; };
+		FB80FC2A2AC5752300D796F3 /* Sizes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Sizes; path = "Project SITNU/Widget Stuff/Sizes"; sourceTree = SOURCE_ROOT; };
+		FB80FC2B2AC5752300D796F3 /* FakeWidgetData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FakeWidgetData.swift; path = "Project SITNU/Widget Stuff/FakeWidgetData.swift"; sourceTree = SOURCE_ROOT; };
+		FB80FC2C2AC5752300D796F3 /* PeriodTimelineEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeriodTimelineEntry.swift; path = "Project SITNU/Widget Stuff/PeriodTimelineEntry.swift"; sourceTree = SOURCE_ROOT; };
+		FB80FC392AC57B1A00D796F3 /* Project SITNU.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Project SITNU.entitlements"; sourceTree = "<group>"; };
+		FB80FC3A2AC57B4800D796F3 /* WidgetsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WidgetsExtension.entitlements; sourceTree = "<group>"; };
+		FB80FC3B2AC57B7600D796F3 /* Watch Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Watch Extension.entitlements"; sourceTree = "<group>"; };
 		FB8E7AFE251CC31600D4C43C /* DateOffset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateOffset.swift; sourceTree = "<group>"; };
 		FB9EC0E32517ACA4002D7E16 /* AccountSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSelector.swift; sourceTree = "<group>"; };
 		FB9EC0E92517AEA7002D7E16 /* TimetableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableView.swift; sourceTree = "<group>"; };
@@ -253,6 +355,21 @@
 				FB16A611270E21B000C6EAAB /* SwiftOTP in Frameworks */,
 				FBDAA1AB251FBE0A00104001 /* SwiftyBeaver in Frameworks */,
 				FB0DF3B629291C740098517D /* DefaultCodable in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FB80FBC42AC4CAA800D796F3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB80FC122AC4DF5B00D796F3 /* Alamofire in Frameworks */,
+				FB80FBCB2AC4CAA800D796F3 /* SwiftUI.framework in Frameworks */,
+				FB80FBC92AC4CAA800D796F3 /* WidgetKit.framework in Frameworks */,
+				FB80FC142AC4DF5B00D796F3 /* SwiftyBeaver in Frameworks */,
+				FB80FC182AC4DF5B00D796F3 /* SwiftOTP in Frameworks */,
+				FB80FC1A2AC4DF5B00D796F3 /* DefaultCodable in Frameworks */,
+				FB80FC1C2AC4DF5B00D796F3 /* KeychainSwift in Frameworks */,
+				FB80FC162AC4DF5B00D796F3 /* Cache in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,6 +437,7 @@
 		FB6E8979251624DD00DAB2F4 /* Watch Extension */ = {
 			isa = PBXGroup;
 			children = (
+				FB80FC3B2AC57B7600D796F3 /* Watch Extension.entitlements */,
 				FB4CC36225190CBD001E7F69 /* Utility */,
 				FB36E80B2518B9010039DFC9 /* Extension */,
 				FB9EC0F32517C946002D7E16 /* Untis Utility */,
@@ -349,6 +467,8 @@
 			children = (
 				FB16A60B270E206C00C6EAAB /* CryptoKit.framework */,
 				FB16A609270E206300C6EAAB /* CryptoKit.framework */,
+				FB80FBC82AC4CAA800D796F3 /* WidgetKit.framework */,
+				FB80FBCA2AC4CAA800D796F3 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -358,6 +478,7 @@
 			children = (
 				FB6E89CA25162F6400DAB2F4 /* AccountContext.swift */,
 				FB5A92912520B36F00477E7A /* LogFiles.swift */,
+				FB80FC1D2AC4DFA900D796F3 /* Log.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -418,6 +539,43 @@
 			path = Stores;
 			sourceTree = "<group>";
 		};
+		FB80FBCC2AC4CAA800D796F3 /* Widgets */ = {
+			isa = PBXGroup;
+			children = (
+				FB80FC2B2AC5752300D796F3 /* FakeWidgetData.swift */,
+				FB80FC2C2AC5752300D796F3 /* PeriodTimelineEntry.swift */,
+				FB80FC272AC5752300D796F3 /* PeriodTimelineProvider.swift */,
+				FB80FC282AC5752300D796F3 /* PeriodTimelineWidget.swift */,
+				FB80FC292AC5752300D796F3 /* PeriodTimelineWidgetView.swift */,
+				FB80FC2A2AC5752300D796F3 /* Sizes */,
+				FB80FBCD2AC4CAA800D796F3 /* WidgetsBundle.swift */,
+				FB80FBD32AC4CAA900D796F3 /* Assets.xcassets */,
+				FB80FBD52AC4CAA900D796F3 /* Info.plist */,
+			);
+			path = Widgets;
+			sourceTree = "<group>";
+		};
+		FB80FBDD2AC4CB9000D796F3 /* Widget Stuff */ = {
+			isa = PBXGroup;
+			children = (
+				FB80FBEE2AC4D69700D796F3 /* Sizes */,
+				FB80FBDE2AC4CBB000D796F3 /* PeriodTimelineEntry.swift */,
+				FB80FBE02AC4CDE500D796F3 /* PeriodTimelineProvider.swift */,
+				FB80FBE82AC4D59800D796F3 /* PeriodTimelineWidget.swift */,
+				FB80FBEA2AC4D61700D796F3 /* PeriodTimelineWidgetView.swift */,
+				FB80FBF22AC4D6DF00D796F3 /* FakeWidgetData.swift */,
+			);
+			path = "Widget Stuff";
+			sourceTree = "<group>";
+		};
+		FB80FBEE2AC4D69700D796F3 /* Sizes */ = {
+			isa = PBXGroup;
+			children = (
+				FB80FBEF2AC4D6A500D796F3 /* PeriodTimlineWidgetSmall.swift */,
+			);
+			path = Sizes;
+			sourceTree = "<group>";
+		};
 		FB8E7B0E251CC40C00D4C43C /* Debug */ = {
 			isa = PBXGroup;
 			children = (
@@ -439,6 +597,7 @@
 		FBA95D992514F53200494B5C = {
 			isa = PBXGroup;
 			children = (
+				FB80FC3A2AC57B4800D796F3 /* WidgetsExtension.entitlements */,
 				FB36E81C2518E5210039DFC9 /* Test.playground */,
 				FB6E89C925162F5300DAB2F4 /* Shared */,
 				FBA95DBD2514F67F00494B5C /* WebUntis */,
@@ -447,6 +606,7 @@
 				FBE5AE652AC1BAAC00E3EAA5 /* Watch Connectivity */,
 				FB6E896A251624DA00DAB2F4 /* Watch */,
 				FB6E8979251624DD00DAB2F4 /* Watch Extension */,
+				FB80FBCC2AC4CAA800D796F3 /* Widgets */,
 				FBA95DA32514F53200494B5C /* Products */,
 				FB6E89972516250B00DAB2F4 /* Frameworks */,
 			);
@@ -459,6 +619,7 @@
 				FBA95DEC25154A2100494B5C /* Project SITNUTests.xctest */,
 				FB6E8969251624DA00DAB2F4 /* Watch.app */,
 				FB6E8975251624DD00DAB2F4 /* Watch Extension.appex */,
+				FB80FBC72AC4CAA800D796F3 /* WidgetsExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -466,6 +627,8 @@
 		FBA95DA42514F53200494B5C /* Project SITNU */ = {
 			isa = PBXGroup;
 			children = (
+				FB80FC392AC57B1A00D796F3 /* Project SITNU.entitlements */,
+				FB80FBDD2AC4CB9000D796F3 /* Widget Stuff */,
 				FB7F6A1525175E7B0052F679 /* Components */,
 				FB6E89E625163B0E00DAB2F4 /* External */,
 				FB6E89D42516341900DAB2F4 /* Views */,
@@ -608,6 +771,31 @@
 			productReference = FB6E8975251624DD00DAB2F4 /* Watch Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
 		};
+		FB80FBC62AC4CAA800D796F3 /* WidgetsExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FB80FBD92AC4CAAA00D796F3 /* Build configuration list for PBXNativeTarget "WidgetsExtension" */;
+			buildPhases = (
+				FB80FBC32AC4CAA800D796F3 /* Sources */,
+				FB80FBC42AC4CAA800D796F3 /* Frameworks */,
+				FB80FBC52AC4CAA800D796F3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WidgetsExtension;
+			packageProductDependencies = (
+				FB80FC112AC4DF5B00D796F3 /* Alamofire */,
+				FB80FC132AC4DF5B00D796F3 /* SwiftyBeaver */,
+				FB80FC152AC4DF5B00D796F3 /* Cache */,
+				FB80FC172AC4DF5B00D796F3 /* SwiftOTP */,
+				FB80FC192AC4DF5B00D796F3 /* DefaultCodable */,
+				FB80FC1B2AC4DF5B00D796F3 /* KeychainSwift */,
+			);
+			productName = WidgetsExtension;
+			productReference = FB80FBC72AC4CAA800D796F3 /* WidgetsExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		FBA95DA12514F53200494B5C /* Project SITNU */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FBA95DB12514F53400494B5C /* Build configuration list for PBXNativeTarget "Project SITNU" */;
@@ -616,11 +804,13 @@
 				FBA95D9F2514F53200494B5C /* Frameworks */,
 				FBA95DA02514F53200494B5C /* Resources */,
 				FB6E8992251624DD00DAB2F4 /* Embed Watch Content */,
+				FB80FBDC2AC4CAAA00D796F3 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				FB80FBC22AC43AC000D796F3 /* PBXTargetDependency */,
+				FB80FBD72AC4CAA900D796F3 /* PBXTargetDependency */,
 			);
 			name = "Project SITNU";
 			packageProductDependencies = (
@@ -664,7 +854,7 @@
 				KnownAssetTags = (
 					New,
 				);
-				LastSwiftUpdateCheck = 1200;
+				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1200;
 				TargetAttributes = {
 					FB6E8968251624DA00DAB2F4 = {
@@ -674,6 +864,9 @@
 					FB6E8974251624DD00DAB2F4 = {
 						CreatedOnToolsVersion = 12.0;
 						LastSwiftMigration = 1200;
+					};
+					FB80FBC62AC4CAA800D796F3 = {
+						CreatedOnToolsVersion = 15.0;
 					};
 					FBA95DA12514F53200494B5C = {
 						CreatedOnToolsVersion = 12.0;
@@ -711,6 +904,7 @@
 				FBA95DEB25154A2100494B5C /* Project SITNUTests */,
 				FB6E8968251624DA00DAB2F4 /* Watch */,
 				FB6E8974251624DD00DAB2F4 /* Watch Extension */,
+				FB80FBC62AC4CAA800D796F3 /* WidgetsExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -734,6 +928,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FB80FBC52AC4CAA800D796F3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB80FBD42AC4CAA900D796F3 /* Assets.xcassets in Resources */,
+				FB80FC342AC5752300D796F3 /* Sizes in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FBA95DA02514F53200494B5C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -741,6 +944,7 @@
 				FBA95DAD2514F53400494B5C /* Preview Assets.xcassets in Resources */,
 				FBA95DAA2514F53400494B5C /* Assets.xcassets in Resources */,
 				FB36E8262518EAD40039DFC9 /* Storyboard.storyboard in Resources */,
+				FB80FC332AC5752300D796F3 /* Sizes in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -759,7 +963,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB80FBFB2AC4DACF00D796F3 /* FakeWidgetData.swift in Sources */,
 				FB7F6AD8251790190052F679 /* Subjects.swift in Sources */,
+				FB80FC202AC4DFB400D796F3 /* Log.swift in Sources */,
+				FB80FBF72AC4DAC300D796F3 /* PeriodTimelineEntry.swift in Sources */,
 				FB7F6AB0251790070052F679 /* UntisClient.swift in Sources */,
 				FB4CC36425190CC7001E7F69 /* BackgroundUtility.swift in Sources */,
 				FB36E8172518B9BA0039DFC9 /* PeriodDetailView.swift in Sources */,
@@ -792,6 +999,7 @@
 				FB6E897F251624DD00DAB2F4 /* ExtensionDelegate.swift in Sources */,
 				FB7F6AC4251790110052F679 /* Auth.swift in Sources */,
 				FB7F6AA625178FFD0052F679 /* DictionaryKeyPath.swift in Sources */,
+				FB80FBF82AC4DAC600D796F3 /* PeriodTimelineProvider.swift in Sources */,
 				FB9EC1092517D170002D7E16 /* Timetable+Util.swift in Sources */,
 				FB7F6AC9251790130052F679 /* Methods.swift in Sources */,
 				FB9EC0EA2517AEA7002D7E16 /* TimetableView.swift in Sources */,
@@ -799,6 +1007,52 @@
 				FB7F6AA125178FDC0052F679 /* Encodable+asDictionary.swift in Sources */,
 				FB36E7FE2518B35F0039DFC9 /* onChangeChim.swift in Sources */,
 				FB36E80D2518B90B0039DFC9 /* Color+Hex.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FB80FBC32AC4CAA800D796F3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB80FC002AC4DB1F00D796F3 /* LogFiles.swift in Sources */,
+				FB80FC0D2AC4DBFE00D796F3 /* Authenticator.swift in Sources */,
+				FB80FC1F2AC4DFA900D796F3 /* Log.swift in Sources */,
+				FB80FC032AC4DB4900D796F3 /* Methods.swift in Sources */,
+				FB80FC012AC4DB2900D796F3 /* UntisClient.swift in Sources */,
+				FB80FBE72AC4CFB000D796F3 /* Timetable+Util.swift in Sources */,
+				FB80FC0E2AC4DC3500D796F3 /* DictionaryKeyPath.swift in Sources */,
+				FB80FC0C2AC4DBF400D796F3 /* ImportTime.swift in Sources */,
+				FB80FC242AC56C9C00D796F3 /* UntisUtil.swift in Sources */,
+				FB80FC252AC56CA700D796F3 /* PeriodWithTimegrid.swift in Sources */,
+				FB80FBFD2AC4DAFF00D796F3 /* Timegrid.swift in Sources */,
+				FB80FC302AC5752300D796F3 /* PeriodTimelineWidget.swift in Sources */,
+				FB80FBF42AC4D6DF00D796F3 /* FakeWidgetData.swift in Sources */,
+				FB80FBF52AC4DA8F00D796F3 /* WatchConnectivityStore.swift in Sources */,
+				FB80FBF62AC4DABF00D796F3 /* PeriodTimelineEntry.swift in Sources */,
+				FB80FBEC2AC4D61700D796F3 /* PeriodTimelineWidgetView.swift in Sources */,
+				FB80FC102AC4DEF000D796F3 /* Message.swift in Sources */,
+				FB80FC262AC56CDC00D796F3 /* Color+Hex.swift in Sources */,
+				FB80FC082AC4DBC300D796F3 /* AuthSession.swift in Sources */,
+				FB80FC092AC4DBD800D796F3 /* SubjectsCache.swift in Sources */,
+				FB80FC0A2AC4DBE900D796F3 /* TimetableCache.swift in Sources */,
+				FB80FBFE2AC4DB0D00D796F3 /* Auth.swift in Sources */,
+				FB80FBED2AC4D61D00D796F3 /* PeriodTimelineWidget.swift in Sources */,
+				FB80FBFF2AC4DB1500D796F3 /* Subjects.swift in Sources */,
+				FB80FBF12AC4D6A500D796F3 /* PeriodTimlineWidgetSmall.swift in Sources */,
+				FB80FC382AC5752300D796F3 /* PeriodTimelineEntry.swift in Sources */,
+				FB80FC0F2AC4DC3800D796F3 /* Decodable.swift in Sources */,
+				FB80FBE22AC4CEF800D796F3 /* BackgroundUtility.swift in Sources */,
+				FB80FBE52AC4CF1000D796F3 /* AccountContext.swift in Sources */,
+				FB80FC2E2AC5752300D796F3 /* PeriodTimelineProvider.swift in Sources */,
+				FB80FC022AC4DB3600D796F3 /* ResponseSerializer.swift in Sources */,
+				FB80FC362AC5752300D796F3 /* FakeWidgetData.swift in Sources */,
+				FB80FC042AC4DB5400D796F3 /* Errors.swift in Sources */,
+				FB80FBF92AC4DAC600D796F3 /* PeriodTimelineProvider.swift in Sources */,
+				FB80FC322AC5752300D796F3 /* PeriodTimelineWidgetView.swift in Sources */,
+				FB80FC0B2AC4DBEF00D796F3 /* TimegridCache.swift in Sources */,
+				FB80FBCE2AC4CAA800D796F3 /* WidgetsBundle.swift in Sources */,
+				FB80FC052AC4DB6100D796F3 /* DateOffset.swift in Sources */,
+				FB80FBFC2AC4DADF00D796F3 /* Timetable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -813,11 +1067,13 @@
 				FBA95DD22515104B00494B5C /* DictionaryKeyPath.swift in Sources */,
 				FB6E89562516221D00DAB2F4 /* AppDelegate.swift in Sources */,
 				FBA95E0C25155DC800494B5C /* Timegrid.swift in Sources */,
+				FB80FBE62AC4CFAF00D796F3 /* Timetable+Util.swift in Sources */,
 				FBA95DD925151B6F00494B5C /* ResponseSerializer.swift in Sources */,
 				FB7A8F8C25210CA00010FDE5 /* ShareSheet.swift in Sources */,
 				FBE5AE742AC1DF6000E3EAA5 /* Message.swift in Sources */,
 				FB5A92922520B36F00477E7A /* LogFiles.swift in Sources */,
 				FBA95E142515627C00494B5C /* TimegridCache.swift in Sources */,
+				FB80FBE12AC4CDE500D796F3 /* PeriodTimelineProvider.swift in Sources */,
 				FB6E89D62516342700DAB2F4 /* SchoolSearchView.swift in Sources */,
 				FB5A92BC2520DDCF00477E7A /* LogFileListView.swift in Sources */,
 				FBA95DA82514F53200494B5C /* RootView.swift in Sources */,
@@ -826,13 +1082,16 @@
 				FBE5AE682AC1BB0300E3EAA5 /* WatchConnectivityStore.swift in Sources */,
 				FB7A8F712520E1780010FDE5 /* RelativeTimeFormatter.swift in Sources */,
 				FBA95E082515595C00494B5C /* AuthSession.swift in Sources */,
+				FB80FC1E2AC4DFA900D796F3 /* Log.swift in Sources */,
 				FBA95DD62515158800494B5C /* Methods.swift in Sources */,
 				FB6E892B2516195800DAB2F4 /* Subjects.swift in Sources */,
 				FB7F6A252517617B0052F679 /* Encodable+asDictionary.swift in Sources */,
 				FB6E892F251619EB00DAB2F4 /* SubjectsCache.swift in Sources */,
 				FB7F6A1725175E870052F679 /* SearchBar.swift in Sources */,
+				FB80FBDF2AC4CBB000D796F3 /* PeriodTimelineEntry.swift in Sources */,
 				FB6E892725160B1500DAB2F4 /* TimetableCache.swift in Sources */,
 				FBA95DC42514F90A00494B5C /* UntisClient.swift in Sources */,
+				FB80FBF32AC4D6DF00D796F3 /* FakeWidgetData.swift in Sources */,
 				FB6E895A2516223B00DAB2F4 /* SceneDelegate.swift in Sources */,
 				FB6E89232516025900DAB2F4 /* Timetable.swift in Sources */,
 				FB6E89CB25162F6400DAB2F4 /* AccountContext.swift in Sources */,
@@ -843,6 +1102,7 @@
 				FB6E89F625163FF300DAB2F4 /* AddView.swift in Sources */,
 				FB8E7AFF251CC31600D4C43C /* DateOffset.swift in Sources */,
 				FB6E89E825163B1E00DAB2F4 /* Throttler.swift in Sources */,
+				FB80FBE32AC4CF0100D796F3 /* BackgroundUtility.swift in Sources */,
 				FBA95DDD2515403A00494B5C /* ImportTime.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -851,6 +1111,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB80FC212AC4DFB500D796F3 /* Log.swift in Sources */,
 				FBA95DEF25154A2100494B5C /* Project_SITNUTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -867,6 +1128,11 @@
 			isa = PBXTargetDependency;
 			target = FB6E8968251624DA00DAB2F4 /* Watch */;
 			targetProxy = FB80FBC12AC43AC000D796F3 /* PBXContainerItemProxy */;
+		};
+		FB80FBD72AC4CAA900D796F3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FB80FBC62AC4CAA800D796F3 /* WidgetsExtension */;
+			targetProxy = FB80FBD62AC4CAA900D796F3 /* PBXContainerItemProxy */;
 		};
 		FBA95DF225154A2100494B5C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -892,6 +1158,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Watch Extension/Watch Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 41;
 				DEVELOPMENT_ASSET_PATHS = "\"Watch Extension/Preview Content\"";
@@ -922,6 +1189,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Watch Extension/Watch Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 41;
 				DEVELOPMENT_ASSET_PATHS = "\"Watch Extension/Preview Content\"";
@@ -1002,6 +1270,77 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		FB80FBDA2AC4CAAA00D796F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = WidgetsExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P88CDRP8CR;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Widgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Widgets;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.noim.Project-SITNU.Widgets";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FB80FBDB2AC4CAAA00D796F3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = WidgetsExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P88CDRP8CR;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Widgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Widgets;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.noim.Project-SITNU.Widgets";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -1124,9 +1463,11 @@
 		FBA95DB22514F53400494B5C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Project SITNU/Project SITNU.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 41;
@@ -1157,9 +1498,11 @@
 		FBA95DB32514F53400494B5C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Project SITNU/Project SITNU.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 41;
@@ -1242,6 +1585,15 @@
 			buildConfigurations = (
 				FB6E8990251624DD00DAB2F4 /* Debug */,
 				FB6E8991251624DD00DAB2F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FB80FBD92AC4CAAA00D796F3 /* Build configuration list for PBXNativeTarget "WidgetsExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FB80FBDA2AC4CAAA00D796F3 /* Debug */,
+				FB80FBDB2AC4CAAA00D796F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1374,6 +1726,36 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FBA95DB52514F63D00494B5C /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		FB80FC112AC4DF5B00D796F3 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FBA95DB52514F63D00494B5C /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		FB80FC132AC4DF5B00D796F3 /* SwiftyBeaver */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FBDAA1A3251FBDDB00104001 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;
+			productName = SwiftyBeaver;
+		};
+		FB80FC152AC4DF5B00D796F3 /* Cache */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FB2B57D72646BC64008CD6C4 /* XCRemoteSwiftPackageReference "Cache" */;
+			productName = Cache;
+		};
+		FB80FC172AC4DF5B00D796F3 /* SwiftOTP */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FB16A60D270E219E00C6EAAB /* XCRemoteSwiftPackageReference "SwiftOTP" */;
+			productName = SwiftOTP;
+		};
+		FB80FC192AC4DF5B00D796F3 /* DefaultCodable */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FB0DF3B229291C070098517D /* XCRemoteSwiftPackageReference "DefaultCodable" */;
+			productName = DefaultCodable;
+		};
+		FB80FC1B2AC4DF5B00D796F3 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FBE5AE6E2AC1D7A700E3EAA5 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
 		};
 		FBA95DB62514F63D00494B5C /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;

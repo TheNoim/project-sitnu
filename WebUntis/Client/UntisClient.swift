@@ -23,7 +23,7 @@ class UntisClient {
     
     init(credentials: BasicUntisCredentials) {
         self.credentials = credentials;
-        let diskConfig: DiskConfig = DiskConfig(name: "Untis", expiry: .date(Date().addingTimeInterval(60 * 60 * 24 * 14)), maxSize: 52428800)
+        let diskConfig: DiskConfig = DiskConfig(name: "Untis", expiry: .date(Date().addingTimeInterval(60 * 60 * 24 * 14)), maxSize: 52428800, directory: FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.io.noim.Project-SITNU"))
         let memoryConfig: MemoryConfig = MemoryConfig(expiry: .never, countLimit: 40, totalCostLimit: 10)
         do {
             self.storage = try Storage(diskConfig: diskConfig, memoryConfig: memoryConfig, transformer: TransformerFactory.forCodable(ofType: String.self));

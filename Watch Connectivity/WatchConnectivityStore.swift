@@ -17,7 +17,6 @@ final class WatchConnectivityStore: NSObject, WCSessionDelegate {
     // MARK: - Store states
     
     public var accounts: [UntisAccount] = []
-    public var isReachable = false
     public var currentlySelected: UntisAccount?
     
     #if os(iOS)
@@ -46,11 +45,11 @@ final class WatchConnectivityStore: NSObject, WCSessionDelegate {
         
     func sessionReachabilityDidChange(_ session: WCSession) {
         log.debug("sessionReachabilityDidChange to \(session.isReachable)", "WatchConnectivityStore")
-        if session.isReachable {
-            isReachable = true
-        } else {
-            isReachable = false
+        #if os(iOS)
+        if session.isReachable, pendingSync {
+            sync()
         }
+        #endif
     }
     
     #if os(iOS)
@@ -135,12 +134,13 @@ final class WatchConnectivityStore: NSObject, WCSessionDelegate {
     /// Setup the WCSession and load account data from Keychain into store
     /// Set `withWCSession` to false for background tasks and if you don't expect to receive credential updates
     func initialize(withWCSession: Bool = true) {
+        log.info("Initialize WatchConnectivity Store")
         if withWCSession {
             wcSession.delegate = self
             wcSession.activate()
-            isReachable = wcSession.isReachable
             log.debug("WCSession activated", "WatchConnectivityStore")
         }
+        keychain.accessGroup = "group.io.noim.Project-SITNU"
         loadFromKeyChain()
         if withWCSession {
             sessionReachabilityDidChange(wcSession)
@@ -154,6 +154,7 @@ final class WatchConnectivityStore: NSObject, WCSessionDelegate {
     
     #if os(iOS)
     func sync() {
+        pendingSync = true
         if !wcSession.isReachable {
             log.warning("Other device is not reachable. Can not update credentials on other device", "WatchConnectivityStore")
             return
@@ -164,8 +165,22 @@ final class WatchConnectivityStore: NSObject, WCSessionDelegate {
             log.warning("Failed to encode data. Can not send to other device", "WatchConnectivityStore")
             return
         }
-        wcSession.sendMessageData(encodedData, replyHandler: nil)
+        wcSession.sendMessageData(encodedData, replyHandler: { _ in
+            log.debug("Received reply from Watch", "WatchConnectivityStore")
+            self.pendingSync = false
+        })
         log.debug("Send credentials to other device", "WatchConnectivityStore")
+    }
+    
+    private var userDefaults = UserDefaults(suiteName: "group.io.noim.Project-SITNU")
+    
+    var pendingSync: Bool {
+        get {
+            userDefaults?.bool(forKey: "pendingSync") ?? false
+        }
+        set {
+            userDefaults?.set(newValue, forKey: "pendingSync")
+        }
     }
     #endif
     
@@ -235,6 +250,22 @@ final class WatchConnectivityStore: NSObject, WCSessionDelegate {
         }
         wcSession.sendMessageData(encodedData, replyHandler: nil)
         log.debug("Requested log files", "WatchConnectivityStore")
+    }
+    #endif
+    
+    // MARK: - Cache data for widgets
+    
+    #if os(iOS)
+    func cacheData() {
+        let untisClient = BackgroundUtility.shared.getUntisClient(initialize: false)
+        
+        untisClient?.getTimegrid(force: true, cachedHandler: nil, completion: { _ in
+            untisClient?.getSubjectColors(force: true, cachedHandler: nil, completion: { _ in
+                untisClient?.getTimetable(and: true, cachedHandler: nil, completion: { _ in
+                    log.debug("Loaded cache data")
+                })
+            })
+        })
     }
     #endif
 }
